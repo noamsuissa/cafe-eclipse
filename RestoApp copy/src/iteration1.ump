@@ -1,0 +1,64 @@
+class Reservation
+{
+  phoneNumber;
+  email;
+  resNumber;
+  date;
+  time;
+  int numPeople;
+  * -<@> 1 Restaurant;
+  * -- * Table;
+}
+
+class Restaurant
+{
+  int numTables;
+  int numSeats;
+  int floorLayout;
+  }
+class Menu
+{
+     
+courses;
+  
+  1 -<@>1 Restaurant;
+}
+
+class FoodItem
+{
+     
+item;
+  int price;
+  1..* -- 1 Order;
+  1..* -<@> 1 Menu;
+}
+
+class Order
+{
+    date;
+  time;
+  1..* -- 1..* OrderItem;
+}
+
+class Bill
+{
+  int total;
+  1 -- 1..* Seat;
+  1..* -- 1..* Table;
+  1..* -<@>1..* Order;
+}
+
+class Table
+{
+  int tableNumber;
+  boolean tableReserved;
+}
+
+class Seat
+{
+  int seatNumber;
+  1..* -- 1 Table;
+}class OrderItem
+{
+  * -- * Seat;
+}
