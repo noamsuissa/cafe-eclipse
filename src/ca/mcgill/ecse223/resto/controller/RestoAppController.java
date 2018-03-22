@@ -151,7 +151,7 @@ public class RestoAppController {
 		RestoApp restoApp = RestoAppApplication.getRestoApp();
 		List<Table> curTables = restoApp.getCurrentTables();
 		for (Table curTable : curTables) {
-			if(curTable.doesOverlap(x,y,width,length)) {
+			if(curTable.doesOverlap(x,y,width,length) && curTable != table) {
 				error = "There is an overlap. ";
 				if(error.length()>0) {
 					throw new InvalidInputException(error.trim());

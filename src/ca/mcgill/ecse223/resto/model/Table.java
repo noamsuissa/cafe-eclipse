@@ -7,7 +7,7 @@ import java.util.*;
 
 // line 85 "../../../../../RestoAppPersistence.ump"
 // line 1 "../../../../../RestoAppTableStateMachine.ump"
-// line 28 "../../../../../RestoApp v3.ump"
+// line 36 "../../../../../RestoApp v3.ump"
 public class Table implements Serializable
 {
 

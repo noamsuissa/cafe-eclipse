@@ -367,6 +367,16 @@ public class Reservation implements Serializable
     nextReservationNumber++;
   }
 
+  // line 27 "../../../../../RestoApp v3.ump"
+   public boolean doesOverlap(Date aDate, Time aTime){
+    if(date.compareTo(aDate)==0) {
+   if(Math.abs((time.getHours())-(aTime.getHours()))<2) {
+   return true;
+   }
+   }
+   return false;
+  }
+
 
   public String toString()
   {

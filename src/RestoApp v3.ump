@@ -23,6 +23,14 @@ class Reservation {
    contactPhoneNumber;
    autounique reservationNumber;
    * reservations -- 1..* Table tables; // only from currentTables
+   public boolean doesOverlap(Date aDate, Time aTime){
+   if(date.compareTo(aDate)==0) {
+   if(Math.abs((time.getHours())-(aTime.getHours()))<2) {
+   return true;
+   }
+   }
+   return false;
+  }
 }
 
 class Table {
@@ -34,8 +42,8 @@ class Table {
    1 <@>- 1..* Seat seats;
    0..1 -> * Seat currentSeats; // subsets seats
    public boolean doesOverlap(int x2,int y2,int width2, int length2){
-	return x2 < this.x + this.width && x2 + width2 > this.x && y2 < this.y + this.length && y2 + length2 > this.y;
-	}
+   return x2 < this.x + this.width && x2 + width2 > this.x && y2 < this.y + this.length && y2 + length2 > this.y;
+}
 }
 
 class Seat {
