@@ -332,7 +332,105 @@ public class RestoAppController {
 		catch(RuntimeException e){
 			throw new InvalidInputException(e.getMessage());
 		}
+		
 
 
 	}
+	
+	public static void reserveTable(Date date, Time time, int numberInParty, String contactName, String contactEmailAddress, String contactPhoneNumber, List<Table> tables) throws InvalidInputException{
+
+		String error = "";
+		@SuppressWarnings("unused")
+		int seatCapacity=0;
+		java.util.Date currentDate;
+		currentDate=java.util.Calendar.getInstance().getTime(); 
+
+		if(date == null){
+		error = "Cannot reserve if there is no reservation date. ";
+		}
+
+		if(time == null){
+		error = error + "Cannot reserve if there is no reservation time. ";
+		}
+
+		if(contactName == null){
+		error = error + "Cannot reserve if there is no reservation contact name.  ";
+		}
+
+		if(contactEmailAddress == null){
+		error = error + "Cannot reserve if there is no reservation contact email. ";
+		}
+
+		if(contactPhoneNumber == null){
+		error = error + "Cannot reserve if there is no reservation contact phone number.  ";
+		}
+
+		if ((date.compareTo(currentDate) < 0)){
+		error = error + "Cannot reserve because this date has passed. ";
+		} 
+
+		if ((time.compareTo(currentDate) < 0)){
+		error = error + "Cannot reserve because this time has passed. ";
+		}
+
+		if(numberInParty > 0){
+		error = error + "Cannot reserve if number in party is a negative number. ";
+		}
+
+		if(contactName.length() == 0){
+		error = error + "Must enter a name to reserve. ";
+		}
+
+		if(contactEmailAddress.length() == 0){
+		error = error + "Must enter an email address to reserve. ";
+		}
+
+		if(contactPhoneNumber.length() == 0){
+		error = error + "Must enter a phone number to reserve. ";
+		}
+
+
+		if (error.length() > 0) {
+		throw new InvalidInputException(error.trim());
+		}
+
+		RestoApp r = RestoAppApplication.getRestoApp();
+
+		List<Table> currentTables = r.getCurrentTables();
+
+		for (Table table : tables ){
+
+		boolean current = currentTables.contains(table);
+
+		if(!current){
+		throw new InvalidInputException("Cannot reserve table because it is not one of the current tables.");
+		}
+
+		seatCapacity += table.numberOfCurrentSeats() ;
+
+		List<Reservation> reservations = table.getReservations();
+
+		for(Reservation reservation : reservations){
+
+		if(reservation.doesOverlap(date, time)){
+
+		throw new InvalidInputException("Cannot reseerve because there is an overlap.");
+		}
+
+		}
+
+		}
+
+		Table[] tableArr = new Table[tables.size()];
+		Reservation res = new Reservation(date, time, numberInParty, contactName, contactEmailAddress, contactPhoneNumber, r, tables.toArray(tableArr));
+
+		try {
+		RestoAppApplication.save();
+		}
+		catch (RuntimeException e) {
+		throw new InvalidInputException(e.getMessage());
+		}
+
+
+		}
 }
