@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="850.0" style="-fx-border-width: 8; -fx-border-color: black;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.AddandRemoveTableController">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <children>
+            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#returnToMainMenu" style="-fx-background-color: black;" text="Return to Main Screen" textFill="WHITE" />
+            <Pane fx:id="P1" layoutX="7.0" layoutY="77.0" prefHeight="650.0" prefWidth="400.0" style="-fx-border-color: black; -fx-border-width: 3;" />
+            <Text layoutX="164.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Floor Plan">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Button layoutX="208.0" layoutY="14.0" mnemonicParsing="false" onAction="#returnToPreviousPage" style="-fx-background-color: black;" text="Return to Previous Page" textFill="WHITE" />
+            <Pane fx:id="P2" layoutX="12.0" layoutY="732.0" prefHeight="44.0" prefWidth="391.0" />
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="268.0" layoutX="20.0" layoutY="154.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="374.0" />
+            <Text layoutX="43.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CAFE ECLIPSE">
+               <font>
+                  <Font name="Impact" size="64.0" />
+               </font>
+            </Text>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="65.0" layoutX="20.0" layoutY="78.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="374.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="65.0" layoutX="20.0" layoutY="438.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="374.0" />
+            <Text layoutX="154.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Add Table">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Text>
+            <Text layoutX="134.0" layoutY="479.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Remove Table">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Text>
+            <Text layoutX="74.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="X coordinate">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <Text layoutX="74.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Y coordinate">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <Text layoutX="67.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Table Number">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <Text layoutX="241.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Width of Table">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <Text layoutX="237.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Length of Table">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <Text layoutX="230.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Add Seat to Table">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <TextField alignment="CENTER" layoutX="57.0" layoutY="204.0" prefHeight="25.0" prefWidth="121.0" promptText="Input X" fx:id="xCoord" />
+            <TextField fx:id="yCoord" alignment="CENTER" layoutX="57.0" layoutY="258.0" prefHeight="25.0" prefWidth="121.0" promptText="Input Y" />
+            <TextField fx:id="tableNumber" alignment="CENTER" layoutX="56.0" layoutY="315.0" prefHeight="26.0" prefWidth="122.0" promptText="Input Table #" />
+            <TextField fx:id="tableWidth" alignment="CENTER" layoutX="233.0" layoutY="204.0" prefHeight="25.0" prefWidth="121.0" promptText="Input Width" />
+            <TextField fx:id="tableLength" alignment="CENTER" layoutX="232.0" layoutY="258.0" prefHeight="25.0" prefWidth="121.0" promptText="Input Length" />
+            <TextField fx:id="addSeats" alignment="CENTER" layoutX="232.0" layoutY="315.0" prefHeight="26.0" prefWidth="122.0" promptText="Input # Of Seats" />
+            <Button fx:id="saveTable" layoutX="131.0" layoutY="354.0" mnemonicParsing="false" onAction="#createRectangle" prefHeight="57.0" prefWidth="151.0" style="-fx-background-color: black;" text="Save Table" textFill="WHITE" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="261.0" layoutX="20.0" layoutY="515.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="374.0" />
+            <Button layoutX="131.0" layoutY="646.0" mnemonicParsing="false" onAction="#deleteRectangle" prefHeight="57.0" prefWidth="151.0" style="-fx-background-color: black;" text="Confirm Removal" textFill="WHITE" />
+            <Text layoutX="32.0" layoutY="593.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Select a table from the floor plan by clicking on it">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+         </children></AnchorPane>
+  </items>
+</SplitPane>

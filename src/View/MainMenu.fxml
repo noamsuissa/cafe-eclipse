@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" style="-fx-border-style: solid; -fx-border-width: 8;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainMenuController">
+    <children>
+        <Button layoutX="447.0" layoutY="400.0" mnemonicParsing="false" onAction="#goToFloorPlanTableLocationButtonPushed" prefHeight="142.0" prefWidth="284.0" style="-fx-background-color: BLACK;" text="Floor Plan/ Table Location" textFill="WHITE">
+            <font>
+                <Font size="22.0" />
+            </font>
+        </Button>
+        <Button layoutX="447.0" layoutY="581.0" mnemonicParsing="false" onAction="#goToBillButtonPushed" prefHeight="142.0" prefWidth="284.0" style="-fx-background-color: BLack;" text="Bill" textFill="WHITE">
+            <font>
+                <Font size="22.0" />
+            </font>
+        </Button>
+        <Button fx:id="fullmenu_btn" layoutX="78.0" layoutY="400.0" mnemonicParsing="false" onAction="#goToFullMenuButtonPushed" prefHeight="142.0" prefWidth="284.0" style="-fx-background-color: BLACK;" text="Full Menu" textFill="WHITE">
+            <font>
+                <Font size="22.0" />
+            </font>
+        </Button>
+        <Button fx:id="res_btn" layoutX="78.0" layoutY="581.0" mnemonicParsing="false" onAction="#goToReservationButtonPushed" prefHeight="142.0" prefWidth="284.0" style="-fx-background-color: BLACK;" text="Reservation" textFill="WHITE">
+            <font>
+                <Font size="22.0" />
+            </font>
+        </Button>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="180.0" layoutX="78.0" layoutY="190.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="5.0" width="654.0" />
+      <Text layoutX="156.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Impact;" text="CAFE ECLIPSE" wrappingWidth="487.26513671875">
+         <font>
+            <Font size="95.0" />
+         </font>
+      </Text>
+      <Text layoutX="239.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: impact;" text="Welcome to the Main Screen">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Text>
+    </children>
+</Pane>
