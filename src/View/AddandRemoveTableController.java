@@ -2,6 +2,7 @@ package View;
 
 import ca.mcgill.ecse223.resto.application.RestoAppApplication;
 import ca.mcgill.ecse223.resto.controller.InvalidInputException;
+import ca.mcgill.ecse223.resto.controller.RestoAppController;
 import ca.mcgill.ecse223.resto.model.Order;
 import ca.mcgill.ecse223.resto.model.RestoApp;
 import ca.mcgill.ecse223.resto.model.Seat;
@@ -40,8 +41,7 @@ public class AddandRemoveTableController implements Initializable{
     @FXML private javafx.scene.control.TextField addSeats;
     @FXML private Pane P1;
     @FXML private Pane P2;
-    
-    
+    RestoAppController c = new RestoAppController();
     private Table selectedTable1;
    
     @Override
@@ -64,7 +64,7 @@ public class AddandRemoveTableController implements Initializable{
         	return;
         }
         try {
-        	addTable(tbleNumber, x,y,tbleWidth,tbleLength,addSeat);
+        	c.addTable(tbleNumber, x,y,tbleWidth,tbleLength,addSeat);
         	updateBox("Table " + tbleNumber + " was created with " + addSeat + " Seats.", Color.BLACK);
         	loadCurrentTables();
         	
@@ -100,7 +100,7 @@ public class AddandRemoveTableController implements Initializable{
     
     public void deleteRectangle(ActionEvent event) throws InvalidInputException {
     	updateBox("Table " + selectedTable1.getNumber() + " was removed.", Color.BLACK);
-    	removeTable(selectedTable1);
+    	c.removeTable(selectedTable1);
     	P1.getChildren().clear();
     	loadGrid();
     	loadCurrentTables();
@@ -245,90 +245,7 @@ public class AddandRemoveTableController implements Initializable{
         window.setScene(tableViewScene);
         window.show();
 
-    }	
-
-
-    public static void removeTable (Table aTable) throws InvalidInputException {
-        String error = "";
-        if (aTable == null) {
-            error = "Must enter a table to remove. ";
-        }
-        boolean reserved = aTable.hasReservations();
-        if(reserved) {
-            error = error + "Cannot remove table because it is reserved. ";
-        }
-        if (error.length() > 0) {
-            throw new InvalidInputException(error.trim());
-        }
-
-        RestoApp r = RestoAppApplication.getRestoApp();
-
-        List<Order> currentOrders = r.getCurrentOrders();
-
-        for(Order order : currentOrders) {
-            List<Table> tables = order.getTables();
-            boolean inUse = tables.contains(aTable);
-            if(inUse) {
-                throw new InvalidInputException("Cannot remove table because it is in use.");
-            }
-        }
-
-        r.removeCurrentTable(aTable);
-        try {
-            RestoAppApplication.save();
-        }
-        catch (RuntimeException e) {
-            throw new InvalidInputException(e.getMessage());
-        }
-    }
-
-    public static void addTable(int aNumber, int aX, int aY, int aWidth, int aLength, int seats) throws InvalidInputException{
-        String error = "";
-        if (aX < 0) {
-            error="The x coordinate cannot be negative ";
-        }
-        if (aY <0) {
-            error= error +"The y coordinate cannot be negative ";
-        }
-        if ( aWidth <= 0) {
-            error= error +"The width must be positive ";
-        }
-        if (aLength<=0) {
-            error= error + "The length must be positive ";
-        }
-        if (seats <= 0) {
-            error = error +"the number of seats must be positive ";
-        }
-        if (aNumber<=0) {
-            error= error + "The table number must be positive ";
-        }
-        if(error.length()>0){
-            throw new InvalidInputException (error.trim());
-        }
-        RestoApp r = RestoAppApplication.getRestoApp();
-        List<Table> currentTables = r.getCurrentTables();
-        for (Table currentTable : currentTables )
-        {
-
-            if (currentTable.doesOverlap(aX,aY, aWidth, aLength)) {
-
-                throw new InvalidInputException("There is already a table in this location");
-            }
-        }
-        try{
-            Table table = new Table(aNumber,aX, aY, aWidth, aLength, r);
-            r.addCurrentTable(table);
-            for (int i=1;i<= seats ;i++ ) {
-                Seat seat= table.addSeat();
-                table.addCurrentSeat(seat);
-            }
-            RestoAppApplication.save();
-        }
-        catch(RuntimeException e){
-            throw new InvalidInputException(e.getMessage());
-        }
-
-    }
+    }	  
 
 }
 

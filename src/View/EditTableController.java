@@ -2,6 +2,7 @@ package View;
 
 import ca.mcgill.ecse223.resto.application.RestoAppApplication;
 import ca.mcgill.ecse223.resto.controller.InvalidInputException;
+import ca.mcgill.ecse223.resto.controller.RestoAppController;
 import ca.mcgill.ecse223.resto.model.Order;
 import ca.mcgill.ecse223.resto.model.RestoApp;
 import ca.mcgill.ecse223.resto.model.Seat;
@@ -36,7 +37,7 @@ public class EditTableController implements Initializable{
 	@FXML private Pane P1;
 	@FXML private Pane P2;
 	private Table selectedTable1;
-	
+	RestoAppController c = new RestoAppController();
 	
 	@Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -82,7 +83,7 @@ public class EditTableController implements Initializable{
 		int newSeats = selectedTable1.getSeats().size();
 		
     try {
-    		updateTable(selectedTable1, newNumber, newSeats);
+    		c.updateTable(selectedTable1, newNumber, newSeats);
     		loadCurrentTables();
     		updateBox("Table number changed to " + selectedTable1.getNumber(), Color.BLUE);
     		System.out.println(("Table number changed to " + selectedTable1.getNumber()));
@@ -102,7 +103,7 @@ public void updateSeatNumberButton(ActionEvent event) throws InvalidInputExcepti
 				
     
     try {
-    		updateTable(selectedTable1, newNumber, newSeats);
+    		c.updateTable(selectedTable1, newNumber, newSeats);
     		loadCurrentTables();
     		updateBox("Table " +newNumber+ " updated. Current number of seats: " + selectedTable1.getCurrentSeats().size(), Color.BLUE);
     		System.out.println("Table " +newNumber+ " now has " + selectedTable1.getCurrentSeats().size() + " seats");
@@ -136,69 +137,6 @@ public void updateSeatNumberButton(ActionEvent event) throws InvalidInputExcepti
         window.show();
 
     }	
-    
-
-    public static void updateTable (Table aTable, int aNumber, int seats) throws InvalidInputException {
-        String error = "";
-        if (aTable == null) {
-            error = "Must enter a table to update. ";
-        }
-        if (aNumber < 0){
-            error = error + "The table number must be positive. ";
-        }
-        if (seats < 0){
-            error = error + "The number of seats must be positive. ";
-        }
-        boolean reserved = aTable.hasReservations();
-        if(reserved) {
-            error = error + "Cannot remove table because it is reserved. ";
-        }
-        if (error.length() > 0) {
-            throw new InvalidInputException(error.trim());
-        }
-
-        RestoApp r = RestoAppApplication.getRestoApp();
-
-        List<Order> currentOrders = r.getCurrentOrders();
-
-        for(Order order : currentOrders) {
-
-            List<Table> tables = order.getTables();
-
-            boolean inUse = tables.contains(aTable);
-            if(inUse) {
-                throw new InvalidInputException("Cannot update table because it is in use.");
-            }
-
-        }
-
-        try{
-            aTable.setNumber(aNumber);
-        }
-        catch(RuntimeException e){
-            throw new InvalidInputException("Table number cannot be a duplicate");
-        }
-
-        int n = aTable.numberOfCurrentSeats();
-
-        for (int i=1;i <= seats-n; i++ ) {
-            Seat seat = aTable.addSeat();
-            aTable.addCurrentSeat(seat);
-        }
-
-        for (int i=1;i <= n-seats; i++ ) {
-            Seat seat = aTable.getCurrentSeat(0);
-            aTable.removeCurrentSeat(seat);
-        }
-
-        try{
-            RestoAppApplication.save();
-        }
-        catch(RuntimeException e){
-            throw new InvalidInputException(e.getMessage());
-        }
-
-
-    }
+ 
 }
 

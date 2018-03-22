@@ -22,6 +22,7 @@ import java.util.ResourceBundle;
 
 import ca.mcgill.ecse223.resto.application.RestoAppApplication;
 import ca.mcgill.ecse223.resto.controller.InvalidInputException;
+import ca.mcgill.ecse223.resto.controller.RestoAppController;
 import ca.mcgill.ecse223.resto.model.RestoApp;
 import ca.mcgill.ecse223.resto.model.Table;
 import ca.mcgill.ecse223.resto.model.MenuItem.ItemCategory;
@@ -32,7 +33,7 @@ public class FullMenuController implements Initializable{
 	@FXML private GridPane G2;
     @FXML private Pane P1;
     private Table selectedTable1;
-   
+    RestoAppController c = new RestoAppController();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     	loadCurrentTables();
@@ -72,7 +73,7 @@ public class FullMenuController implements Initializable{
     }	
     
     public void loadCategoryItems() {
-    	List<ItemCategory> itemCategories = getItemCategory();
+    	List<ItemCategory> itemCategories = c.getItemCategory();
     	int g2x = 0, g2y = 0, g1x = 0, g1y = 0;
     	
     	for(ItemCategory itemCategory: itemCategories) {
@@ -131,12 +132,5 @@ public class FullMenuController implements Initializable{
     	}
     	
     }
-    
-    public static List<ItemCategory> getItemCategory(){
-        return Arrays.asList(ItemCategory.values());
-    }
-    
-    
-
  
 }

@@ -2,6 +2,7 @@ package View;
 
 import ca.mcgill.ecse223.resto.application.RestoAppApplication;
 import ca.mcgill.ecse223.resto.controller.InvalidInputException;
+import ca.mcgill.ecse223.resto.controller.RestoAppController;
 import ca.mcgill.ecse223.resto.model.RestoApp;
 import ca.mcgill.ecse223.resto.model.Table;
 import javafx.event.ActionEvent;
@@ -34,6 +35,7 @@ public class ChangeTableLocationController implements Initializable {
 	    @FXML private Pane P1;
 	    @FXML private Pane P2;
 
+	    RestoAppController c = new RestoAppController();
 	    private Table selectedTable1;
 	    
 	    @Override
@@ -83,7 +85,7 @@ public class ChangeTableLocationController implements Initializable {
         	return;
         }
         try {
-        	moveTable(selectedTable1,x,y);
+        	c.moveTable(selectedTable1,x,y);
         	P1.getChildren().clear();
         	loadGrid();
         	loadCurrentTables();
@@ -199,11 +201,6 @@ public class ChangeTableLocationController implements Initializable {
 
 			P1.getChildren().addAll(line1, line2, line3, line4, line5, line6, line7, line8, line9, line10, line11, line12, line13,line14,line15,line16,line17,line18,line19);
 	    }
-	    
-	    
-	
-	
-	
 
     public void returnToMainMenu(ActionEvent event) throws IOException {
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
@@ -227,41 +224,5 @@ public class ChangeTableLocationController implements Initializable {
 
     }	
     
-    
-    public static void moveTable(Table table, int x, int y) throws InvalidInputException{
-		String error="";
-		int width, length;
-		if(table == null) {
-			error += "Table cannot be null. ";
-		}if(x<0) {
-			error += "x cannot be negative. ";
-		}if(y<0) {
-			error += "y cannot be negative. ";
-		}if (error.length() > 0) {
-			throw new InvalidInputException(error.trim());
-		}
-
-		width = table.getWidth();
-		length = table.getLength();
-		RestoApp restoApp = RestoAppApplication.getRestoApp();
-		List<Table> curTables = restoApp.getCurrentTables();
-		for (Table curTable : curTables) {
-			if(curTable.doesOverlap(x,y,width,length)) {
-				error = "There is an overlap. ";
-				if(error.length()>0) {
-					throw new InvalidInputException(error.trim());
-				}
-			}
-		}
-		table.setX(x);
-		table.setY(y);
-
-		try {
-			RestoAppApplication.save();
-		}
-		catch (RuntimeException e) {
-			throw new InvalidInputException(e.getMessage());
-		}
-	}
 
 }

@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import ca.mcgill.ecse223.resto.application.RestoAppApplication;
 import ca.mcgill.ecse223.resto.controller.InvalidInputException;
+import ca.mcgill.ecse223.resto.controller.RestoAppController;
 import ca.mcgill.ecse223.resto.model.Menu;
 import ca.mcgill.ecse223.resto.model.MenuItem;
 import ca.mcgill.ecse223.resto.model.RestoApp;
@@ -35,7 +36,7 @@ public class MenuItemsViewController implements Initializable{
 	@FXML private Button returnMain;
 	@FXML private Pane P1;
 	@FXML private GridPane G1;
-	
+	RestoAppController c = new RestoAppController();
 	private Table selectedTable1;
 	
 	
@@ -87,28 +88,7 @@ public class MenuItemsViewController implements Initializable{
             P1.getChildren().add(btn);
         }
     }
-	
-	
-    public static List<MenuItem> getMenuItems(ItemCategory itemCategory) throws InvalidInputException {
-        ArrayList<MenuItem> CategoryItems = new ArrayList<MenuItem>();
-        RestoApp restoApp = RestoAppApplication.getRestoApp();
-        Menu menu = restoApp.getMenu();
-        try {
-            for (MenuItem menuItem : menu.getMenuItems()) {
-                boolean current = menuItem.hasCurrentPricedMenuItem();
-                ItemCategory category = menuItem.getItemCategory();
 
-                if(current && category.equals(itemCategory)) {
-                    CategoryItems.add(menuItem);
-                }
-            }
-            return CategoryItems;
-        }
-        catch (RuntimeException e) {
-            throw new InvalidInputException(e.getMessage());
-        }
-    }
-    
 	public void initData(ItemCategory itemCategory) throws InvalidInputException  {
 		String CategoryName = "";
 		String[] r = (itemCategory.name().split("(?=\\p{Upper})"));
@@ -118,7 +98,7 @@ public class MenuItemsViewController implements Initializable{
 		label1.setText(CategoryName);
 		
 		//ITEMS
-		List<MenuItem> menuItems = getMenuItems(itemCategory);
+		List<MenuItem> menuItems = c.getMenuItems(itemCategory);
 		int g1x = 0, g1y = 0;
 		
 		for(MenuItem menuItem: menuItems) {
