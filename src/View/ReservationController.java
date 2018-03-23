@@ -15,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -24,6 +25,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -31,9 +33,9 @@ public class ReservationController {
 
 	@FXML private Label L1;
 	@FXML private Pane P1;
-	private Table selectedTable1 = null;
+	private List<Table> selectedTables= new ArrayList<Table>();
 	@FXML private Pane P2;
-	@FXML private Pane SelectedTablesPane;
+	@FXML private ListView SelectedTablesPane;
 	@FXML private Button ReserveButton;
 	
 
@@ -45,13 +47,13 @@ public class ReservationController {
 	
 
 	public void initialize() {
-
+		
 	    Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {            
 	        Calendar cal = Calendar.getInstance();
 	        second = cal.get(Calendar.SECOND);
 	        minute = cal.get(Calendar.MINUTE);
 	        hour = cal.get(Calendar.HOUR_OF_DAY);
-	        
+	        loadCurrentTables();
 	        //System.out.println(hour + ":" + (minute) + ":" + second);
 	        L1.setText(hour + ":" + (minute) + ":" + second);
 	    }),
@@ -74,6 +76,7 @@ public class ReservationController {
     }
 
 	public void loadCurrentTables() {
+		P1.getChildren().clear();
 		RestoApp r = RestoAppApplication.getRestoApp();
 		List<Table> currentTables = r.getCurrentTables();
 		for (Table currentTable : currentTables) {
@@ -87,8 +90,11 @@ public class ReservationController {
 			btn.setTextFill(Color.WHITE);
 			btn.setOnAction(new EventHandler<ActionEvent>() {
 				@Override public void handle(ActionEvent e) {
-					selectedTable1 = currentTable;
-					updateBox("Table " + selectedTable1.getNumber() + " selected at location (x,y): " + selectedTable1.getX()+" " + selectedTable1.getY(), Color.BLACK);
+					if (!selectedTables.contains(currentTable)){
+						selectedTables.add(currentTable);
+						//SelectedTablesPane.getItems().add("Table " + ((Integer)currentTable.getNumber()).toString())));
+					}
+					updateBox("Table " + currentTable.getNumber() + " selected at location (x,y): " + currentTable.getX()+" " + currentTable.getY(), Color.BLACK);
 				}
 			});
 			P1.getChildren().add(btn);
