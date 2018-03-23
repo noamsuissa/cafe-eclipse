@@ -93,6 +93,7 @@ public class ChangeTableLocationController implements Initializable {
         	System.out.println("new coordinates = x: " +selectedTable1.getX()+ " y: " + selectedTable1.getY());
      
         } catch(InvalidInputException e) {
+        	updateBox(e.getMessage(), Color.RED);
         	System.out.println(e.getMessage());
         }
   
