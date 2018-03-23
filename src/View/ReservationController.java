@@ -3,6 +3,7 @@ package View;
 import ca.mcgill.ecse223.resto.application.RestoAppApplication;
 import ca.mcgill.ecse223.resto.controller.InvalidInputException;
 import ca.mcgill.ecse223.resto.controller.RestoAppController;
+import ca.mcgill.ecse223.resto.model.Reservation;
 import ca.mcgill.ecse223.resto.model.RestoApp;
 import ca.mcgill.ecse223.resto.model.Table;
 import javafx.animation.Animation;
@@ -30,8 +31,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.sql.Time;
 import java.util.Calendar;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
+
 
 public class ReservationController {
 
@@ -39,7 +41,7 @@ public class ReservationController {
 	@FXML private Pane P1;
 	private List<Table> selectedTables= new ArrayList<Table>();
 	@FXML private Pane P2;
-	@FXML private ListView SelectedTablesPane;
+	@FXML private Pane SelectedTablesPane;
 	@FXML private Button ReserveButton;
 	@FXML private javafx.scene.control.TextField yearTF;
 	@FXML private javafx.scene.control.TextField monthTF;
@@ -56,13 +58,17 @@ public class ReservationController {
 	private int minute;
 	private int hour;
 	private int second;
+	private int date;
 	private String ampm;
-	
+	private long localTimeInMillis;
 
 	public void initialize() {
 		
 	    Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {            
 	        Calendar cal = Calendar.getInstance();
+	        localTimeInMillis = cal.getTimeInMillis();
+	        //System.out.println(localTimeInMillis);
+	        date = cal.get(Calendar.DATE);
 	        second = cal.get(Calendar.SECOND);
 	        minute = cal.get(Calendar.MINUTE);
 	        hour = cal.get(Calendar.HOUR_OF_DAY);
@@ -86,6 +92,7 @@ public class ReservationController {
 	            int  month= Integer.parseInt(monthTF.getText());
 	            int  day = Integer.parseInt(dayTF.getText());
 	            Date userDate = new Date(year, month, day);
+	            
 	            int hour = Integer.parseInt(hourTF.getText());
 	            int minute = Integer.parseInt(minuteTF.getText());
 	            Time userTime = new Time(hour, minute, 0);
@@ -95,10 +102,11 @@ public class ReservationController {
 	            String email = emailTF.getText();
 	            String phoneNumber = phoneNumberTF.getText();
 	            
-	            
+	            System.out.println(userDate.getTime());
+	            System.out.println(userTime.getTime());
 	           
 
-	        	c.reserveTable(userDate, userTime, numberInParty, contact, email, phoneNumber, --- );
+	        	c.reserveTable(userDate, userTime, numberInParty, contact, email, phoneNumber, selectedTables);
 	        //	updateBox("Table " + tbleNumber + " was created with " + addSeat + " Seats.", Color.BLACK);
 
 	        	loadCurrentTables();
@@ -141,9 +149,26 @@ public class ReservationController {
 				@Override public void handle(ActionEvent e) {
 					if (!selectedTables.contains(currentTable)){
 						selectedTables.add(currentTable);
-						//SelectedTablesPane.getItems().add("Table " + ((Integer)currentTable.getNumber()).toString())));
+						Text txt = new Text("Table " + ((Integer)currentTable.getNumber()).toString());
+						txt.setLayoutY(selectedTables.size()*13);
+						txt.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+						SelectedTablesPane.getChildren().add(txt);
 					}
-					updateBox("Table " + currentTable.getNumber() + " selected at location (x,y): " + currentTable.getX()+" " + currentTable.getY(), Color.BLACK);
+					int i = 0;
+					for (i = 0; i<currentTable.getReservations().size(); i++) {
+						if ((currentTable.getReservation(i).getTime()).getTime() + 7200000 < localTimeInMillis) {
+							continue;
+						} else {
+							break;
+						}
+					}
+					if (currentTable.hasReservations()) {
+						System.out.println(currentTable.getReservation(i).getTime());
+						//updateBox("Table " + currentTable.getNumber() + "- Next reservation: " + currentTable.getReservation(i).getTime().getHours()+ ":" + currentTable.getReservation(i).getTime().getMinutes() , Color.BLACK);
+					} else {
+						updateBox("Table " + currentTable.getNumber() + "- There are no current reservations." , Color.BLACK);
+					}
+					
 				}
 			});
 			P1.getChildren().add(btn);

@@ -346,6 +346,7 @@ public class RestoAppController {
 		int seatCapacity=0;
 		java.util.Date currentDate;
 		currentDate=java.util.Calendar.getInstance().getTime(); 
+		java.sql.Date sqlDate = new java.sql.Date(currentDate.getTime());
 
 		if(date == null){
 		error = "Cannot reserve if there is no reservation date. ";
@@ -370,12 +371,14 @@ public class RestoAppController {
 		if ((date.compareTo(currentDate) < 0)){
 		error = error + "Cannot reserve because this date has passed. ";
 		} 
-
-		if ((time.compareTo(currentDate) < 0)){
+		System.out.println(date.getTime());
+		System.out.println(time.getTime());
+		System.out.println(sqlDate.getTime());
+		if ((time.getTime() +date.getTime() )< sqlDate.getTime()){
 		error = error + "Cannot reserve because this time has passed. ";
 		}
 
-		if(numberInParty > 0){
+		if(numberInParty < 0){
 		error = error + "Cannot reserve if number in party is a negative number. ";
 		}
 
