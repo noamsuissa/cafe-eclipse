@@ -90,6 +90,7 @@ public class MenuItemsViewController implements Initializable{
     }
 
 	public void initData(ItemCategory itemCategory) throws InvalidInputException  {
+		//ITEM CATEGORY TEXT
 		String CategoryName = "";
 		String[] r = (itemCategory.name().split("(?=\\p{Upper})"));
 		for (int i = 0; i < r.length; i++) {
@@ -103,7 +104,7 @@ public class MenuItemsViewController implements Initializable{
 		
 		for(MenuItem menuItem: menuItems) {
     		
-    		Button btn = new Button(menuItem.getName());
+    		Button btn = new Button(menuItem.getName() + " " + menuItem.getCurrentPricedMenuItem().getPrice() + "$");
     		btn.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
     		btn.setWrapText(true);
     		btn.setStyle("-fx-border-color: black; -fx-font-weight: bold");
