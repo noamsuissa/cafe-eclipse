@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -23,6 +24,7 @@ public class ReservationController {
 	private int minute;
 	private int hour;
 	private int second;
+	private String ampm;
 	
 	@FXML
 	public void initialize() {
@@ -32,8 +34,9 @@ public class ReservationController {
 	        second = cal.get(Calendar.SECOND);
 	        minute = cal.get(Calendar.MINUTE);
 	        hour = cal.get(Calendar.HOUR);
-	        //System.out.println(hour + ":" + (minute) + ":" + second);
-	        L1.setText(hour + ":" + (minute) + ":" + second);
+	        ampm = cal.get(Calendar.AM_PM) == 0 ? "AM": "PM";
+	        System.out.println(hour + ":" + (minute) + ":" + second);
+	        L1.setText(hour + ":" + (minute) + ":" + second + " " + ampm);
 	    }),
 	         new KeyFrame(Duration.seconds(1))
 	    );
