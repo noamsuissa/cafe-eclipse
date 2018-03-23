@@ -52,18 +52,20 @@ public class AddandRemoveTableController implements Initializable{
     }
     
     public void createRectangle(ActionEvent event) throws InvalidInputException{
-    	int x = Integer.parseInt(xCoord.getText());
-        int y = Integer.parseInt(yCoord.getText());
-        int tbleNumber = Integer.parseInt(tableNumber.getText());
-        int tbleLength = Integer.parseInt(tableLength.getText());
-        int tbleWidth = Integer.parseInt(tableWidth.getText());
-        int addSeat = Integer.parseInt(addSeats.getText());
+    	
         
-        if (x + tbleWidth> 400 || y + tbleLength > 650) {
-        	updateBox("Input coordinates for table out of bound", Color.RED);
-        	return;
-        }
         try {
+        	int x = Integer.parseInt(xCoord.getText());
+            int y = Integer.parseInt(yCoord.getText());
+            int tbleNumber = Integer.parseInt(tableNumber.getText());
+            int tbleLength = Integer.parseInt(tableLength.getText());
+            int tbleWidth = Integer.parseInt(tableWidth.getText());
+            int addSeat = Integer.parseInt(addSeats.getText());
+            
+            if (x + tbleWidth> 400 || y + tbleLength > 650) {
+            	updateBox("Input coordinates for table out of bound", Color.RED);
+            	return;
+            }
         	c.addTable(tbleNumber, x,y,tbleWidth,tbleLength,addSeat);
         	updateBox("Table " + tbleNumber + " was created with " + addSeat + " Seats.", Color.BLACK);
         	loadCurrentTables();

@@ -60,7 +60,7 @@ class Table {
    }
    
    // check that the provided quantity is an integer greater than 0
-   private boolean quantityNotNegative(int quantity) {
+   private boolean quantityIsPositive(int quantity) {
       if (quantity > 0 ){
       return true;
       }
