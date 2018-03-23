@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.ReservationController">
+<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.ReservationController">
 
   <items>
 
@@ -20,31 +20,7 @@
 
             <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#returnToMainMenu" style="-fx-background-color: black;" text="Return to Main Menu" textFill="WHITE" />
 
-            <Pane layoutX="8.0" layoutY="74.0" prefHeight="650.0" prefWidth="400.0" style="-fx-border-color: black; -fx-border-width: 3;">
-
-               <children>
-
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="65.0" layoutX="28.0" layoutY="35.0" stroke="BLACK" strokeType="INSIDE" width="173.0" />
-
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="65.0" layoutX="191.0" layoutY="455.0" stroke="BLACK" strokeType="INSIDE" width="173.0" />
-
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="65.0" layoutX="38.0" layoutY="156.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
-
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="65.0" layoutX="271.0" layoutY="91.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
-
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="65.0" layoutX="270.0" layoutY="344.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
-
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="65.0" layoutX="38.0" layoutY="325.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
-
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="65.0" layoutX="136.0" layoutY="228.0" stroke="BLACK" strokeType="INSIDE" width="173.0" />
-
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="65.0" layoutX="129.0" layoutY="555.0" stroke="BLACK" strokeType="INSIDE" width="173.0" />
-
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="65.0" layoutX="38.0" layoutY="462.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
-
-               </children>
-
-            </Pane>
+            <Pane fx:id="P1" layoutX="8.0" layoutY="74.0" prefHeight="650.0" prefWidth="400.0" style="-fx-border-color: black; -fx-border-width: 3;" />
 
             <Text layoutX="164.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Floor Plan">
 
@@ -56,34 +32,16 @@
 
             </Text>
 
-            <Pane layoutX="8.0" layoutY="733.0" prefHeight="48.0" prefWidth="400.0">
-
-               <children>
-
-                  <Text layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Update field: For example, if you click on a table in the floor plan, its table number, number of seats and the details of the next reservation will appear as an update in this space" textAlignment="CENTER" wrappingWidth="400.00000623986125">
-
-                     <font>
-
-                        <Font size="12.0" />
-
-                     </font>
-
-                  </Text>
-
-                  <Text layoutX="16.0" layoutY="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Table with Order Placed (In Use)" />
-
-                  <Text layoutX="297.0" layoutY="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available Table" />
-
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="10.0" layoutX="279.0" layoutY="-5.0" stroke="BLACK" strokeType="INSIDE" width="11.0" />
-
-               </children>
-
-            </Pane>
+            <Pane fx:id="P2" layoutX="8.0" layoutY="742.0" prefHeight="49.0" prefWidth="400.0" />
 
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="10.0" layoutX="9.0" layoutY="728.0" stroke="BLACK" strokeType="INSIDE" width="11.0" />
 
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="39.0" layoutX="206.0" layoutY="8.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="193.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="27.0" layoutX="207.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="193.0" />
             <Label fx:id="L1" layoutX="257.0" layoutY="18.0" prefHeight="18.0" prefWidth="79.0" text="Label" />
+
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="10.0" layoutX="292.0" layoutY="729.0" stroke="BLACK" strokeType="INSIDE" width="11.0" />
+            <Text layoutX="29.0" layoutY="738.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Table In Use" />
+            <Text layoutX="314.0" layoutY="738.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Table Available" />
 
          </children></AnchorPane>
 
@@ -173,7 +131,7 @@
 
             <TextField alignment="CENTER" layoutX="95.0" layoutY="583.0" prefHeight="27.0" prefWidth="221.0" promptText="Enter Phone Number" />
 
-            <Button layoutX="123.0" layoutY="659.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="173.0" style="-fx-background-color: black;" text="Add Reservation" textFill="WHITE" />
+            <Button fx:id="ReserveButton" layoutX="209.0" layoutY="656.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="173.0" style="-fx-background-color: black;" text="Add Reservation" textFill="WHITE" />
 
             <TextField alignment="CENTER" layoutX="53.0" layoutY="289.0" prefHeight="27.0" prefWidth="55.0" promptText="year" />
 
@@ -194,6 +152,8 @@
                </font>
 
             </Text>
+            <Pane fx:id="SelectedTablesPane" layoutX="30.0" layoutY="656.0" prefHeight="79.0" prefWidth="173.0" style="-fx-border-color: black;" />
+            <Text layoutX="67.0" layoutY="652.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selected Tables" />
 
          </children></AnchorPane>
 
