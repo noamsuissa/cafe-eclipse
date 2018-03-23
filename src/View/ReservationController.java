@@ -2,6 +2,7 @@ package View;
 
 import ca.mcgill.ecse223.resto.application.RestoAppApplication;
 import ca.mcgill.ecse223.resto.controller.InvalidInputException;
+import ca.mcgill.ecse223.resto.controller.RestoAppController;
 import ca.mcgill.ecse223.resto.model.RestoApp;
 import ca.mcgill.ecse223.resto.model.Table;
 import javafx.animation.Animation;
@@ -16,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -25,6 +27,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.sql.Time;
 import java.util.Calendar;
 import java.util.Date;
@@ -34,9 +37,9 @@ public class ReservationController {
 
 	@FXML private Label L1;
 	@FXML private Pane P1;
-	private Table selectedTable1 = null;
+	private List<Table> selectedTables= new ArrayList<Table>();
 	@FXML private Pane P2;
-	@FXML private Pane SelectedTablesPane;
+	@FXML private ListView SelectedTablesPane;
 	@FXML private Button ReserveButton;
 	@FXML private javafx.scene.control.TextField yearTF;
 	@FXML private javafx.scene.control.TextField monthTF;
@@ -47,7 +50,7 @@ public class ReservationController {
 	@FXML private javafx.scene.control.TextField contactTF;
 	@FXML private javafx.scene.control.TextField emailTF;
 	@FXML private javafx.scene.control.TextField phoneNumberTF;
-
+	RestoAppController c = new RestoAppController();
 
 
 	private int minute;
@@ -57,13 +60,13 @@ public class ReservationController {
 	
 
 	public void initialize() {
-
+		
 	    Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {            
 	        Calendar cal = Calendar.getInstance();
 	        second = cal.get(Calendar.SECOND);
 	        minute = cal.get(Calendar.MINUTE);
 	        hour = cal.get(Calendar.HOUR_OF_DAY);
-	        
+	        loadCurrentTables();
 	        //System.out.println(hour + ":" + (minute) + ":" + second);
 	        L1.setText(hour + ":" + (minute) + ":" + second);
 	    }),
@@ -79,7 +82,7 @@ public class ReservationController {
 	    	
 	        
 	        try {
-	        		int year  = Integer.parseInt(yearTF.getText());
+	        	int year  = Integer.parseInt(yearTF.getText());
 	            int  month= Integer.parseInt(monthTF.getText());
 	            int  day = Integer.parseInt(dayTF.getText());
 	            Date userDate = new Date(year, month, day);
@@ -94,8 +97,10 @@ public class ReservationController {
 	            
 	            
 	           
+
 	        	c.reserveTable(userDate, userTime, numberInParty, contact, email, phoneNumber, --- );
 	        //	updateBox("Table " + tbleNumber + " was created with " + addSeat + " Seats.", Color.BLACK);
+
 	        	loadCurrentTables();
 	        	
 	     
@@ -120,6 +125,7 @@ public class ReservationController {
     }
 
 	public void loadCurrentTables() {
+		P1.getChildren().clear();
 		RestoApp r = RestoAppApplication.getRestoApp();
 		List<Table> currentTables = r.getCurrentTables();
 		for (Table currentTable : currentTables) {
@@ -133,8 +139,11 @@ public class ReservationController {
 			btn.setTextFill(Color.WHITE);
 			btn.setOnAction(new EventHandler<ActionEvent>() {
 				@Override public void handle(ActionEvent e) {
-					selectedTable1 = currentTable;
-					updateBox("Table " + selectedTable1.getNumber() + " selected at location (x,y): " + selectedTable1.getX()+" " + selectedTable1.getY(), Color.BLACK);
+					if (!selectedTables.contains(currentTable)){
+						selectedTables.add(currentTable);
+						//SelectedTablesPane.getItems().add("Table " + ((Integer)currentTable.getNumber()).toString())));
+					}
+					updateBox("Table " + currentTable.getNumber() + " selected at location (x,y): " + currentTable.getX()+" " + currentTable.getY(), Color.BLACK);
 				}
 			});
 			P1.getChildren().add(btn);

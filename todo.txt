@@ -8,4 +8,4 @@ Iteration 5 to do list:
 
 Additional features:
 > New page showing a huge list of all reservations
-> 
+> Display time in all pages (make the method modular)
