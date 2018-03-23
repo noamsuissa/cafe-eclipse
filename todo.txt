@@ -4,6 +4,7 @@ Iteration 5 to do list:
 > Once clicking on table display its info + time of next reservation
 > Toggle table use/available button
 > make tables red when in use on all loadtable() methods 
+> Current Selected tables in reservation
 
 Additional features:
 > New page showing a huge list of all reservations
