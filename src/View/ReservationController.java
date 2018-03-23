@@ -1,5 +1,7 @@
 package View;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,12 +11,18 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
+import java.util.Calendar;
 
 public class ReservationController {
 	
 	@FXML private Label L1;
+	
+	private int minute;
+	private int hour;
+	private int second;
 	
 	@FXML
 	public void initialize() {
@@ -25,7 +33,7 @@ public class ReservationController {
 	        minute = cal.get(Calendar.MINUTE);
 	        hour = cal.get(Calendar.HOUR);
 	        //System.out.println(hour + ":" + (minute) + ":" + second);
-	        time.setText(hour + ":" + (minute) + ":" + second);
+	        L1.setText(hour + ":" + (minute) + ":" + second);
 	    }),
 	         new KeyFrame(Duration.seconds(1))
 	    );
