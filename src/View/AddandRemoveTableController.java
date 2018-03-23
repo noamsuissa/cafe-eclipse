@@ -31,8 +31,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 
-// test comment line
-
 public class AddandRemoveTableController implements Initializable{
 
     @FXML private Button saveTable;
