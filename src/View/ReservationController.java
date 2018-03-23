@@ -94,8 +94,8 @@ public class ReservationController {
 	            
 	            
 	           
-	        	c.reservateTable(userDate, userTime, numberInParty, contact, email, phoneNumber, );
-	        	updateBox("Table " + tbleNumber + " was created with " + addSeat + " Seats.", Color.BLACK);
+	        	c.reserveTable(userDate, userTime, numberInParty, contact, email, phoneNumber, --- );
+	        //	updateBox("Table " + tbleNumber + " was created with " + addSeat + " Seats.", Color.BLACK);
 	        	loadCurrentTables();
 	        	
 	     
