@@ -77,14 +77,16 @@ public class ChangeTableLocationController implements Initializable {
 	    }
 	    
 	    public void changeTableLocationButton(ActionEvent event) throws InvalidInputException{
-    	int x = Integer.parseInt(xCoord.getText());
-        int y = Integer.parseInt(yCoord.getText());
-       
-        if (x + selectedTable1.getWidth()> 400 || y + selectedTable1.getLength() > 650) {
-        	updateBox("Input coordinates for table out of bound", Color.RED);
-        	return;
-        }
+    	
+        
         try {
+        	int x = Integer.parseInt(xCoord.getText());
+        	int y = Integer.parseInt(yCoord.getText());
+       
+        	if (x + selectedTable1.getWidth()> 400 || y + selectedTable1.getLength() > 650) {
+        		updateBox("Input coordinates for table out of bound", Color.RED);
+        		return;
+        	}
         	c.moveTable(selectedTable1,x,y);
         	P1.getChildren().clear();
         	loadGrid();
@@ -95,6 +97,8 @@ public class ChangeTableLocationController implements Initializable {
         } catch(InvalidInputException e) {
         	updateBox(e.getMessage(), Color.RED);
         	System.out.println(e.getMessage());
+        } catch(RuntimeException e) {
+        	updateBox("Please input values in all fields", Color.RED);
         }
   
     }

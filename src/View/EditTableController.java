@@ -79,40 +79,43 @@ public class EditTableController implements Initializable{
 	
 	public void updateTableNumberButton(ActionEvent event) throws InvalidInputException{
 		
-		int newNumber = Integer.parseInt(newNumberText.getText());
-		int newSeats = selectedTable1.getSeats().size();
 		
     try {
-    		c.updateTable(selectedTable1, newNumber, newSeats);
-    		loadCurrentTables();
-    		updateBox("Table number changed to " + selectedTable1.getNumber(), Color.BLUE);
-    		System.out.println(("Table number changed to " + selectedTable1.getNumber()));
+    	int newNumber = Integer.parseInt(newNumberText.getText());
+		int newSeats = selectedTable1.getSeats().size();
+		
+		c.updateTable(selectedTable1, newNumber, newSeats);
+		loadCurrentTables();
+		updateBox("Table number changed to " + selectedTable1.getNumber(), Color.BLUE);
+		System.out.println(("Table number changed to " + selectedTable1.getNumber()));
  
-    		} catch(InvalidInputException e) {
-    			System.out.println(e.getMessage());
-    			updateBox(e.getMessage(),Color.RED);
-    		}
+		} catch(InvalidInputException e) {
+			System.out.println(e.getMessage());
+			updateBox(e.getMessage(),Color.RED);
+		} catch(RuntimeException e) {
+        	updateBox("Please input a value in the field." , Color.RED);
+        }
 
 }
 	
 public void updateSeatNumberButton(ActionEvent event) throws InvalidInputException{
-		
+	
+    try {
+    	
 		int newNumber = selectedTable1.getNumber();
 		int newSeats = Integer.parseInt(newNumberSeat.getText());
-		
-				
-    
-    try {
-    		c.updateTable(selectedTable1, newNumber, newSeats);
-    		loadCurrentTables();
-    		updateBox("Table " +newNumber+ " updated. Current number of seats: " + selectedTable1.getCurrentSeats().size(), Color.BLUE);
-    		System.out.println("Table " +newNumber+ " now has " + selectedTable1.getCurrentSeats().size() + " seats");
-    		
- 
-    		} catch(InvalidInputException e) {
-    			System.out.println(e.getMessage());
-    			updateBox(e.getMessage(),Color.RED);
-    		}
+		c.updateTable(selectedTable1, newNumber, newSeats);
+		loadCurrentTables();
+		updateBox("Table " +newNumber+ " updated. Current number of seats: " + selectedTable1.getCurrentSeats().size(), Color.BLUE);
+		System.out.println("Table " +newNumber+ " now has " + selectedTable1.getCurrentSeats().size() + " seats");
+	    		
+	 
+		} catch(InvalidInputException e) {
+			System.out.println(e.getMessage());
+			updateBox(e.getMessage(),Color.RED);
+		}  catch(RuntimeException e) {
+        	updateBox("Please input a value in the field.", Color.RED);
+        }
 
 }
 	

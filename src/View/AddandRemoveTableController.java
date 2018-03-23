@@ -42,7 +42,7 @@ public class AddandRemoveTableController implements Initializable{
     @FXML private Pane P1;
     @FXML private Pane P2;
     RestoAppController c = new RestoAppController();
-    private Table selectedTable1;
+    private Table selectedTable1 = null;
    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -74,8 +74,9 @@ public class AddandRemoveTableController implements Initializable{
         } catch(InvalidInputException e) {
         	updateBox(e.getMessage(), Color.RED);
         	System.out.println(e.getMessage());
+        } catch(RuntimeException e) {
+        	updateBox("Please input values in all fields", Color.RED);
         }
-  
     }
     
     public void loadCurrentTables() {
@@ -101,11 +102,16 @@ public class AddandRemoveTableController implements Initializable{
     }
     
     public void deleteRectangle(ActionEvent event) throws InvalidInputException {
+    	if (selectedTable1 != null) {
     	updateBox("Table " + selectedTable1.getNumber() + " was removed.", Color.BLACK);
     	c.removeTable(selectedTable1);
+    	selectedTable1 = null;
     	P1.getChildren().clear();
     	loadGrid();
     	loadCurrentTables();
+    	} else {
+    		updateBox("Please select a table to remove", Color.RED);
+    	}
         
     }
     
