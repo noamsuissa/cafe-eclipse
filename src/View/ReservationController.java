@@ -33,6 +33,9 @@ public class ReservationController {
 	@FXML private Pane P1;
 	private Table selectedTable1 = null;
 	@FXML private Pane P2;
+	@FXML private Pane SelectedTablesPane;
+	@FXML private Button ReserveButton;
+	
 
 
 	private int minute;
