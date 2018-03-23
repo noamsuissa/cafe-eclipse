@@ -49,7 +49,7 @@ public class ReservationController {
 	        minute = cal.get(Calendar.MINUTE);
 	        hour = cal.get(Calendar.HOUR_OF_DAY);
 	        
-	        System.out.println(hour + ":" + (minute) + ":" + second);
+	        //System.out.println(hour + ":" + (minute) + ":" + second);
 	        L1.setText(hour + ":" + (minute) + ":" + second);
 	    }),
 	         new KeyFrame(Duration.seconds(1))
