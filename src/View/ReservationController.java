@@ -1,6 +1,7 @@
 package View;
 
 import ca.mcgill.ecse223.resto.application.RestoAppApplication;
+import ca.mcgill.ecse223.resto.controller.InvalidInputException;
 import ca.mcgill.ecse223.resto.model.RestoApp;
 import ca.mcgill.ecse223.resto.model.Table;
 import javafx.animation.Animation;
@@ -24,7 +25,9 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.sql.Time;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class ReservationController {
@@ -35,7 +38,16 @@ public class ReservationController {
 	@FXML private Pane P2;
 	@FXML private Pane SelectedTablesPane;
 	@FXML private Button ReserveButton;
-	
+	@FXML private javafx.scene.control.TextField yearTF;
+	@FXML private javafx.scene.control.TextField monthTF;
+	@FXML private javafx.scene.control.TextField dayTF;
+	@FXML private javafx.scene.control.TextField hourTF;
+	@FXML private javafx.scene.control.TextField minuteTF;
+	@FXML private javafx.scene.control.TextField numInPartyTF;
+	@FXML private javafx.scene.control.TextField contactTF;
+	@FXML private javafx.scene.control.TextField emailTF;
+	@FXML private javafx.scene.control.TextField phoneNumberTF;
+
 
 
 	private int minute;
@@ -62,6 +74,40 @@ public class ReservationController {
 
 
 	}
+	
+	 public void createReservation(ActionEvent event) throws InvalidInputException{
+	    	
+	        
+	        try {
+	        		int year  = Integer.parseInt(yearTF.getText());
+	            int  month= Integer.parseInt(monthTF.getText());
+	            int  day = Integer.parseInt(dayTF.getText());
+	            Date userDate = new Date(year, month, day);
+	            int hour = Integer.parseInt(hourTF.getText());
+	            int minute = Integer.parseInt(minuteTF.getText());
+	            Time userTime = new Time(hour, minute, 0);
+	            int numberInParty = Integer.parseInt(numInPartyTF.getText());
+	            
+	            String contact = contactTF.getText();
+	            String email = emailTF.getText();
+	            String phoneNumber = phoneNumberTF.getText();
+	            
+	            
+	           
+	        	c.reservateTable(userDate, userTime, numberInParty, contact, email, phoneNumber, );
+	        	updateBox("Table " + tbleNumber + " was created with " + addSeat + " Seats.", Color.BLACK);
+	        	loadCurrentTables();
+	        	
+	     
+	        } catch(InvalidInputException e) {
+	        	updateBox(e.getMessage(), Color.RED);
+	        	System.out.println(e.getMessage());
+	        } catch(RuntimeException e) {
+	        	updateBox("Please input values in all fields", Color.RED);
+	        }
+	    }
+	
+	
 	
     public void returnToMainMenu(ActionEvent event) throws IOException {
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
