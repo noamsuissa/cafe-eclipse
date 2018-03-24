@@ -37,7 +37,7 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="10.0" layoutX="9.0" layoutY="728.0" stroke="BLACK" strokeType="INSIDE" width="11.0" />
 
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="27.0" layoutX="207.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="193.0" />
-            <Label fx:id="L1" layoutX="257.0" layoutY="18.0" prefHeight="18.0" prefWidth="79.0" text="Label" />
+            <Label fx:id="L1" layoutX="274.0" layoutY="17.0" prefHeight="18.0" prefWidth="79.0" text="Label" />
 
             <Rectangle arcHeight="5.0" arcWidth="5.0" height="10.0" layoutX="292.0" layoutY="729.0" stroke="BLACK" strokeType="INSIDE" width="11.0" />
             <Text layoutX="29.0" layoutY="738.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Table In Use" />
@@ -131,7 +131,7 @@
 
             <TextField fx:id="phoneNumberTF" alignment="CENTER" layoutX="95.0" layoutY="583.0" prefHeight="27.0" prefWidth="221.0" promptText="Enter Phone Number" />
 
-            <Button fx:id="ReserveButton" layoutX="209.0" layoutY="656.0" mnemonicParsing="false" onAction="#createReservation" prefHeight="79.0" prefWidth="173.0" style="-fx-background-color: black;" text="Add Reservation" textFill="WHITE" />
+            <Button fx:id="ReserveButton" layoutX="153.0" layoutY="656.0" mnemonicParsing="false" onAction="#createReservation" prefHeight="78.0" prefWidth="88.0" style="-fx-background-color: black;" text="Add Reservation" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
 
             <TextField fx:id="yearTF" alignment="CENTER" layoutX="53.0" layoutY="289.0" prefHeight="27.0" prefWidth="55.0" promptText="year" />
 
@@ -152,8 +152,11 @@
                </font>
 
             </Text>
-            <Text layoutX="72.0" layoutY="652.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selected Tables" />
-            <Pane fx:id="SelectedTablesPane" layoutX="34.0" layoutY="656.0" prefHeight="78.0" prefWidth="166.0" style="-fx-border-color: black;" />
+            <Text layoutX="47.0" layoutY="652.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selected Tables" />
+            <Pane fx:id="SelectedTablesPane" layoutX="34.0" layoutY="656.0" prefHeight="78.0" prefWidth="108.0" style="-fx-border-color: black;" />
+            <Button fx:id="ClearSelectionButton" layoutX="42.0" layoutY="737.0" mnemonicParsing="false" onAction="#clearSelection" style="-fx-background-color: black;" text="Clear Selection" textFill="WHITE" />
+            <Button fx:id="ToggleButton1" layoutX="249.0" layoutY="656.0" mnemonicParsing="false" onAction="#toggleTableUse" prefHeight="36.0" prefWidth="122.0" style="-fx-background-color: black;" text="Set Table in Use" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
+            <Button fx:id="ToggleAvailableButton" layoutX="249.0" layoutY="698.0" mnemonicParsing="false" onAction="#toggleTableAvailability" prefHeight="36.0" prefWidth="122.0" style="-fx-background-color: black;" text="Set Table Available" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
 
          </children></AnchorPane>
 

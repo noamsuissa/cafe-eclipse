@@ -103,17 +103,22 @@ public class AddandRemoveTableController implements Initializable{
     }
     
     public void deleteRectangle(ActionEvent event) throws InvalidInputException {
-    	if (selectedTable1 != null) {
-    	updateBox("Table " + selectedTable1.getNumber() + " was removed.", Color.BLACK);
-    	c.removeTable(selectedTable1);
-    	selectedTable1 = null;
-    	P1.getChildren().clear();
-    	loadGrid();
-    	loadCurrentTables();
-    	} else {
-    		updateBox("Please select a table to remove", Color.RED);
+    	try { 
+			if (selectedTable1 != null) {
+			updateBox("Table " + selectedTable1.getNumber() + " was removed.", Color.BLACK);
+			c.removeTable(selectedTable1);
+			selectedTable1 = null;
+			P1.getChildren().clear();
+			loadGrid();
+			loadCurrentTables();
+			} else {
+				updateBox("Please select a table to remove", Color.RED);
+			}
+    	} 
+    		catch (InvalidInputException e) {
+    	
+    		updateBox(e.getMessage(), Color.RED);
     	}
-        
     }
     
     public void deleteHistory(ActionEvent event) {

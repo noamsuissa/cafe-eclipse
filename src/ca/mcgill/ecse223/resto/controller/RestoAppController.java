@@ -68,6 +68,7 @@ public class RestoAppController {
 
 		try {
 			RestoAppApplication.save();
+			System.out.println("save worked start order");
 		}
 		catch (RuntimeException e) {
 			throw new InvalidInputException(e.getMessage());
@@ -85,7 +86,7 @@ public class RestoAppController {
         RestoApp r = RestoAppApplication.getRestoApp();
 
         List<Order> currentOrders = r.getCurrentOrders();
-
+        
         boolean current = currentOrders.contains(order);
 
         if(!current) {
@@ -96,7 +97,7 @@ public class RestoAppController {
 
         for (Table table : tables) { 
             if(table.numberOfOrders()>0 && table.getOrder(table.numberOfOrders()-1).equals(order)) {
-        		
+   
             	table.endOrder(order);
             	
             }
@@ -106,8 +107,9 @@ public class RestoAppController {
             r.removeCurrentOrder(order);
         }
         
-         try {
+        try {
             RestoAppApplication.save();
+            System.out.println("save worked end order");
         }
         catch (RuntimeException e) {
             throw new InvalidInputException(e.getMessage());
@@ -346,52 +348,46 @@ public class RestoAppController {
 		int seatCapacity=0;
 		java.util.Date currentDate;
 		currentDate=java.util.Calendar.getInstance().getTime(); 
-		java.sql.Date sqlDate = new java.sql.Date(currentDate.getTime());
+		
 
 		if(date == null){
 		error = "Cannot reserve if there is no reservation date. ";
 		}
 
 		if(time == null){
-		error = error + "Cannot reserve if there is no reservation time. ";
+		error = "Cannot reserve if there is no reservation time. ";
 		}
 
 		if(contactName == null){
-		error = error + "Cannot reserve if there is no reservation contact name.  ";
+		error = "Cannot reserve if there is no reservation contact name.  ";
 		}
 
 		if(contactEmailAddress == null){
-		error = error + "Cannot reserve if there is no reservation contact email. ";
+		error = "Cannot reserve if there is no reservation contact email. ";
 		}
 
 		if(contactPhoneNumber == null){
-		error = error + "Cannot reserve if there is no reservation contact phone number.  ";
+		error = "Cannot reserve if there is no reservation contact phone number.  ";
 		}
-
-		if ((date.compareTo(currentDate) < 0)){
-		error = error + "Cannot reserve because this date has passed. ";
-		} 
-		System.out.println(date.getTime());
-		System.out.println(time.getTime());
-		System.out.println(sqlDate.getTime());
-		if ((time.getTime() +date.getTime() )< sqlDate.getTime()){
-		error = error + "Cannot reserve because this time has passed. ";
+	
+		if ((time.getTime() + date.getTime() ) < currentDate.getTime() && (date.compareTo(currentDate) < 0)){
+		error = "Cannot reserve for a date in the past. ";
 		}
 
 		if(numberInParty < 0){
-		error = error + "Cannot reserve if number in party is a negative number. ";
+		error = "Cannot reserve if number in party is a negative number. ";
 		}
 
 		if(contactName.length() == 0){
-		error = error + "Must enter a name to reserve. ";
+		error = "Must enter a name to reserve. ";
 		}
 
 		if(contactEmailAddress.length() == 0){
-		error = error + "Must enter an email address to reserve. ";
+		error = "Must enter an email address to reserve. ";
 		}
 
 		if(contactPhoneNumber.length() == 0){
-		error = error + "Must enter a phone number to reserve. ";
+		error = "Must enter a phone number to reserve. ";
 		}
 
 

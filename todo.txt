@@ -1,11 +1,10 @@
 Iteration 5 to do list:
-> Set timer in loadtables method that refreshers the layout each x seconds
-> Give functionality to add reservation button
+
 > Once clicking on table display its info + time of next reservation
-> Toggle table use/available button
-> make tables red when in use on all loadtable() methods 
-> Current Selected tables in reservation
 
 Additional features:
 > New page showing a huge list of all reservations
 > Display time in all pages (make the method modular)
+
+
+> In controller methods, order reservations as we add them to the table.
