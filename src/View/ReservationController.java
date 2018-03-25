@@ -72,13 +72,11 @@ public class ReservationController {
 		loadCurrentTables();
 	    Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {            
 	        Calendar cal = Calendar.getInstance();
-	        localTimeInMillis= new java.sql.Date(Calendar.getInstance().getTime().getTime()).getTime();
-	        //System.out.println(localTimeInMillis);
+	        localTimeInMillis= cal.getTimeInMillis();
 	        date = cal.get(Calendar.DATE);
 	        second = cal.get(Calendar.SECOND);
 	        minute = cal.get(Calendar.MINUTE);
 	        hour = cal.get(Calendar.HOUR_OF_DAY);
-	        //System.out.println(hour + ":" + (minute) + ":" + second);
 	        L1.setText(hour + ":" + (minute) + ":" + second);
 	    }),
 	         new KeyFrame(Duration.seconds(1))
@@ -94,13 +92,18 @@ public class ReservationController {
 	        
 	        try {
 	        	int year  = Integer.parseInt(yearTF.getText());
-	            int  month= Integer.parseInt(monthTF.getText());
+	            int  month= Integer.parseInt(monthTF.getText()) - 1;
 	            int  day = Integer.parseInt(dayTF.getText());
 	            Date userDate = new Date(year - 1900, month, day);
-	    
+	
 	            int hour = Integer.parseInt(hourTF.getText());
 	            int minute = Integer.parseInt(minuteTF.getText());
-	            Time userTime = new Time(hour, minute, 0);
+	            
+	            Calendar cal = Calendar.getInstance();
+	            cal.set(year, month, day, hour, minute, 0);
+	            
+	            Time userTime = new Time(cal.getTimeInMillis()-userDate.getTime());
+	            
 	            int numberInParty = Integer.parseInt(numInPartyTF.getText());
 	            
 	            String contact = contactTF.getText();
@@ -112,8 +115,10 @@ public class ReservationController {
 	            }
 	            //System.out.println(userDate.getTime());
 	            //System.out.println(userTime.getTime());
-	           
-
+	            //System.out.println(cal.getTimeInMillis());
+	            //System.out.println(userTime.getTime() + userDate.getTime());
+	            //System.out.println(localTimeInMillis);
+	            
 	        	c.reserveTable(userDate, userTime, numberInParty, contact, email, phoneNumber, selectedTables);
 	        	
 	        	updateBox("Table reservation created.", Color.BLACK);
@@ -125,7 +130,7 @@ public class ReservationController {
 	        	updateBox(e.getMessage(), Color.RED);
 	        	System.out.println(e.getMessage());
 	        } catch(RuntimeException e) {
-	        	updateBox("Please input values in all fields", Color.RED);
+	        	updateBox("Please input valid values in all fields", Color.RED);
 	        }
 	    }
 	
@@ -163,6 +168,7 @@ public class ReservationController {
 			btn.setTextFill(Color.WHITE);
 			btn.setOnAction(new EventHandler<ActionEvent>() {
 				@Override public void handle(ActionEvent e) {
+					
 					if (!selectedTables.contains(currentTable)){
 						selectedTables.add(currentTable);
 						//System.out.println(Arrays.toString(selectedTables.toArray()));
@@ -172,12 +178,13 @@ public class ReservationController {
 						SelectedTablesPane.getChildren().add(txt);
 					}
 					int i = 0;
+					long thisResTime;
 					//Collections.sort(currentTable.getReservations(), Comparator.comparingLong((Reservation::getTime)::getTime));
+					//FOR LOOP TO MOVE THROUGH PAST RESERVATIONS
 					for (i = 0; i<currentTable.getReservations().size(); i++) {
-						System.out.println((currentTable.getReservation(i).getTime()).getTime());
-						System.out.println(currentTable.getReservation(i).getDate().getTime());
-						System.out.println(localTimeInMillis);
-						if ((currentTable.getReservation(i).getTime()).getTime() + currentTable.getReservation(i).getDate().getTime()< localTimeInMillis) {
+						thisResTime = currentTable.getReservation(i).getTime().getTime() + currentTable.getReservation(i).getDate().getTime();
+						long twoHrs = 7200000;
+						if (thisResTime + twoHrs < localTimeInMillis) {
 							continue;
 						} else {
 							break;
@@ -185,16 +192,16 @@ public class ReservationController {
 					}
 					
 					if (currentTable.hasReservations()) {
-						String resStatus =( (currentTable.getReservation(i).getTime()).getTime() + currentTable.getReservation(i).getDate().getTime()< localTimeInMillis)&&(currentTable.getReservation(i).getTime()).getTime() + currentTable.getReservation(i).getDate().getTime() + 7200000> localTimeInMillis? "Current Reservation": "Next Reservation";
+						String resStatus = currentTable.getReservation(i).getTime().getTime() + currentTable.getReservation(i).getDate().getTime() < localTimeInMillis? "Current Reservation started at": "Next Reservation is at";
 						String txt2;
-						updateBox("Table " + currentTable.getNumber() + " - "+ resStatus + ": " + currentTable.getReservation(i).getTime().getHours()+ ":" + currentTable.getReservation(i).getTime().getMinutes() + " " + months[currentTable.getReservation(i).getDate().getMonth()-1] + " " +currentTable.getReservation(i).getDate().getDate() , Color.BLACK);
+						updateBox("Table " + currentTable.getNumber() + " - "+ resStatus + ": " + (currentTable.getReservation(i).getTime().getHours()+5) + ":" + currentTable.getReservation(i).getTime().getMinutes() + " " + months[currentTable.getReservation(i).getDate().getMonth()] + " " +currentTable.getReservation(i).getDate().getDate() , Color.BLACK);
 						
 						if (i+1 < currentTable.getReservations().size()) {
-							txt2 = "Next Reservation: " + currentTable.getReservation(i+1).getTime().getHours()+ ":" + currentTable.getReservation(i+1).getTime().getMinutes() + " " + months[currentTable.getReservation(i+1).getDate().getMonth()-1] + " " +currentTable.getReservation(i+1).getDate().getDate();
+							txt2 = "Next Reservation: " + (currentTable.getReservation(i+1).getTime().getHours()+5)+ ":" + currentTable.getReservation(i+1).getTime().getMinutes() + " " + months[currentTable.getReservation(i+1).getDate().getMonth()] + " " +currentTable.getReservation(i+1).getDate().getDate();
 							
 						} else {
 							txt2 = "There are no following reservations";		
-						}
+						} 
 						Text txt = new Text(txt2);
 						txt.setLayoutY(35);
 						txt.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
@@ -213,7 +220,6 @@ public class ReservationController {
 	
 	public void clearSelection(ActionEvent event) throws IOException{
 		selectedTables.clear();
-		//System.out.println(Arrays.toString(selectedTables.toArray()));
 		SelectedTablesPane.getChildren().clear();
 		P2.getChildren().clear();
 	}
