@@ -21,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -44,32 +45,34 @@ public class ReservationController {
 
 	@FXML private Label L1;
 	@FXML private Pane P1;
-	private List<Table> selectedTables= new ArrayList<Table>();
 	@FXML private Pane P2;
 	@FXML private Pane SelectedTablesPane;
 	@FXML private Button ReserveButton;
-	@FXML private javafx.scene.control.TextField yearTF;
-	@FXML private javafx.scene.control.TextField monthTF;
-	@FXML private javafx.scene.control.TextField dayTF;
-	@FXML private javafx.scene.control.TextField hourTF;
-	@FXML private javafx.scene.control.TextField minuteTF;
-	@FXML private javafx.scene.control.TextField numInPartyTF;
-	@FXML private javafx.scene.control.TextField contactTF;
-	@FXML private javafx.scene.control.TextField emailTF;
-	@FXML private javafx.scene.control.TextField phoneNumberTF;
 	@FXML private Button ToggleButton1;
 	@FXML private Button ToggleAvailableButton;
+	@FXML private TextField yearTF;
+	@FXML private TextField monthTF;
+	@FXML private TextField dayTF;
+	@FXML private TextField hourTF;
+	@FXML private TextField minuteTF;
+	@FXML private TextField numInPartyTF;
+	@FXML private TextField contactTF;
+	@FXML private TextField emailTF;
+	@FXML private TextField phoneNumberTF;
+	
 	RestoAppController c = new RestoAppController();
+	private List<Table> selectedTables= new ArrayList<Table>();
 	String[] months = {"Jan", "Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep" ,"Oct", "Nov", "Dec"};
 	private int minute;
 	private int hour;
 	private int second;
 	private int date;
-	private String ampm;
 	private long localTimeInMillis;
 
 	public void initialize() {
 		loadCurrentTables();
+		
+		//This is the clock animation code
 	    Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {            
 	        Calendar cal = Calendar.getInstance();
 	        localTimeInMillis= cal.getTimeInMillis();
@@ -83,46 +86,44 @@ public class ReservationController {
 	    );
 	    clock.setCycleCount(Animation.INDEFINITE);
 	    clock.play();
-
-
 	}
 	
 	 public void createReservation(ActionEvent event) throws InvalidInputException{
-	    	
-	        
 	        try {
+	        	//This is the code for parsing user input
 	        	int year  = Integer.parseInt(yearTF.getText());
 	            int  month= Integer.parseInt(monthTF.getText()) - 1;
 	            int  day = Integer.parseInt(dayTF.getText());
-	            Date userDate = new Date(year - 1900, month, day);
-	
 	            int hour = Integer.parseInt(hourTF.getText());
 	            int minute = Integer.parseInt(minuteTF.getText());
-	            
-	            Calendar cal = Calendar.getInstance();
-	            cal.set(year, month, day, hour, minute, 0);
-	            
-	            Time userTime = new Time(cal.getTimeInMillis()-userDate.getTime());
-	            
 	            int numberInParty = Integer.parseInt(numInPartyTF.getText());
-	            
 	            String contact = contactTF.getText();
 	            String email = emailTF.getText();
 	            String phoneNumber = phoneNumberTF.getText();
+	            
+	            //Converting user input to a Calendar object
+	            Calendar cal = Calendar.getInstance();
+	            cal.set(year, month, day, hour, minute, 0);
+	            
+	            //Deriving Date and Time from the Calendar object
+	            Date userDate = new Date(year - 1900, month, day);
+	            Time userTime = new Time(cal.getTimeInMillis()-userDate.getTime());
+	          
+	            //Checking for valid time inputs
 	            if (hour > 24 || minute > 60 || hour < 0 || minute < 0 || day < 0 || day > 31 || month >12 || month < 0) {
 	            	updateBox("Please input a valid date", Color.RED);
 	            	return;
 	            }
+	            
 	            //System.out.println(userDate.getTime());
 	            //System.out.println(userTime.getTime());
 	            //System.out.println(cal.getTimeInMillis());
 	            //System.out.println(userTime.getTime() + userDate.getTime());
 	            //System.out.println(localTimeInMillis);
 	            
+	            //Calling Controller method for reserve table
 	        	c.reserveTable(userDate, userTime, numberInParty, contact, email, phoneNumber, selectedTables);
-	        	
 	        	updateBox("Table reservation created.", Color.BLACK);
-
 	        	loadCurrentTables();
 	        	
 	     
