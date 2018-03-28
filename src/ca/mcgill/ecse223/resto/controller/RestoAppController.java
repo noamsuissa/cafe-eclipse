@@ -15,7 +15,7 @@ import ca.mcgill.ecse223.resto.model.MenuItem.ItemCategory;
 public class RestoAppController {
 	public RestoAppController() {
 	}
-
+//NOAM
 	public static void startOrder (List<Table> tables) throws InvalidInputException {
 		
 		boolean orderCreated = false;
