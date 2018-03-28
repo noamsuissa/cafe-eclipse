@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<SplitPane dividerPositions="0.5294117647058824" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" style="-fx-border-color: black; -fx-border-width: 8;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.ChangeTableLocationController">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <children>
+            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#returnToMainMenu" style="-fx-background-color: black;" text="Return to Main Screen" textFill="WHITE" />
+            <Pane fx:id="P1" layoutX="7.0" layoutY="77.0" prefHeight="650.0" prefWidth="400.0" style="-fx-border-color: black; -fx-border-width: 3;" />
+            <Text layoutX="151.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Floor Plan">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Button layoutX="194.0" layoutY="14.0" mnemonicParsing="false" onAction="#returnToPreviousPage" style="-fx-background-color: black;" text="Return to Previous Page" textFill="WHITE" />
+            <Pane fx:id="P2" layoutX="8.0" layoutY="738.0" prefHeight="29.0" prefWidth="382.0" />
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="783.0" prefWidth="430.0">
+         <children>
+            <Text layoutX="25.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CAFE ECLIPSE" wrappingWidth="318.323974609375">
+               <font>
+                  <Font name="Impact" size="60.0" />
+               </font>
+            </Text>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="72.0" layoutX="12.0" layoutY="176.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="346.0" />
+            <Text layoutX="64.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Change Table Location">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Text>
+            <Pane fx:id="P11" layoutX="8.0" layoutY="270.0" prefHeight="374.0" prefWidth="346.0" style="-fx-border-color: black; -fx-border-width: 3;">
+               <children>
+                  <Text layoutX="27.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Select a Table in the Floor Plan Layout to the left by clicking on it " textAlignment="CENTER" wrappingWidth="292.09130859375">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="27.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Enter below, the new coordinates of where you would like the table to now be located" textAlignment="CENTER" wrappingWidth="292.09131598472595">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="59.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="X coordinate">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="59.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Y coordinate">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Button fx:id="moveTableButton" layoutX="84.0" layoutY="314.0" mnemonicParsing="false" onAction="#changeTableLocationButton" prefHeight="45.0" prefWidth="161.0" style="-fx-background-color: black;" text="Move Table" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <TextField alignment="CENTER" layoutX="173.0" layoutY="212.0" prefHeight="26.0" prefWidth="113.0" promptText="X value" fx:id="xCoord" />
+                  <TextField fx:id="yCoord" alignment="CENTER" layoutX="173.0" layoutY="269.0" prefHeight="26.0" prefWidth="114.0" promptText="Y value" />
+               </children>
+            </Pane>
+         </children></AnchorPane>
+  </items>
+</SplitPane>

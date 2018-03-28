@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.ReservationController">
+
+  <items>
+
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+
+         <children>
+
+            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#returnToMainMenu" style="-fx-background-color: black;" text="Return to Main Menu" textFill="WHITE" />
+
+            <Pane fx:id="P1" layoutX="8.0" layoutY="74.0" prefHeight="650.0" prefWidth="400.0" style="-fx-border-color: black; -fx-border-width: 3;" />
+
+            <Text layoutX="164.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Floor Plan">
+
+               <font>
+
+                  <Font size="18.0" />
+
+               </font>
+
+            </Text>
+
+            <Pane fx:id="P2" layoutX="8.0" layoutY="742.0" prefHeight="49.0" prefWidth="400.0" />
+
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="10.0" layoutX="9.0" layoutY="728.0" stroke="BLACK" strokeType="INSIDE" width="11.0" />
+
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="27.0" layoutX="207.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="193.0" />
+            <Label fx:id="L1" layoutX="274.0" layoutY="17.0" prefHeight="18.0" prefWidth="79.0" text="Label" />
+
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="10.0" layoutX="292.0" layoutY="729.0" stroke="BLACK" strokeType="INSIDE" width="11.0" />
+            <Text layoutX="29.0" layoutY="738.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Table In Use" />
+            <Text layoutX="314.0" layoutY="738.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Table Available" />
+
+         </children></AnchorPane>
+
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+
+         <children>
+
+            <Text layoutX="43.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CAFE ECLIPSE">
+
+               <font>
+
+                  <Font name="Impact" size="64.0" />
+
+               </font>
+
+            </Text>
+
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="65.0" layoutX="20.0" layoutY="78.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="374.0" />
+
+            <Text layoutX="143.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reservations">
+
+               <font>
+
+                  <Font size="22.0" />
+
+               </font>
+
+            </Text>
+
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="612.0" layoutX="20.0" layoutY="159.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="374.0" />
+
+            <Text layoutX="164.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date &amp; Time ">
+
+               <font>
+
+                  <Font size="15.0" />
+
+               </font>
+
+            </Text>
+
+            <Text layoutX="150.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number in Party">
+
+               <font>
+
+                  <Font size="15.0" />
+
+               </font>
+
+            </Text>
+
+            <Text layoutX="156.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contact Name">
+
+               <font>
+
+                  <Font size="15.0" />
+
+               </font>
+
+            </Text>
+
+            <Text layoutX="126.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contact Email Address">
+
+               <font>
+
+                  <Font size="15.0" />
+
+               </font>
+
+            </Text>
+
+            <Text layoutX="153.0" layoutY="564.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Number">
+
+               <font>
+
+                  <Font size="15.0" />
+
+               </font>
+
+            </Text>
+
+            <TextField fx:id="numInPartyTF" alignment="CENTER" layoutX="96.0" layoutY="359.0" prefHeight="27.0" prefWidth="221.0" promptText="Enter Number in Party" />
+
+            <TextField fx:id="contactTF" alignment="CENTER" layoutX="95.0" layoutY="431.0" prefHeight="27.0" prefWidth="221.0" promptText="Enter Contact Name" />
+
+            <TextField fx:id="emailTF" alignment="CENTER" layoutX="95.0" layoutY="503.0" prefHeight="27.0" prefWidth="221.0" promptText="Enter Email Address" />
+
+            <TextField fx:id="phoneNumberTF" alignment="CENTER" layoutX="95.0" layoutY="583.0" prefHeight="27.0" prefWidth="221.0" promptText="Enter Phone Number" />
+
+            <Button fx:id="ReserveButton" layoutX="153.0" layoutY="656.0" mnemonicParsing="false" onAction="#createReservation" prefHeight="78.0" prefWidth="88.0" style="-fx-background-color: black;" text="Add Reservation" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
+
+            <TextField fx:id="yearTF" alignment="CENTER" layoutX="53.0" layoutY="289.0" prefHeight="27.0" prefWidth="55.0" promptText="year" />
+
+            <TextField fx:id="monthTF" alignment="CENTER" layoutX="116.0" layoutY="289.0" prefHeight="27.0" prefWidth="55.0" promptText="month" />
+
+            <TextField fx:id="dayTF" alignment="CENTER" layoutX="179.0" layoutY="289.0" prefHeight="27.0" prefWidth="55.0" promptText="day" />
+
+            <TextField fx:id="hourTF" alignment="CENTER" layoutX="240.0" layoutY="289.0" prefHeight="27.0" prefWidth="55.0" promptText="hour" />
+
+            <TextField fx:id="minuteTF" alignment="CENTER" layoutX="303.0" layoutY="289.0" prefHeight="27.0" prefWidth="55.0" promptText="mintue" />
+
+            <Text layoutX="89.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select a Table in the Floor Plan and click on Add Reservation below to confirm the reservation" textAlignment="CENTER" wrappingWidth="241.98876953125">
+
+               <font>
+
+                  <Font size="14.0" />
+
+               </font>
+
+            </Text>
+            <Text layoutX="47.0" layoutY="652.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selected Tables" />
+            <Pane fx:id="SelectedTablesPane" layoutX="34.0" layoutY="656.0" prefHeight="78.0" prefWidth="108.0" style="-fx-border-color: black;" />
+            <Button fx:id="ClearSelectionButton" layoutX="42.0" layoutY="737.0" mnemonicParsing="false" onAction="#clearSelection" style="-fx-background-color: black;" text="Clear Selection" textFill="WHITE" />
+            <Button fx:id="ToggleButton1" layoutX="249.0" layoutY="656.0" mnemonicParsing="false" onAction="#toggleTableUse" prefHeight="36.0" prefWidth="122.0" style="-fx-background-color: black;" text="Set Table in Use" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
+            <Button fx:id="ToggleAvailableButton" layoutX="249.0" layoutY="698.0" mnemonicParsing="false" onAction="#toggleTableAvailability" prefHeight="36.0" prefWidth="122.0" style="-fx-background-color: black;" text="Set Table Available" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
+
+         </children></AnchorPane>
+
+  </items>
+
+</SplitPane>

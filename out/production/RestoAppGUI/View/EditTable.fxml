@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<SplitPane dividerPositions="0.5191815856777494" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" style="-fx-border-color: black; -fx-border-width: 8;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.EditTableController">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <children>
+            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#returnToMainMenu" style="-fx-background-color: black;" text="Return to Main Screen" textFill="WHITE" />
+            <Pane fx:id="P1" layoutX="3.0" layoutY="76.0" prefHeight="650.0" prefWidth="400.0" style="-fx-border-color: black; -fx-border-width: 3;" />
+            <Text layoutX="151.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Floor Plan">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Button layoutX="195.0" layoutY="14.0" mnemonicParsing="false" onAction="#returnToPreviousPage" style="-fx-background-color: black;" text="Return to Previous Page" textFill="WHITE" />
+            <Pane fx:id="P2" layoutX="7.0" layoutY="731.0" prefHeight="48.0" prefWidth="375.0" />
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <children>
+            <Text layoutX="16.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CAFE ECLIPSE" wrappingWidth="340.0946044921875">
+               <font>
+                  <Font name="Impact" size="66.0" />
+               </font>
+            </Text>
+            <Pane layoutX="187.0" layoutY="246.0" prefHeight="368.0" prefWidth="171.0" style="-fx-border-color: black; -fx-border-width: 3;">
+               <children>
+                  <Pane layoutX="5.0" layoutY="14.0" prefHeight="70.0" prefWidth="162.0" style="-fx-border-color: black; -fx-border-width: 3;">
+                     <children>
+                        <Text layoutX="14.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Update Number of Seats at Table" textAlignment="CENTER" wrappingWidth="134.40001010894775" />
+                     </children>
+                  </Pane>
+                  <Button fx:id="newSeatButton" layoutX="11.0" layoutY="233.0" mnemonicParsing="false" onAction="#updateSeatNumberButton" prefHeight="87.0" prefWidth="149.0" style="-fx-background-color: black;" text="Update Number of Seats" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
+                  <Text layoutX="37.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="New Number of Seats" textAlignment="CENTER" wrappingWidth="95.474609375" />
+                  <TextField fx:id="newNumberSeat" layoutX="23.0" layoutY="171.0" prefHeight="26.0" prefWidth="126.0" promptText="Input Number" />
+               </children>
+            </Pane>
+            <Pane layoutX="11.0" layoutY="141.0" prefHeight="95.0" prefWidth="348.0" style="-fx-border-color: black; -fx-border-width: 3;">
+               <children>
+                  <Text layoutX="128.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Edit Table">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="43.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Select Table to Update by clicking on it in the Floor Plan Layout" textAlignment="CENTER" wrappingWidth="272.6000928878784" />
+               </children>
+            </Pane>
+            <Pane layoutX="11.0" layoutY="246.0" prefHeight="368.0" prefWidth="171.0" style="-fx-border-color: black; -fx-border-width: 3;">
+               <children>
+                  <Pane layoutX="5.0" layoutY="14.0" prefHeight="70.0" prefWidth="162.0" style="-fx-border-color: black; -fx-border-width: 3;">
+                     <children>
+                        <Text layoutX="14.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Update Number of Seats at Table" textAlignment="CENTER" wrappingWidth="134.40001010894775" />
+                     </children>
+                  </Pane>
+                  <TextField fx:id="newNumberText" layoutX="24.0" layoutY="171.0" prefHeight="26.0" prefWidth="125.0" promptText="Input Number" />
+                  <Text layoutX="47.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="New Table Number" textAlignment="CENTER" wrappingWidth="78.23553466796875" />
+                  <Button fx:id="newNumberButton" layoutX="11.0" layoutY="235.0" mnemonicParsing="false" onAction="#updateTableNumberButton" prefHeight="87.0" prefWidth="149.0" style="-fx-background-color: black;" text="Update Table Number" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
+               </children>
+            </Pane>
+         </children></AnchorPane>
+  </items>
+</SplitPane>

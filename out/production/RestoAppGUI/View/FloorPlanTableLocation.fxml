@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="800.0" prefWidth="800.0" style="-fx-border-color: black; -fx-border-width: 8;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.FloorPlanTableLocationController">
+   <children>
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#returnToMainMenu" style="-fx-background-color: black;" text="Return to Main Screen" textFill="WHITE" />
+      <Text layoutX="156.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CAFE ECLIPSE" wrappingWidth="486.89453125">
+         <font>
+            <Font name="Impact" size="95.0" />
+         </font>
+      </Text>
+      <Button layoutX="78.0" layoutY="400.0" mnemonicParsing="false" onAction="#goToEditTable" prefHeight="142.0" prefWidth="284.0" style="-fx-background-color: black;" text="Edit Existing Table" textFill="WHITE">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Button>
+      <Button layoutX="447.0" layoutY="400.0" mnemonicParsing="false" onAction="#goToAddTable" prefHeight="142.0" prefWidth="284.0" style="-fx-background-color: black;" text="Add or Remove Table" textFill="WHITE">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Button>
+      <Button layoutX="192.0" layoutY="579.0" mnemonicParsing="false" onAction="#goToChangeTableLocation" prefHeight="148.0" prefWidth="426.0" style="-fx-background-color: black;" text="Change Location of Existing Table" textFill="WHITE">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Button>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="180.0" layoutX="78.0" layoutY="190.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="5.0" width="654.0" />
+      <Text layoutX="144.0" layoutY="291.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: impact;" text="Welcome to the Floor Plan/Table Location Screen">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
