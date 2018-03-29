@@ -7,8 +7,8 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.*;
 
-// line 34 "../../../../../RestoAppPersistence.ump"
-// line 52 "../../../../../RestoApp v3.ump"
+// line 40 "../../../../../RestoAppPersistence.ump"
+// line 59 "../../../../../RestoApp v3.ump"
 public class Order implements Serializable
 {
 
@@ -32,6 +32,7 @@ public class Order implements Serializable
   //Order Associations
   private List<Table> tables;
   private List<OrderItem> orderItems;
+  private Waiter waiter;
   private RestoApp restoApp;
   private List<Bill> bills;
 
@@ -39,7 +40,7 @@ public class Order implements Serializable
   // CONSTRUCTOR
   //------------------------
 
-  public Order(Date aDate, Time aTime, RestoApp aRestoApp, Table... allTables)
+  public Order(Date aDate, Time aTime, Waiter aWaiter, RestoApp aRestoApp, Table... allTables)
   {
     date = aDate;
     time = aTime;
@@ -51,6 +52,11 @@ public class Order implements Serializable
       throw new RuntimeException("Unable to create Order, must have at least 1 tables");
     }
     orderItems = new ArrayList<OrderItem>();
+    boolean didAddWaiter = setWaiter(aWaiter);
+    if (!didAddWaiter)
+    {
+      throw new RuntimeException("Unable to create order due to waiter");
+    }
     boolean didAddRestoApp = setRestoApp(aRestoApp);
     if (!didAddRestoApp)
     {
@@ -155,6 +161,11 @@ public class Order implements Serializable
   {
     int index = orderItems.indexOf(aOrderItem);
     return index;
+  }
+
+  public Waiter getWaiter()
+  {
+    return waiter;
   }
 
   public RestoApp getRestoApp()
@@ -398,6 +409,25 @@ public class Order implements Serializable
     return wasAdded;
   }
 
+  public boolean setWaiter(Waiter aWaiter)
+  {
+    boolean wasSet = false;
+    if (aWaiter == null)
+    {
+      return wasSet;
+    }
+
+    Waiter existingWaiter = waiter;
+    waiter = aWaiter;
+    if (existingWaiter != null && !existingWaiter.equals(aWaiter))
+    {
+      existingWaiter.removeOrder(this);
+    }
+    waiter.addOrder(this);
+    wasSet = true;
+    return wasSet;
+  }
+
   public boolean setRestoApp(RestoApp aRestoApp)
   {
     boolean wasSet = false;
@@ -504,6 +534,12 @@ public class Order implements Serializable
       orderItems.remove(aOrderItem);
     }
     
+    Waiter placeholderWaiter = waiter;
+    this.waiter = null;
+    if(placeholderWaiter != null)
+    {
+      placeholderWaiter.removeOrder(this);
+    }
     RestoApp placeholderRestoApp = restoApp;
     this.restoApp = null;
     if(placeholderRestoApp != null)
@@ -517,7 +553,7 @@ public class Order implements Serializable
     }
   }
 
-  // line 39 "../../../../../RestoAppPersistence.ump"
+  // line 45 "../../../../../RestoAppPersistence.ump"
    public static  void reinitializeAutouniqueNumber(List<Order> orders){
     for (Order order : orders) {
       if (order.getNumber() > nextNumber) {
@@ -534,13 +570,14 @@ public class Order implements Serializable
             "number" + ":" + getNumber()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "date" + "=" + (getDate() != null ? !getDate().equals(this)  ? getDate().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
             "  " + "time" + "=" + (getTime() != null ? !getTime().equals(this)  ? getTime().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
+            "  " + "waiter = "+(getWaiter()!=null?Integer.toHexString(System.identityHashCode(getWaiter())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "restoApp = "+(getRestoApp()!=null?Integer.toHexString(System.identityHashCode(getRestoApp())):"null");
   }  
   //------------------------
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
-  // line 37 "../../../../../RestoAppPersistence.ump"
+  // line 43 "../../../../../RestoAppPersistence.ump"
   private static final long serialVersionUID = -3900912597282882073L ;
 
   

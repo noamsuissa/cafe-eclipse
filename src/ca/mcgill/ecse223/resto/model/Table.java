@@ -5,9 +5,9 @@ package ca.mcgill.ecse223.resto.model;
 import java.io.Serializable;
 import java.util.*;
 
-// line 85 "../../../../../RestoAppPersistence.ump"
+// line 91 "../../../../../RestoAppPersistence.ump"
 // line 1 "../../../../../RestoAppTableStateMachine.ump"
-// line 36 "../../../../../RestoApp v3.ump"
+// line 43 "../../../../../RestoApp v3.ump"
 public class Table implements Serializable
 {
 
@@ -211,7 +211,7 @@ public class Table implements Serializable
     switch (aStatus)
     {
       case NothingOrdered:
-        if (quantityIsPositive(quantity))
+        if (quantityNotNegative(quantity))
         {
         // line 12 "../../../../../RestoAppTableStateMachine.ump"
           // create a new order item with the provided quantity, order, seat, and priced menu item
@@ -221,7 +221,7 @@ public class Table implements Serializable
         }
         break;
       case Ordered:
-        if (quantityIsPositive(quantity))
+        if (quantityNotNegative(quantity))
         {
         // line 32 "../../../../../RestoAppTableStateMachine.ump"
           // create a new order item with the provided quantity, order, seat, and priced menu item
@@ -906,7 +906,7 @@ public class Table implements Serializable
     }
   }
 
-  // line 90 "../../../../../RestoAppPersistence.ump"
+  // line 96 "../../../../../RestoAppPersistence.ump"
    public static  void reinitializeUniqueNumber(List<Table> tables){
     tablesByNumber = new HashMap<Integer, Table>();
   	for(Table table : tables){
@@ -919,7 +919,7 @@ public class Table implements Serializable
    * check that the provided quantity is an integer greater than 0
    */
   // line 64 "../../../../../RestoAppTableStateMachine.ump"
-   private boolean quantityIsPositive(int quantity){
+   private boolean quantityNotNegative(int quantity){
     if (quantity > 0 ){
       return true;
       }
@@ -1026,7 +1026,7 @@ public class Table implements Serializable
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
-  // line 88 "../../../../../RestoAppPersistence.ump"
+  // line 94 "../../../../../RestoAppPersistence.ump"
   private static final long serialVersionUID = 8896099581655989380L ;
 
   

@@ -12,8 +12,15 @@ class RestoApp {
    1 <@>- 1 Menu menu;   
    1 <@>- * PricedMenuItem pricedMenuItems;
    1 <@>- * Bill bills;
+   1 <@>- * Waiter waiter;
 }
 
+class Waiter {
+	unique Integer id;
+	name;
+	password;
+	}
+	
 class Reservation {
    Date date;
    Time time;
@@ -55,6 +62,7 @@ class Order {
    autounique number;
    * orders -- 1..* Table tables; // only from currentTables for currentOrders
    1 <@>- * OrderItem orderItems;
+   * -- 1 Waiter waiter;
 }
 
 class OrderItem {
