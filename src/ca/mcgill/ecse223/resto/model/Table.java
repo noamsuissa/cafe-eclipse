@@ -172,7 +172,7 @@ public class Table implements Serializable
     {
       case Available:
         // line 4 "../../../../../RestoAppTableStateMachine.ump"
-        new Order(new java.sql.Date(Calendar.getInstance().getTime().getTime()), new java.sql.Time(Calendar.getInstance().getTime().getTime()), this.getRestoApp().getWaiter(0), this.getRestoApp(), this);
+        new Order(new java.sql.Date(Calendar.getInstance().getTime().getTime()), new java.sql.Time(Calendar.getInstance().getTime().getTime()), this.getRestoApp().getCurrentWaiter(), this.getRestoApp(), this);
         setStatus(Status.NothingOrdered);
         wasEventProcessed = true;
         break;

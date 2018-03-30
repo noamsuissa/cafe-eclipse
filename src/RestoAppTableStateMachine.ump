@@ -2,7 +2,7 @@ class Table {
    status {
       Available {
          startOrder() / {
-            new Order(new java.sql.Date(Calendar.getInstance().getTime().getTime()), new java.sql.Time(Calendar.getInstance().getTime().getTime()), this.getRestoApp().getWaiter(0), this.getRestoApp(), this);
+            new Order(new java.sql.Date(Calendar.getInstance().getTime().getTime()), new java.sql.Time(Calendar.getInstance().getTime().getTime()), this.getRestoApp().getCurrentWaiter(), this.getRestoApp(), this);
          } -> NothingOrdered;
          addToOrder(Order o) / {
             o.addTable(this);
