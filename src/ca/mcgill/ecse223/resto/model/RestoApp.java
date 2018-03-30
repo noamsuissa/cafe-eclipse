@@ -25,6 +25,7 @@ public class RestoApp implements Serializable
   private Menu menu;
   private List<PricedMenuItem> pricedMenuItems;
   private List<Bill> bills;
+  private List<Waiter> waiter;
 
   //------------------------
   // CONSTRUCTOR
@@ -44,6 +45,7 @@ public class RestoApp implements Serializable
     menu = aMenu;
     pricedMenuItems = new ArrayList<PricedMenuItem>();
     bills = new ArrayList<Bill>();
+    waiter = new ArrayList<Waiter>();
   }
 
   public RestoApp()
@@ -56,6 +58,7 @@ public class RestoApp implements Serializable
     menu = new Menu(this);
     pricedMenuItems = new ArrayList<PricedMenuItem>();
     bills = new ArrayList<Bill>();
+    waiter = new ArrayList<Waiter>();
   }
 
   //------------------------
@@ -286,6 +289,36 @@ public class RestoApp implements Serializable
     return index;
   }
 
+  public Waiter getWaiter(int index)
+  {
+    Waiter aWaiter = waiter.get(index);
+    return aWaiter;
+  }
+
+  public List<Waiter> getWaiter()
+  {
+    List<Waiter> newWaiter = Collections.unmodifiableList(waiter);
+    return newWaiter;
+  }
+
+  public int numberOfWaiter()
+  {
+    int number = waiter.size();
+    return number;
+  }
+
+  public boolean hasWaiter()
+  {
+    boolean has = waiter.size() > 0;
+    return has;
+  }
+
+  public int indexOfWaiter(Waiter aWaiter)
+  {
+    int index = waiter.indexOf(aWaiter);
+    return index;
+  }
+
   public static int minimumNumberOfReservations()
   {
     return 0;
@@ -492,9 +525,9 @@ public class RestoApp implements Serializable
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public Order addOrder(Date aDate, Time aTime, Table... allTables)
+  public Order addOrder(Date aDate, Time aTime, Waiter aWaiter, Table... allTables)
   {
-    return new Order(aDate, aTime, this, allTables);
+    return new Order(aDate, aTime, aWaiter, this, allTables);
   }
 
   public boolean addOrder(Order aOrder)
@@ -760,6 +793,78 @@ public class RestoApp implements Serializable
     return wasAdded;
   }
 
+  public static int minimumNumberOfWaiter()
+  {
+    return 0;
+  }
+  /* Code from template association_AddManyToOne */
+  public Waiter addWaiter(int aId, String aName, String aPassword)
+  {
+    return new Waiter(aId, aName, aPassword, this);
+  }
+
+  public boolean addWaiter(Waiter aWaiter)
+  {
+    boolean wasAdded = false;
+    if (waiter.contains(aWaiter)) { return false; }
+    RestoApp existingRestoApp = aWaiter.getRestoApp();
+    boolean isNewRestoApp = existingRestoApp != null && !this.equals(existingRestoApp);
+    if (isNewRestoApp)
+    {
+      aWaiter.setRestoApp(this);
+    }
+    else
+    {
+      waiter.add(aWaiter);
+    }
+    wasAdded = true;
+    return wasAdded;
+  }
+
+  public boolean removeWaiter(Waiter aWaiter)
+  {
+    boolean wasRemoved = false;
+    //Unable to remove aWaiter, as it must always have a restoApp
+    if (!this.equals(aWaiter.getRestoApp()))
+    {
+      waiter.remove(aWaiter);
+      wasRemoved = true;
+    }
+    return wasRemoved;
+  }
+
+  public boolean addWaiterAt(Waiter aWaiter, int index)
+  {  
+    boolean wasAdded = false;
+    if(addWaiter(aWaiter))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfWaiter()) { index = numberOfWaiter() - 1; }
+      waiter.remove(aWaiter);
+      waiter.add(index, aWaiter);
+      wasAdded = true;
+    }
+    return wasAdded;
+  }
+
+  public boolean addOrMoveWaiterAt(Waiter aWaiter, int index)
+  {
+    boolean wasAdded = false;
+    if(waiter.contains(aWaiter))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfWaiter()) { index = numberOfWaiter() - 1; }
+      waiter.remove(aWaiter);
+      waiter.add(index, aWaiter);
+      wasAdded = true;
+    } 
+    else 
+    {
+      wasAdded = addWaiterAt(aWaiter, index);
+    }
+    return wasAdded;
+  }
+
   public void delete()
   {
     while (reservations.size() > 0)
@@ -803,6 +908,13 @@ public class RestoApp implements Serializable
       Bill aBill = bills.get(bills.size() - 1);
       aBill.delete();
       bills.remove(aBill);
+    }
+    
+    while (waiter.size() > 0)
+    {
+      Waiter aWaiter = waiter.get(waiter.size() - 1);
+      aWaiter.delete();
+      waiter.remove(aWaiter);
     }
     
   }

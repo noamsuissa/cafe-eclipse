@@ -44,7 +44,7 @@ public class AddandRemoveTableController implements Initializable{
     @FXML private Pane P2;
     RestoAppController c = new RestoAppController();
     private Table selectedTable1 = null;
-   //BECKY
+ 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     	loadGrid();

@@ -19,6 +19,12 @@ class Menu {
   private static final long serialVersionUID = -7403802774454467836L;
 }
 
+class Waiter {
+	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID = -1520532775726597836L;
+	}
+
 class MenuItem {
   depend java.io.Serializable;
   isA Serializable;

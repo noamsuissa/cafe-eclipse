@@ -2,7 +2,7 @@ class Table {
    status {
       Available {
          startOrder() / {
-            new Order(new java.sql.Date(Calendar.getInstance().getTime().getTime()), new java.sql.Time(Calendar.getInstance().getTime().getTime()), this.getRestoApp(), this);
+            new Order(new java.sql.Date(Calendar.getInstance().getTime().getTime()), new java.sql.Time(Calendar.getInstance().getTime().getTime()), this.getRestoApp().getWaiter(0), this.getRestoApp(), this);
          } -> NothingOrdered;
          addToOrder(Order o) / {
             o.addTable(this);
@@ -60,7 +60,7 @@ class Table {
    }
    
    // check that the provided quantity is an integer greater than 0
-   private boolean quantityIsPositive(int quantity) {
+   private boolean quantityNotNegative(int quantity) {
       if (quantity > 0 ){
       return true;
       }

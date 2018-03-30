@@ -7,8 +7,8 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.*;
 
-// line 59 "../../../../../RestoAppPersistence.ump"
-// line 17 "../../../../../RestoApp v3.ump"
+// line 65 "../../../../../RestoAppPersistence.ump"
+// line 24 "../../../../../RestoApp v3.ump"
 public class Reservation implements Serializable
 {
 
@@ -357,7 +357,7 @@ public class Reservation implements Serializable
     }
   }
 
-  // line 64 "../../../../../RestoAppPersistence.ump"
+  // line 70 "../../../../../RestoAppPersistence.ump"
    public static  void reinitializeAutouniqueReservationNumber(List<Reservation> reservations){
     for (Reservation reservation : reservations) {
       if (reservation.getReservationNumber() > nextReservationNumber) {
@@ -367,7 +367,7 @@ public class Reservation implements Serializable
     nextReservationNumber++;
   }
 
-  // line 27 "../../../../../RestoApp v3.ump"
+  // line 34 "../../../../../RestoApp v3.ump"
    public boolean doesOverlap(Date aDate, Time aTime){
     if(date.compareTo(aDate)==0) {
    if(Math.abs((time.getHours())-(aTime.getHours()))<2) {
@@ -394,7 +394,7 @@ public class Reservation implements Serializable
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
-  // line 62 "../../../../../RestoAppPersistence.ump"
+  // line 68 "../../../../../RestoAppPersistence.ump"
   private static final long serialVersionUID = 2315072607928790501L ;
 
   
