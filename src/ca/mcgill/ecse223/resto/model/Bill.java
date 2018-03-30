@@ -9,7 +9,7 @@ import java.util.*;
 // line 91 "../../../../../RestoApp v3.ump"
 public class Bill implements Serializable
 {
-
+//NOAM
   //------------------------
   // MEMBER VARIABLES
   //------------------------
