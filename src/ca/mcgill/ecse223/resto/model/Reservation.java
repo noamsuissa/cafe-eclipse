@@ -7,7 +7,7 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.*;
 
-// line 65 "../../../../../RestoAppPersistence.ump"
+// line 72 "../../../../../RestoAppPersistence.ump"
 // line 25 "../../../../../RestoApp v3.ump"
 public class Reservation implements Serializable
 {
@@ -357,7 +357,7 @@ public class Reservation implements Serializable
     }
   }
 
-  // line 70 "../../../../../RestoAppPersistence.ump"
+  // line 77 "../../../../../RestoAppPersistence.ump"
    public static  void reinitializeAutouniqueReservationNumber(List<Reservation> reservations){
     for (Reservation reservation : reservations) {
       if (reservation.getReservationNumber() > nextReservationNumber) {
@@ -394,7 +394,7 @@ public class Reservation implements Serializable
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
-  // line 68 "../../../../../RestoAppPersistence.ump"
+  // line 75 "../../../../../RestoAppPersistence.ump"
   private static final long serialVersionUID = 2315072607928790501L ;
 
   

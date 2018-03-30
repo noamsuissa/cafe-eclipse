@@ -5,7 +5,7 @@ package ca.mcgill.ecse223.resto.model;
 import java.io.Serializable;
 import java.util.*;
 
-// line 91 "../../../../../RestoAppPersistence.ump"
+// line 98 "../../../../../RestoAppPersistence.ump"
 // line 1 "../../../../../RestoAppTableStateMachine.ump"
 // line 44 "../../../../../RestoApp v3.ump"
 public class Table implements Serializable
@@ -906,7 +906,7 @@ public class Table implements Serializable
     }
   }
 
-  // line 96 "../../../../../RestoAppPersistence.ump"
+  // line 103 "../../../../../RestoAppPersistence.ump"
    public static  void reinitializeUniqueNumber(List<Table> tables){
     tablesByNumber = new HashMap<Integer, Table>();
   	for(Table table : tables){
@@ -1026,7 +1026,7 @@ public class Table implements Serializable
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
-  // line 94 "../../../../../RestoAppPersistence.ump"
+  // line 101 "../../../../../RestoAppPersistence.ump"
   private static final long serialVersionUID = 8896099581655989380L ;
 
   

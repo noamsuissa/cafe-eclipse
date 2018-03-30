@@ -9,6 +9,7 @@ class RestoApp {
   	Table.reinitializeUniqueNumber(this.getTables());
   	Order.reinitializeAutouniqueNumber(this.getOrders());
     MenuItem.reinitializeUniqueName(this.getMenu().getMenuItems());
+    Waiter.reinitializeUniqueId(this.getWaiters());
   }
   
 }
@@ -23,7 +24,13 @@ class Waiter {
 	depend java.io.Serializable;
 	isA Serializable;
 	private static final long serialVersionUID = -1520532775726597836L;
-	}
+	public static void reinitializeUniqueId(List<Waiter> waiters){
+  		waitersById = new HashMap<Integer, Waiter>();
+  		for(Waiter waiter : waiters){
+  			waitersById.put(waiter.getId(), waiter);
+  		}  
+  	}	
+}
 
 class MenuItem {
   depend java.io.Serializable;

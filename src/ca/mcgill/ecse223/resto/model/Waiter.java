@@ -7,7 +7,7 @@ import java.util.*;
 import java.sql.Date;
 import java.sql.Time;
 
-// line 22 "../../../../../RestoAppPersistence.ump"
+// line 23 "../../../../../RestoAppPersistence.ump"
 // line 19 "../../../../../RestoApp v3.ump"
 public class Waiter implements Serializable
 {
@@ -254,6 +254,14 @@ public class Waiter implements Serializable
     }
   }
 
+  // line 28 "../../../../../RestoAppPersistence.ump"
+   public static  void reinitializeUniqueId(List<Waiter> waiters){
+    waitersById = new HashMap<Integer, Waiter>();
+  		for(Waiter waiter : waiters){
+  			waitersById.put(waiter.getId(), waiter);
+  		}
+  }
+
 
   public String toString()
   {
@@ -267,7 +275,7 @@ public class Waiter implements Serializable
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
-  // line 25 "../../../../../RestoAppPersistence.ump"
+  // line 26 "../../../../../RestoAppPersistence.ump"
   private static final long serialVersionUID = -1520532775726597836L ;
 
   
