@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<SplitPane dividerPositions="0.5242966751918159" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" style="-fx-border-color: black; -fx-border-width: 8;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.FullMenuController">
+<SplitPane dividerPositions="0.5242966751918159" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" style="-fx-border-color: black; -fx-border-width: 8;" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.FullMenuController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="260.0">
          <children>
@@ -34,7 +34,7 @@
                   <Font name="Impact" size="60.0" />
                </font>
             </Text>
-            <GridPane fx:id="G2" layoutX="14.0" layoutY="477.0" prefHeight="234.0" prefWidth="339.0" style="-fx-border-color: black; -fx-border-width: 3;">
+            <GridPane fx:id="G2" layoutX="14.0" layoutY="477.0" prefHeight="115.0" prefWidth="339.0" style="-fx-border-color: black; -fx-border-width: 3;">
                <columnConstraints>
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="99.0" />
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="177.0" minWidth="0.0" prefWidth="101.0" />
@@ -42,7 +42,6 @@
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints maxHeight="135.20003662109377" minHeight="3.199975585937497" prefHeight="113.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="174.4000244140625" minHeight="0.0" prefHeight="115.40000000000002" vgrow="SOMETIMES" />
                </rowConstraints>
             </GridPane>
             <GridPane fx:id="G1" layoutX="15.0" layoutY="95.0" prefHeight="227.0" prefWidth="339.0" style="-fx-border-color: black; -fx-border-width: 3;">
@@ -56,6 +55,11 @@
                   <RowConstraints maxHeight="123.1999969482422" minHeight="0.0" prefHeight="92.00000000000001" vgrow="SOMETIMES" />
                </rowConstraints>
             </GridPane>
+            <Button layoutX="22.0" layoutY="638.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="327.0" style="-fx-background-color: black;" text="Modify Menu Items" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
          </children></AnchorPane>
   </items>
 </SplitPane>
