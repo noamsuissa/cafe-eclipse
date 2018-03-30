@@ -12,7 +12,8 @@ class RestoApp {
    1 <@>- 1 Menu menu;   
    1 <@>- * PricedMenuItem pricedMenuItems;
    1 <@>- * Bill bills;
-   1 <@>- * Waiter waiter;
+   1 <@>- * Waiter waiters;
+   1 -> 0..1 Waiter currentWaiter; // subset waiters
 }
 
 class Waiter {
