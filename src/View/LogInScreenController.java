@@ -40,13 +40,21 @@ public class LogInScreenController {
             String waiterPass = logInPasswordTF.getText();
 
             if (isValidWaiter(waiterID, waiterPass)) {
-                Parent tableViewParent = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
-                Scene tableViewScene = new Scene(tableViewParent);
+                Parent tableViewParent;
+				try {
+					tableViewParent = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
+				
+					Scene tableViewScene = new Scene(tableViewParent);
 
-                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-                window.setScene(tableViewScene);
-                window.show();
+	                window.setScene(tableViewScene);
+	                window.show();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					System.out.println(e.getMessage());
+				}
+               
             }
         }catch(InvalidInputException e) {
             updateBox(e.getMessage(), Color.RED);
