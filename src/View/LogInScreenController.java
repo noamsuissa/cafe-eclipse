@@ -53,6 +53,8 @@ public class LogInScreenController {
             System.out.println(e.getMessage());
         } catch(RuntimeException e) {
             updateBox("Please input values in all fields", Color.RED);
+        } catch (IOException e) {
+        	System.out.println(e.getMessage());
         }
     }
 
