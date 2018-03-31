@@ -8,22 +8,22 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" style="-fx-border-style: solid; -fx-border-width: 8;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainMenuController">
     <children>
-        <Button layoutX="447.0" layoutY="400.0" mnemonicParsing="false" onAction="#goToFloorPlanTableLocationButtonPushed" prefHeight="142.0" prefWidth="284.0" style="-fx-background-color: BLACK;" text="Floor Plan/ Table Location" textFill="WHITE">
+        <Button layoutX="447.0" layoutY="384.0" mnemonicParsing="false" onAction="#goToFloorPlanTableLocationButtonPushed" prefHeight="105.0" prefWidth="284.0" style="-fx-background-color: BLACK;" text="Floor Plan/ Table Location" textFill="WHITE">
             <font>
                 <Font size="22.0" />
             </font>
         </Button>
-        <Button layoutX="447.0" layoutY="581.0" mnemonicParsing="false" onAction="#goToBillButtonPushed" prefHeight="142.0" prefWidth="284.0" style="-fx-background-color: BLack;" text="Bill" textFill="WHITE">
+        <Button layoutX="447.0" layoutY="522.0" mnemonicParsing="false" onAction="#goToBillButtonPushed" prefHeight="105.0" prefWidth="284.0" style="-fx-background-color: BLack;" text="Bill" textFill="WHITE">
             <font>
                 <Font size="22.0" />
             </font>
         </Button>
-        <Button fx:id="fullmenu_btn" layoutX="78.0" layoutY="400.0" mnemonicParsing="false" onAction="#goToFullMenuButtonPushed" prefHeight="142.0" prefWidth="284.0" style="-fx-background-color: BLACK;" text="Full Menu" textFill="WHITE">
+        <Button fx:id="fullmenu_btn" layoutX="78.0" layoutY="384.0" mnemonicParsing="false" onAction="#goToFullMenuButtonPushed" prefHeight="105.0" prefWidth="284.0" style="-fx-background-color: BLACK;" text="Full Menu" textFill="WHITE">
             <font>
                 <Font size="22.0" />
             </font>
         </Button>
-        <Button fx:id="res_btn" layoutX="78.0" layoutY="581.0" mnemonicParsing="false" onAction="#goToReservationButtonPushed" prefHeight="142.0" prefWidth="284.0" style="-fx-background-color: BLACK;" text="Reservation" textFill="WHITE">
+        <Button fx:id="res_btn" layoutX="78.0" layoutY="522.0" mnemonicParsing="false" onAction="#goToReservationButtonPushed" prefHeight="105.0" prefWidth="284.0" style="-fx-background-color: BLACK;" text="Reservation" textFill="WHITE">
             <font>
                 <Font size="22.0" />
             </font>
@@ -42,6 +42,11 @@
       <Button layoutX="671.0" layoutY="14.0" mnemonicParsing="false" onAction="#logOffButton" prefHeight="40.0" prefWidth="115.0" style="-fx-background-color: black;" text="Log Out" textFill="WHITE">
          <font>
             <Font size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="263.0" layoutY="650.0" mnemonicParsing="false" prefHeight="105.0" prefWidth="284.0" style="-fx-background-color: BLack;" text="Orders" textFill="WHITE">
+         <font>
+            <Font size="22.0" />
          </font>
       </Button>
     </children>
