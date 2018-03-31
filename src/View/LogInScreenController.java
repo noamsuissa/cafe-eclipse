@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -26,10 +27,10 @@ public class LogInScreenController {
     @FXML private Button logInButton;
     @FXML private Button createWaiterButton;
     @FXML private TextField logInIDTF;
-    @FXML private TextField logInPasswordTF;
+    @FXML private PasswordField logInPasswordTF;
     @FXML private TextField createIdTF;
     @FXML private TextField createNameTF;
-    @FXML private TextField createPasswordTF;
+    @FXML private PasswordField createPasswordTF;
     @FXML private Pane updatePane;
 
 
@@ -52,7 +53,7 @@ public class LogInScreenController {
             updateBox(e.getMessage(), Color.RED);
             System.out.println(e.getMessage());
         } catch(RuntimeException e) {
-            updateBox("Please input values in all fields", Color.RED);
+            updateBox(e.getMessage(), Color.RED);
         } catch (IOException e) {
         	System.out.println(e.getMessage());
         }
@@ -97,12 +98,13 @@ public class LogInScreenController {
             String name = createNameTF.getText();
             String password = createPasswordTF.getText();
             createWaiter(name, id, password);
+            updateBox("Waiter Account Created Successfully", Color.BLACK);
         }
         catch(InvalidInputException e) {
                 updateBox(e.getMessage(), Color.RED);
                 System.out.println(e.getMessage());
             } catch(RuntimeException e) {
-                updateBox("Please input values in all fields", Color.RED);
+                updateBox(e.getMessage(), Color.RED);
             }
         }
 
@@ -110,14 +112,14 @@ public class LogInScreenController {
 
         String errorMessage = "";
 
-        if(aName == null || aName == ""){
-            errorMessage += "Please enter valid credentials";
+        if(aName == null || aName.equals("")){
+            errorMessage = "Please enter in your name";
         }
         if(aId<=0){
-            errorMessage += "Please enter valid credentials";
+            errorMessage = "Please enter in a valid ID number";
         }
-        if(aPassword == null || aPassword ==""){
-            errorMessage += "Please enter valid credentials";
+        if(aPassword == null || aPassword.equals("")){
+            errorMessage = "Please enter a password";
         }
         if(errorMessage.length()>1){
             throw new InvalidInputException(errorMessage);
@@ -140,5 +142,7 @@ public class LogInScreenController {
         updatePane.getChildren().clear();
         updatePane.getChildren().add(txt);
     }
+
+
 
 }

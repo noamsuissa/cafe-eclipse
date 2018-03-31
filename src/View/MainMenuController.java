@@ -46,4 +46,15 @@ public class MainMenuController {
         window.setScene(tableViewScene);
         window.show();
     }
+
+    public void logOffButton(ActionEvent event)throws IOException {
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("LogInScreenView.fxml"));
+        Scene tableViewScene = new Scene(tableViewParent);
+
+        Stage window = (Stage)((Node) event.getSource()).getScene().getWindow();
+
+        window.setScene(tableViewScene);
+        window.show();
+    }
+
 }

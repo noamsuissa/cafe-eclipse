@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -23,11 +24,6 @@
             <Font size="16.0" />
          </font>
       </TextField>
-      <TextField fx:id="logInPasswordTF" layoutX="113.0" layoutY="426.0" prefHeight="27.0" prefWidth="223.0" promptText="Password">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </TextField>
       <Text layoutX="120.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Existing Waiter Login">
          <font>
             <Font size="21.0" />
@@ -43,11 +39,6 @@
             <Font size="16.0" />
          </font>
       </TextField>
-      <TextField fx:id="createPasswordTF" layoutX="452.0" layoutY="497.0" prefHeight="27.0" prefWidth="223.0" promptText="Password">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </TextField>
       <TextField fx:id="createNameTF" layoutX="452.0" layoutY="426.0" prefHeight="27.0" prefWidth="223.0" promptText="Name">
          <font>
             <Font size="16.0" />
@@ -55,10 +46,16 @@
       </TextField>
       <Button fx:id="createWaiterButton" layoutX="452.0" layoutY="559.0" mnemonicParsing="false" onAction="#createWaiterButton" prefHeight="54.0" prefWidth="223.0" style="-fx-background-color: black;" text="Create Waiter" textFill="WHITE" />
       <Button fx:id="logInButton" layoutX="113.0" layoutY="559.0" mnemonicParsing="false" onAction="#logInButton" prefHeight="54.0" prefWidth="223.0" style="-fx-background-color: black;" text="Log In" textFill="WHITE" />
-      <Pane fx:id="updatePane" layoutX="229.0" layoutY="675.0" prefHeight="54.0" prefWidth="341.0" style="-fx-border-color: black;">
-         <children>
-            <Text layoutX="67.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Update Box (User Input Invalid ...)" />
-         </children>
-      </Pane>
+      <Pane fx:id="updatePane" layoutX="229.0" layoutY="675.0" prefHeight="54.0" prefWidth="341.0" />
+      <PasswordField fx:id="createPasswordTF" layoutX="452.0" layoutY="487.0" prefHeight="37.0" prefWidth="223.0" promptText="Password">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </PasswordField>
+      <PasswordField fx:id="logInPasswordTF" layoutX="113.0" layoutY="426.0" prefHeight="37.0" prefWidth="223.0" promptText="Password">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </PasswordField>
    </children>
 </Pane>

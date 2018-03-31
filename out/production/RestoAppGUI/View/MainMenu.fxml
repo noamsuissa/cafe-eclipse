@@ -39,5 +39,10 @@
             <Font size="26.0" />
          </font>
       </Text>
+      <Button layoutX="671.0" layoutY="14.0" mnemonicParsing="false" onAction="#logOffButton" prefHeight="40.0" prefWidth="115.0" style="-fx-background-color: black;" text="Log Out" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
     </children>
 </Pane>
