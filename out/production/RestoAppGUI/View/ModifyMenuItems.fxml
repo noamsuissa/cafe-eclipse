@@ -16,7 +16,7 @@
       <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="260.0">
          <children>
             <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#returnToMainMenu" style="-fx-background-color: black;" text="Return to Main Screen" textFill="WHITE" />
-            <Button layoutX="206.0" layoutY="15.0" mnemonicParsing="false" onAction="#returnToMainMenu" style="-fx-background-color: black;" text="Return to Previous Screen" textFill="WHITE" />
+            <Button layoutX="206.0" layoutY="15.0" mnemonicParsing="false" onAction="#returnToPreviousPage" style="-fx-background-color: black;" text="Return to Previous Screen" textFill="WHITE" />
             <TableView fx:id="tableView" layoutX="23.0" layoutY="124.0" prefHeight="564.0" prefWidth="356.0">
               <columns>
                 <TableColumn fx:id="tableName" prefWidth="133.1505470275879" text="Name" />

@@ -115,7 +115,6 @@ public class ModifyMenuItemsController implements Initializable{
 		window.show();
 
 	}
-	//TODO: returns to main page, make it return to fullmenu page
 	public void returnToPreviousPage(ActionEvent event)throws IOException {
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("FullMenu.fxml"));
 		Scene tableViewScene = new Scene(tableViewParent);
