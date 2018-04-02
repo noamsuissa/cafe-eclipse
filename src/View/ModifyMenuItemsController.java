@@ -95,13 +95,14 @@ public class ModifyMenuItemsController implements Initializable{
 
 	}
 
-	void removeAnItemButton(ActionEvent event) throws InvalidInputException{
+	public void removeAnItemButton(ActionEvent event) throws InvalidInputException{
 
 	}
 
-	void updateAnItemButton(ActionEvent event) throws InvalidInputException{
+	public void updateAnItemButton(ActionEvent event) throws InvalidInputException{
 
 	}
+	
 	public void returnToMainMenu(ActionEvent event) throws IOException {
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
 		Scene tableViewScene = new Scene(tableViewParent);
