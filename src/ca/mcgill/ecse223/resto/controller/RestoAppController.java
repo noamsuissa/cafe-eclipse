@@ -16,13 +16,45 @@ public class RestoAppController {
 	public RestoAppController() {
 	}
 
-	public static void startOrder (List<Table> tables) throws InvalidInputException {
+	public static void addMenuItem(String name, ItemCategory category, double price) throws InvalidInputException {
+		String error="";
+		if(name == null) {
+			error += "Table cannot be null. ";
+		}if(category == null) {
+			error += "x cannot be negative. ";
+		}if(price <= 0) {
+			error += "price cannot be zero or negative. ";
+		}if (error.length() > 0) {
+			throw new InvalidInputException(error.trim());
+		} 
+
+		RestoApp r = RestoAppApplication.getRestoApp();
+		Menu menu = r.getMenu();
+		try {
+			MenuItem menuItem = new MenuItem(name, price, menu);
+			menuItem.setItemCategory(category);
+			PricedMenuItem pmi = menuItem.addPricedMenuItem(price, r);
+			menuItem.setCurrentPricedMenuItem(pmi);
+		}catch(RuntimeException e) {
+			throw new InvalidInputException("Name is a duplicate");
+		}
 		
+		try {
+			RestoAppApplication.save();
+		}
+		catch (RuntimeException e) {
+			throw new InvalidInputException(e.getMessage());
+		}
+
+	}
+
+	public static void startOrder (List<Table> tables) throws InvalidInputException {
+
 		boolean orderCreated = false;
 		Order newOrder = null;
 
 		if (tables == null) {
-			
+
 			throw new InvalidInputException("Error. Table is null");
 		}
 
@@ -49,7 +81,7 @@ public class RestoAppController {
 				}
 
 				table.startOrder();
-				
+
 				if((table.numberOfOrders()>0) && !(table.getOrder(table.numberOfOrders()-1)).equals(lastOrder)) {
 					orderCreated = true;
 					newOrder = table.getOrder(table.numberOfOrders()-1);
@@ -75,48 +107,48 @@ public class RestoAppController {
 		}
 
 	}
-	
+
 	public static void endOrder (Order order) throws InvalidInputException {
-        
-        if (order == null) {
-          
-        	throw new InvalidInputException("Error. Order is null.");
+
+		if (order == null) {
+
+			throw new InvalidInputException("Error. Order is null.");
 		}
-        
-        RestoApp r = RestoAppApplication.getRestoApp();
 
-        List<Order> currentOrders = r.getCurrentOrders();
-        
-        boolean current = currentOrders.contains(order);
+		RestoApp r = RestoAppApplication.getRestoApp();
 
-        if(!current) {
-                throw new InvalidInputException("Order is not in current orders");
-            }
+		List<Order> currentOrders = r.getCurrentOrders();
 
-        List<Table> tables = order.getTables();
+		boolean current = currentOrders.contains(order);
 
-        for (Table table : tables) { 
-            if(table.numberOfOrders()>0 && table.getOrder(table.numberOfOrders()-1).equals(order)) {
-   
-            	table.endOrder(order);
-            	
-            }
-        }
+		if(!current) {
+			throw new InvalidInputException("Order is not in current orders");
+		}
 
-        if(allTablesAvailableOrDifferentCurrentOrder(tables,order)){
-            r.removeCurrentOrder(order);
-        }
-        
-        try {
-            RestoAppApplication.save();
-            System.out.println("save worked end order");
-        }
-        catch (RuntimeException e) {
-            throw new InvalidInputException(e.getMessage());
-        }
-    
-    }
-	
+		List<Table> tables = order.getTables();
+
+		for (Table table : tables) { 
+			if(table.numberOfOrders()>0 && table.getOrder(table.numberOfOrders()-1).equals(order)) {
+
+				table.endOrder(order);
+
+			}
+		}
+
+		if(allTablesAvailableOrDifferentCurrentOrder(tables,order)){
+			r.removeCurrentOrder(order);
+		}
+
+		try {
+			RestoAppApplication.save();
+			System.out.println("save worked end order");
+		}
+		catch (RuntimeException e) {
+			throw new InvalidInputException(e.getMessage());
+		}
+
+	}
+
 	private static boolean allTablesAvailableOrDifferentCurrentOrder(List<Table> tables, Order order) {
 
 		for(Table table: tables)
@@ -133,7 +165,6 @@ public class RestoAppController {
 		}
 		return true;
 	}
-
 
 	public static void moveTable(Table table, int x, int y) throws InvalidInputException{
 		String error="";
@@ -336,11 +367,11 @@ public class RestoAppController {
 		catch(RuntimeException e){
 			throw new InvalidInputException(e.getMessage());
 		}
-		
+
 
 
 	}
-	
+
 	public static void reserveTable(Date date, Time time, int numberInParty, String contactName, String contactEmailAddress, String contactPhoneNumber, List<Table> tables) throws InvalidInputException{
 
 		String error = "";
@@ -348,51 +379,51 @@ public class RestoAppController {
 		int seatCapacity=0;
 		java.util.Date currentDate;
 		currentDate=java.util.Calendar.getInstance().getTime(); 
-		
+
 
 		if(date == null){
-		error = "Cannot reserve if there is no reservation date. ";
+			error = "Cannot reserve if there is no reservation date. ";
 		}
 
 		if(time == null){
-		error = "Cannot reserve if there is no reservation time. ";
+			error = "Cannot reserve if there is no reservation time. ";
 		}
 
 		if(contactName == null){
-		error = "Cannot reserve if there is no reservation contact name.  ";
+			error = "Cannot reserve if there is no reservation contact name.  ";
 		}
 
 		if(contactEmailAddress == null){
-		error = "Cannot reserve if there is no reservation contact email. ";
+			error = "Cannot reserve if there is no reservation contact email. ";
 		}
 
 		if(contactPhoneNumber == null){
-		error = "Cannot reserve if there is no reservation contact phone number.  ";
+			error = "Cannot reserve if there is no reservation contact phone number.  ";
 		}
-	
+
 		if ((time.getTime() + date.getTime() ) < currentDate.getTime() && (date.compareTo(currentDate) < 0)){
-		error = "Cannot reserve for a date in the past. ";
+			error = "Cannot reserve for a date in the past. ";
 		}
 
 		if(numberInParty < 0){
-		error = "Cannot reserve if number in party is a negative number. ";
+			error = "Cannot reserve if number in party is a negative number. ";
 		}
 
 		if(contactName.length() == 0){
-		error = "Must enter a name to reserve. ";
+			error = "Must enter a name to reserve. ";
 		}
 
 		if(contactEmailAddress.length() == 0){
-		error = "Must enter an email address to reserve. ";
+			error = "Must enter an email address to reserve. ";
 		}
 
 		if(contactPhoneNumber.length() == 0){
-		error = "Must enter a phone number to reserve. ";
+			error = "Must enter a phone number to reserve. ";
 		}
 
 
 		if (error.length() > 0) {
-		throw new InvalidInputException(error.trim());
+			throw new InvalidInputException(error.trim());
 		}
 
 		RestoApp r = RestoAppApplication.getRestoApp();
@@ -401,24 +432,24 @@ public class RestoAppController {
 
 		for (Table table : tables ){
 
-		boolean current = currentTables.contains(table);
+			boolean current = currentTables.contains(table);
 
-		if(!current){
-		throw new InvalidInputException("Cannot reserve table because it is not one of the current tables.");
-		}
+			if(!current){
+				throw new InvalidInputException("Cannot reserve table because it is not one of the current tables.");
+			}
 
-		seatCapacity += table.numberOfCurrentSeats() ;
+			seatCapacity += table.numberOfCurrentSeats() ;
 
-		List<Reservation> reservations = table.getReservations();
+			List<Reservation> reservations = table.getReservations();
 
-		for(Reservation reservation : reservations){
+			for(Reservation reservation : reservations){
 
-		if(reservation.doesOverlap(date, time)){
+				if(reservation.doesOverlap(date, time)){
 
-		throw new InvalidInputException("Cannot reseerve because there is an overlap.");
-		}
+					throw new InvalidInputException("Cannot reseerve because there is an overlap.");
+				}
 
-		}
+			}
 
 		}
 
@@ -426,12 +457,12 @@ public class RestoAppController {
 		Reservation res = new Reservation(date, time, numberInParty, contactName, contactEmailAddress, contactPhoneNumber, r, tables.toArray(tableArr));
 
 		try {
-		RestoAppApplication.save();
+			RestoAppApplication.save();
 		}
 		catch (RuntimeException e) {
-		throw new InvalidInputException(e.getMessage());
+			throw new InvalidInputException(e.getMessage());
 		}
 
 
-		}
+	}
 }
