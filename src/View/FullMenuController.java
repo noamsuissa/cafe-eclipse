@@ -32,6 +32,7 @@ public class FullMenuController implements Initializable{
 	@FXML private GridPane G1;
 	@FXML private GridPane G2;
     @FXML private Pane P1;
+    @FXML private Button modifyMenuItemB;
     private Table selectedTable1;
     RestoAppController c = new RestoAppController();
     @Override
@@ -71,6 +72,16 @@ public class FullMenuController implements Initializable{
         window.show();
 
     }	
+    
+    public void modifyMenuItemsButton(ActionEvent event) throws IOException{
+    	Parent tableViewParent = FXMLLoader.load(getClass().getResource("ModifyMenuItems.fxml"));
+        Scene tableViewScene = new Scene(tableViewParent);
+
+        Stage window = (Stage)((Node) event.getSource()).getScene().getWindow();
+
+        window.setScene(tableViewScene);
+        window.show();
+    }
     
     public void loadCategoryItems() {
     	List<ItemCategory> itemCategories = c.getItemCategory();

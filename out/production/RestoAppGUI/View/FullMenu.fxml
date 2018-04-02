@@ -55,7 +55,7 @@
                   <RowConstraints maxHeight="123.1999969482422" minHeight="0.0" prefHeight="92.00000000000001" vgrow="SOMETIMES" />
                </rowConstraints>
             </GridPane>
-            <Button layoutX="22.0" layoutY="638.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="327.0" style="-fx-background-color: black;" text="Modify Menu Items" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="modifyMenuItemB" layoutX="22.0" layoutY="638.0" mnemonicParsing="false" onAction="#modifyMenuItemsButton" prefHeight="74.0" prefWidth="327.0" style="-fx-background-color: black;" text="Modify Menu Items" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
