@@ -7,6 +7,8 @@ import ca.mcgill.ecse223.resto.model.MenuItem;
 import ca.mcgill.ecse223.resto.model.MenuItem.ItemCategory;
 import ca.mcgill.ecse223.resto.model.PricedMenuItem;
 import ca.mcgill.ecse223.resto.model.RestoApp;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -19,6 +21,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -37,7 +40,7 @@ public class ModifyMenuItemsController implements Initializable{
 	@FXML private TableView<MenuItem> tableView;
 	@FXML private TableColumn<MenuItem, String> tableName;
 	@FXML private TableColumn<MenuItem, Double> tablePrice;
-    @FXML private TableColumn<MenuItem, String> tableCategory;
+	@FXML private TableColumn<MenuItem, ItemCategory> tableCategory;
 	@FXML private Pane P1;
 	@FXML private TextField firstName;
 	@FXML private TextField firstPrice;
@@ -53,18 +56,30 @@ public class ModifyMenuItemsController implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		loadCurrentMenuItems();
-		updateBox("Select a table to edit.", Color.BLACK);
+		tableName.setCellValueFactory(new PropertyValueFactory<MenuItem, String>("Name"));
+		tablePrice.setCellValueFactory(new PropertyValueFactory<MenuItem, Double>("Price"));	
+		tableCategory.setCellValueFactory(new PropertyValueFactory<MenuItem, ItemCategory>("Category"));
+		tableView.setItems(loadCurrentMenuItems());
+		updateBox("Select a menu item to edit.", Color.BLACK);
 	}
 
-	private void loadCurrentMenuItems() {
-		RestoApp r = RestoAppApplication.getRestoApp();
-		MenuItem menuItem;
+	private ObservableList<MenuItem> loadCurrentMenuItems() {
+		ObservableList<MenuItem> menuItemsForTable = FXCollections.observableArrayList();
 		ItemCategory itemCategories;
 		for(ItemCategory itemCategory : ItemCategory.values()) {
-			List<MenuItem> menuItems = RestoAppController.getMenuItems(itemCategory);
-			
+			List<MenuItem> menuItems;
+			try {
+				menuItems = RestoAppController.getMenuItems(itemCategory);
+				for(MenuItem mI : menuItems) {
+					menuItemsForTable.add(mI);
+				}
+			} catch (InvalidInputException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		}
+		return menuItemsForTable;
 	}
 
 	public void updateBox(String message, Color color) {
@@ -79,7 +94,7 @@ public class ModifyMenuItemsController implements Initializable{
 	public void addNewItemButton(ActionEvent event) throws InvalidInputException{
 
 	}
-	
+
 	void removeAnItemButton(ActionEvent event) throws InvalidInputException{
 
 	}
