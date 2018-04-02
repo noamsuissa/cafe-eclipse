@@ -53,7 +53,7 @@
                         <Font size="16.0" />
                      </font>
                   </Text>
-                  <ComboBox layoutX="152.0" layoutY="222.0" prefWidth="202.0" promptText="Category..." />
+                  <ComboBox fx:id="categoryDropDown1" layoutX="152.0" layoutY="222.0" prefWidth="202.0" promptText="Category..." />
                   <Button fx:id="addItemButton" layoutX="40.0" layoutY="273.0" mnemonicParsing="false" onAction="#addNewItemButton" prefHeight="52.0" prefWidth="286.0" style="-fx-background-color: black;" text="Add Item" textFill="WHITE">
                      <font>
                         <Font size="26.0" />
@@ -79,7 +79,7 @@
                               <Font size="26.0" />
                            </font>
                         </Button>
-                        <ComboBox layoutX="152.0" layoutY="184.0" prefWidth="202.0" promptText="Category..." />
+                        <ComboBox fx:id="categoryDropDown2" layoutX="152.0" layoutY="184.0" prefWidth="202.0" promptText="Category..." />
                         <TextField fx:id="newName" layoutX="152.0" layoutY="113.0" prefWidth="202.0" promptText="New Name..." />
                         <Pane layoutX="24.0" layoutY="20.0" prefHeight="74.0" prefWidth="320.0" style="-fx-border-color: black; -fx-border-width: 3;">
                            <children>

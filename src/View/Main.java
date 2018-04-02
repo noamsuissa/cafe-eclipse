@@ -11,7 +11,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("LogInScreenView.fxml"));
-        primaryStage.setTitle("RestoApp Iteration 3");
+        primaryStage.setTitle("RestoApp");
         primaryStage.setScene(new Scene(root, 800, 800));
         primaryStage.setResizable(false);
         primaryStage.show();

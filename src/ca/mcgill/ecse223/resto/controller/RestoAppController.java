@@ -19,9 +19,9 @@ public class RestoAppController {
 	public static void addMenuItem(String name, ItemCategory category, double price) throws InvalidInputException {
 		String error="";
 		if(name == null) {
-			error += "Table cannot be null. ";
+			error += "Name cannot be null. ";
 		}if(category == null) {
-			error += "x cannot be negative. ";
+			error += "Category cannot be null. ";
 		}if(price <= 0) {
 			error += "price cannot be zero or negative. ";
 		}if (error.length() > 0) {
@@ -46,6 +46,66 @@ public class RestoAppController {
 			throw new InvalidInputException(e.getMessage());
 		}
 
+	}
+	
+	public static void removeMenuItem(MenuItem menuItem) throws InvalidInputException{
+		String error="";
+		if(menuItem == null) {
+			error += "You must choose a menu item. ";
+		}if (error.length() > 0) {
+			throw new InvalidInputException(error.trim());
+		}
+		
+		boolean current = menuItem.hasCurrentPricedMenuItem();
+		
+		if(!current) {
+			throw new InvalidInputException("There is no current item. ");
+		}
+		
+		menuItem.setCurrentPricedMenuItem(null);
+		
+		try {
+			RestoAppApplication.save();
+		}
+		catch (RuntimeException e) {
+			throw new InvalidInputException(e.getMessage());
+		}
+	}
+	
+	public static void updateMenuItem(MenuItem menuItem, String name, ItemCategory category, double price) throws InvalidInputException{
+		String error="";
+		if(name == null) {
+			error += "Name cannot be null. ";
+		}if(category == null) {
+			error += "Category cannot be null. ";
+		}if(price <= 0) {
+			error += "price cannot be zero or negative. ";
+		}if(menuItem == null) {
+			error += "menuItem cannot be null";
+		}if (error.length() > 0) {
+			throw new InvalidInputException(error.trim());
+		} 
+		
+		if(!menuItem.hasCurrentPricedMenuItem()) {
+			throw new InvalidInputException("There is no current item. ");
+		}
+		
+		//no checks because it is okay to keep same name/category and only want to change price
+		menuItem.setName(name);
+		menuItem.setItemCategory(category);
+		
+		if(price != menuItem.getCurrentPricedMenuItem().getPrice()) {
+			RestoApp r = RestoAppApplication.getRestoApp();
+			PricedMenuItem pmi = menuItem.addPricedMenuItem(price, r);
+			menuItem.setCurrentPricedMenuItem(pmi);
+		}
+		
+		try {
+			RestoAppApplication.save();
+		}
+		catch (RuntimeException e) {
+			throw new InvalidInputException(e.getMessage());
+		}
 	}
 
 	public static void startOrder (List<Table> tables) throws InvalidInputException {

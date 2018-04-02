@@ -18,6 +18,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -41,6 +42,8 @@ public class ModifyMenuItemsController implements Initializable{
 	@FXML private TableColumn<MenuItem, String> tableName;
 	@FXML private TableColumn<MenuItem, Double> tablePrice;
 	@FXML private TableColumn<MenuItem, ItemCategory> tableCategory;
+	@FXML private ComboBox<ItemCategory> categoryDropDown1;
+	@FXML private ComboBox<ItemCategory> categoryDropDown2;
 	@FXML private Pane P1;
 	@FXML private TextField firstName;
 	@FXML private TextField firstPrice;
@@ -59,7 +62,9 @@ public class ModifyMenuItemsController implements Initializable{
 		tableName.setCellValueFactory(new PropertyValueFactory<MenuItem, String>("Name"));
 		tableCategory.setCellValueFactory(new PropertyValueFactory<MenuItem, ItemCategory>("itemCategory"));
 		tablePrice.setCellValueFactory(new PropertyValueFactory<MenuItem, Double>("price"));	
-		
+		categoryDropDown1.getItems().setAll(ItemCategory.values());
+		categoryDropDown2.getItems().setAll(ItemCategory.values());
+
 		tableView.setItems(loadCurrentMenuItems());
 		updateBox("Select a menu item to edit.", Color.BLACK);
 	}
@@ -94,17 +99,38 @@ public class ModifyMenuItemsController implements Initializable{
 	}
 
 	public void addNewItemButton(ActionEvent event) throws InvalidInputException{
-
+		ItemCategory cat = categoryDropDown1.getSelectionModel().getSelectedItem();
+		categoryDropDown1.setPromptText(cat.name());
+		String name = firstName.getText();
+		double price = Double.parseDouble(firstPrice.getText());
+		c.addMenuItem(name, cat, price);
+		//not done
 	}
 
 	public void removeAnItemButton(ActionEvent event) throws InvalidInputException{
-
+		selectedMenuItem = tableView.getSelectionModel().getSelectedItem();
+		try {
+			c.removeMenuItem(selectedMenuItem);
+			loadCurrentMenuItems();
+			tableView.refresh(); //does not refresh, need to check more
+			//tableView.getColumns().get(0).setVisible(false);
+			//tableView.getColumns().get(0).setVisible(true);
+			updateBox(selectedMenuItem.getName() + " has been removed. ", Color.BLUE);
+			System.out.println(selectedMenuItem.getName() + " has been removed. ");
+			
+		}catch(InvalidInputException e) {
+			System.out.println(e.getMessage());
+			updateBox(e.getMessage(),Color.RED);
+		}catch(RuntimeException e) {
+			updateBox("Please input a value in the field." , Color.RED);
+		}
 	}
 
 	public void updateAnItemButton(ActionEvent event) throws InvalidInputException{
-
+		ItemCategory cat = categoryDropDown1.getSelectionModel().getSelectedItem();
+		categoryDropDown1.setPromptText(cat.name());
 	}
-	
+
 	public void returnToMainMenu(ActionEvent event) throws IOException {
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
 		Scene tableViewScene = new Scene(tableViewParent);
