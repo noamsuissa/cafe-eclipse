@@ -78,6 +78,9 @@ class Menu {
 
 class MenuItem {
    unique name;
+   Double price;
+   public double getPMIPrice(){ this.price = this.getCurrentPricedMenuItem().getPrice();
+   	return price;}
    enum ItemCategory { Appetizer, Main, Dessert, AlcoholicBeverage, NonAlcoholicBeverage }
    lazy ItemCategory itemCategory;
    1 -- 1..* PricedMenuItem pricedMenuItems;

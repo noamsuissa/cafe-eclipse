@@ -57,8 +57,9 @@ public class ModifyMenuItemsController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		tableName.setCellValueFactory(new PropertyValueFactory<MenuItem, String>("Name"));
-		tablePrice.setCellValueFactory(new PropertyValueFactory<MenuItem, Double>("Price"));	
-		tableCategory.setCellValueFactory(new PropertyValueFactory<MenuItem, ItemCategory>("Category"));
+		tableCategory.setCellValueFactory(new PropertyValueFactory<MenuItem, ItemCategory>("itemCategory"));
+		tablePrice.setCellValueFactory(new PropertyValueFactory<MenuItem, Double>("price"));	
+		
 		tableView.setItems(loadCurrentMenuItems());
 		updateBox("Select a menu item to edit.", Color.BLACK);
 	}
@@ -71,6 +72,7 @@ public class ModifyMenuItemsController implements Initializable{
 			try {
 				menuItems = RestoAppController.getMenuItems(itemCategory);
 				for(MenuItem mI : menuItems) {
+					mI.getPMIPrice();
 					menuItemsForTable.add(mI);
 				}
 			} catch (InvalidInputException e) {
@@ -113,8 +115,9 @@ public class ModifyMenuItemsController implements Initializable{
 		window.show();
 
 	}
+	//TODO: returns to main page, make it return to fullmenu page
 	public void returnToPreviousPage(ActionEvent event)throws IOException {
-		Parent tableViewParent = FXMLLoader.load(getClass().getResource("MenuItemsView.fxml"));
+		Parent tableViewParent = FXMLLoader.load(getClass().getResource("FullMenu.fxml"));
 		Scene tableViewScene = new Scene(tableViewParent);
 
 		Stage window = (Stage)((Node) event.getSource()).getScene().getWindow();
