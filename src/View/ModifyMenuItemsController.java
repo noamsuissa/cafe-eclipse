@@ -103,8 +103,16 @@ public class ModifyMenuItemsController implements Initializable{
 		categoryDropDown1.setPromptText(cat.name());
 		String name = firstName.getText();
 		double price = Double.parseDouble(firstPrice.getText());
-		c.addMenuItem(name, cat, price);
-		//not done
+		try {
+			c.addMenuItem(name, cat, price);
+			updateBox(name + " menu item created. ", Color.BLUE);
+			System.out.println(name + " menu item created. ");
+		}catch(InvalidInputException e) {
+			System.out.println(e.getMessage());
+			updateBox(e.getMessage(),Color.RED);
+		}catch(RuntimeException e) {
+			updateBox("Please input a value in the field." , Color.RED);
+		}
 	}
 
 	public void removeAnItemButton(ActionEvent event) throws InvalidInputException{
@@ -117,7 +125,7 @@ public class ModifyMenuItemsController implements Initializable{
 			//tableView.getColumns().get(0).setVisible(true);
 			updateBox(selectedMenuItem.getName() + " has been removed. ", Color.BLUE);
 			System.out.println(selectedMenuItem.getName() + " has been removed. ");
-			
+
 		}catch(InvalidInputException e) {
 			System.out.println(e.getMessage());
 			updateBox(e.getMessage(),Color.RED);
