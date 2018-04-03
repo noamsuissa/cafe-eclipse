@@ -22,12 +22,17 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Callback;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
@@ -40,7 +45,7 @@ public class ModifyMenuItemsController implements Initializable{
 
 	@FXML private TableView<MenuItem> tableView;
 	@FXML private TableColumn<MenuItem, String> tableName;
-	@FXML private TableColumn<MenuItem, Double> tablePrice;
+	@FXML private TableColumn<MenuItem, Double> tablePrice; //change to string if uncommenting the bellow comment
 	@FXML private TableColumn<MenuItem, ItemCategory> tableCategory;
 	@FXML private ComboBox<ItemCategory> categoryDropDown1;
 	@FXML private ComboBox<ItemCategory> categoryDropDown2;
@@ -61,7 +66,15 @@ public class ModifyMenuItemsController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		tableName.setCellValueFactory(new PropertyValueFactory<MenuItem, String>("Name"));
 		tableCategory.setCellValueFactory(new PropertyValueFactory<MenuItem, ItemCategory>("itemCategory"));
-		tablePrice.setCellValueFactory(new PropertyValueFactory<MenuItem, Double>("price"));	
+		tablePrice.setCellValueFactory(new PropertyValueFactory<MenuItem, Double>("price"));
+		/*way to retrieve price directly from PMI
+		tablePrice.setCellValueFactory(new Callback<CellDataFeatures<MenuItem, String>, ObservableValue<String>>() {
+		    @Override
+			public ObservableValue<String> call( CellDataFeatures<MenuItem, String> c) {
+		      return new SimpleStringProperty(c.getValue().getValue().getCurrentPricedMenuItem().getPrice()+"");
+		     }
+		    });	
+		*/
 		categoryDropDown1.getItems().setAll(ItemCategory.values());
 		categoryDropDown2.getItems().setAll(ItemCategory.values());
 
