@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="850.0" style="-fx-border-color: black; -fx-border-width: 8;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.BillController">
+<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="850.0" style="-fx-border-color: black; -fx-border-width: 8;" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.BillController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
@@ -35,12 +35,12 @@
                   <Font size="22.0" />
                </font>
             </Text>
-            <TableView layoutX="24.0" layoutY="265.0" prefHeight="183.0" prefWidth="176.0">
+            <TableView fx:id="tableViewSeat" layoutX="24.0" layoutY="265.0" prefHeight="183.0" prefWidth="176.0">
               <columns>
-                <TableColumn prefWidth="175.0" text="Select Seat" />
+                <TableColumn fx:id="tableSeatName" prefWidth="175.0" text="Seat Number" />
               </columns>
             </TableView>
-            <Pane layoutX="24.0" layoutY="191.0" prefHeight="58.0" prefWidth="200.0" style="-fx-border-color: black;">
+            <Pane fx:id="displaySelectedTablePane" layoutX="24.0" layoutY="191.0" prefHeight="58.0" prefWidth="200.0" style="-fx-border-color: black;">
                <children>
                   <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Box to display selected Table" wrappingWidth="143.798828125" />
                </children>
@@ -53,17 +53,17 @@
                   <TableColumn prefWidth="66.0" text="Price ($)" />
               </columns>
             </TableView>
-            <Pane layoutX="215.0" layoutY="265.0" prefHeight="183.0" prefWidth="176.0" style="-fx-border-color: black;">
+            <Pane fx:id="displaySeatsPane" layoutX="215.0" layoutY="265.0" prefHeight="183.0" prefWidth="176.0" style="-fx-border-color: black;">
                <children>
                   <Text layoutX="15.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Box to display all of the currently selected seats" wrappingWidth="125.3154296875" />
                </children>
             </Pane>
-            <Pane layoutX="193.0" layoutY="669.0" prefHeight="31.0" prefWidth="200.0" style="-fx-border-color: black;">
+            <Pane fx:id="billTotalPane" layoutX="193.0" layoutY="669.0" prefHeight="31.0" prefWidth="200.0" style="-fx-border-color: black;">
                <children>
                   <Text layoutX="34.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bill Total: " />
                </children>
             </Pane>
-            <Button layoutX="133.0" layoutY="709.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="155.0" style="-fx-background-color: black;" text="Create Bill" textFill="WHITE" />
+            <Button fx:id="createBillButton" layoutX="133.0" layoutY="709.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="155.0" style="-fx-background-color: black;" text="Create Bill" textFill="WHITE" />
          </children></AnchorPane>
   </items>
 </SplitPane>
