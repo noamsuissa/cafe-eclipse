@@ -1,11 +1,11 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.27.0.3728.d139ed893 modeling language!*/
+/*This code was generated using the UMPLE 1.26.1-f40f105-3613 modeling language!*/
 
 package ca.mcgill.ecse223.resto.model;
 import java.io.Serializable;
 import java.util.*;
 
-// line 100 "../../../../../RestoAppPersistence.ump"
+// line 99 "../../../../../RestoAppPersistence.ump"
 // line 1 "../../../../../RestoAppTableStateMachine.ump"
 // line 44 "../../../../../RestoApp v3.ump"
 public class Table implements Serializable
@@ -874,10 +874,7 @@ public class Table implements Serializable
     currentSeats.clear();
     RestoApp placeholderRestoApp = restoApp;
     this.restoApp = null;
-    if(placeholderRestoApp != null)
-    {
-      placeholderRestoApp.removeTable(this);
-    }
+    placeholderRestoApp.removeTable(this);
     ArrayList<Reservation> copyOfReservations = new ArrayList<Reservation>(reservations);
     reservations.clear();
     for(Reservation aReservation : copyOfReservations)
@@ -906,7 +903,7 @@ public class Table implements Serializable
     }
   }
 
-  // line 105 "../../../../../RestoAppPersistence.ump"
+  // line 104 "../../../../../RestoAppPersistence.ump"
    public static  void reinitializeUniqueNumber(List<Table> tables){
     tablesByNumber = new HashMap<Integer, Table>();
   	for(Table table : tables){
@@ -1026,7 +1023,7 @@ public class Table implements Serializable
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
-  // line 103 "../../../../../RestoAppPersistence.ump"
+  // line 102 ../../../../../RestoAppPersistence.ump
   private static final long serialVersionUID = 8896099581655989380L ;
 
   
