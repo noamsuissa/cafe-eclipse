@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.gluonhq.charm.glisten.control.TextField?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
@@ -25,10 +26,11 @@
             </Text>
             <Button fx:id="returnMain" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#returnToMainMenu" style="-fx-background-color: black;" text="Return to Main Screen" textFill="WHITE" />
             <Button layoutX="194.0" layoutY="14.0" mnemonicParsing="false" onAction="#returnToPreviousPage" style="-fx-background-color: black;" text="Return to Previous Page" textFill="WHITE" />
+            <Pane fx:id="errorPane" layoutX="25.0" layoutY="741.0" prefHeight="23.0" prefWidth="310.0" />
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" SplitPane.resizableWithParent="false">
          <children>
-            <GridPane fx:id="G1" layoutX="24.0" layoutY="148.0" prefHeight="412.0" prefWidth="323.0">
+            <GridPane fx:id="G1" layoutX="24.0" layoutY="148.0" prefHeight="333.0" prefWidth="323.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -42,7 +44,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <Button layoutX="114.0" layoutY="697.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="144.0" style="-fx-background-color: black;" text="Add to Order" textFill="WHITE" />
+            <Button fx:id="addOrderButton" layoutX="114.0" layoutY="697.0" mnemonicParsing="false" onAction="#addOrderClicked" prefHeight="70.0" prefWidth="144.0" style="-fx-background-color: black;" text="Add to Order" textFill="WHITE" />
             <AnchorPane layoutY="27.0">
                <children>
                   <Label fx:id="label1" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" prefHeight="126.0" prefWidth="339.0" text="Item Category Sample" textAlignment="CENTER" wrapText="true">
@@ -54,9 +56,10 @@
             </AnchorPane>
             <TableView layoutX="77.0" layoutY="577.0" prefHeight="116.0" prefWidth="221.0">
               <columns>
-                <TableColumn prefWidth="220.0" text="Seat Number" />
+                <TableColumn fx:id="tableView" prefWidth="220.0" text="Seat Number" />
               </columns>
             </TableView>
+            <TextField fx:id="qtyText" layoutX="75.0" layoutY="535.0" prefHeight="27.0" prefWidth="220.0" promptText="Insert quantity" />
          </children></AnchorPane>
   </items>
 </SplitPane>
