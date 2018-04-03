@@ -223,8 +223,12 @@ public class RestoAppController {
 			throw new InvalidInputException("There is no current item. ");
 		}
 		
-		//no checks because it is okay to keep same name/category and only want to change price
-		menuItem.setName(name);
+		
+		boolean duplicate = menuItem.setName(name);
+		/* potential code -- doesn't let same name to be created
+		if(!duplicate) {
+			throw new InvalidInputException("Cannot have a duplicate name");
+		}*/
 		menuItem.setItemCategory(category);
 		
 		if(price != menuItem.getCurrentPricedMenuItem().getPrice()) {
