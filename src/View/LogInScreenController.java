@@ -2,6 +2,7 @@ package View;
 
 import ca.mcgill.ecse223.resto.application.RestoAppApplication;
 import ca.mcgill.ecse223.resto.controller.InvalidInputException;
+import ca.mcgill.ecse223.resto.controller.RestoAppController;
 import ca.mcgill.ecse223.resto.model.RestoApp;
 import ca.mcgill.ecse223.resto.model.Waiter;
 import javafx.event.ActionEvent;
@@ -32,7 +33,7 @@ public class LogInScreenController {
     @FXML private TextField createNameTF;
     @FXML private PasswordField createPasswordTF;
     @FXML private Pane updatePane;
-
+    RestoAppController c = new RestoAppController();
 
     public void logInButton(ActionEvent event) throws InvalidInputException {
         try {
@@ -40,7 +41,7 @@ public class LogInScreenController {
             int waiterID = Integer.parseInt(logInIDTF.getText());
             String waiterPass = logInPasswordTF.getText();
 
-            if (isValidWaiter(waiterID, waiterPass)) {
+            if (c.isValidWaiter(waiterID, waiterPass)) {
                 Parent tableViewParent = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
                 Scene tableViewScene = new Scene(tableViewParent);
 
@@ -59,38 +60,7 @@ public class LogInScreenController {
         }
     }
 
-    public boolean isValidWaiter( int aId, String aPassword) throws InvalidInputException {
-        String errorMessage = "";
-        if (aId <= 0) {
-            errorMessage += "Please input valid credentials";
-        }
-        if (aPassword == null || aPassword == "") {
-            errorMessage += "Please input valid credentials";
-        }
-        if (errorMessage.length() > 1)
-            throw new InvalidInputException(errorMessage);
-
-        RestoApp r = RestoAppApplication.getRestoApp();
-        try {
-            Waiter waiter = Waiter.getWithId(aId);
-            if (waiter == null) {
-                throw new InvalidInputException("This ID does not exist");
-            }
-            String waiterPass = waiter.getPassword();
-            if (waiterPass.equals(aPassword)) {
-                r.setCurrentWaiter(waiter);
-                RestoAppApplication.save();
-                return true;
-            } else
-                {throw new InvalidInputException("Incorrect Password");
-
-                }
-
-        } catch (RuntimeException e){
-            throw new InvalidInputException(e.getMessage());
-        }
-
-    }
+ 
 
     public void createWaiterButton(ActionEvent event) throws InvalidInputException{
     	
@@ -98,7 +68,7 @@ public class LogInScreenController {
             int id = Integer.parseInt(createIdTF.getText());
             String name = createNameTF.getText();
             String password = createPasswordTF.getText();
-            createWaiter(name, id, password);
+            c.createWaiter(name, id, password);
             updateBox("Waiter Account Created Successfully", Color.BLACK);
         }
         catch(InvalidInputException e) {
@@ -108,32 +78,6 @@ public class LogInScreenController {
                 updateBox(e.getMessage(), Color.RED);
             }
         }
-
-    public void createWaiter(String aName, int aId, String aPassword)  throws InvalidInputException {
-
-        String errorMessage = "";
-
-        if(aName == null || aName.equals("")){
-            errorMessage = "Please enter in your name";
-        }
-        if(aId<=0){
-            errorMessage = "Please enter in a valid ID number";
-        }
-        if(aPassword == null || aPassword.equals("")){
-            errorMessage = "Please enter a password";
-        }
-        if(errorMessage.length()>1){
-            throw new InvalidInputException(errorMessage);
-        }
-        RestoApp r = RestoAppApplication.getRestoApp();
-
-        try{
-        Waiter w = new Waiter(aId, aName, aPassword, r);
-        RestoAppApplication.save();
-    } catch (RuntimeException e){
-            throw new InvalidInputException(e.getMessage());
-        }
-    }
 
     public void updateBox(String message, Color color) {
         Text txt = new Text(message);

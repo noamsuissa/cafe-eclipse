@@ -15,6 +15,65 @@ import ca.mcgill.ecse223.resto.model.MenuItem.ItemCategory;
 public class RestoAppController {
 	public RestoAppController() {
 	}
+	
+	public boolean isValidWaiter( int aId, String aPassword) throws InvalidInputException {
+        String errorMessage = "";
+        if (aId <= 0) {
+            errorMessage += "Please input valid credentials";
+        }
+        if (aPassword == null || aPassword == "") {
+            errorMessage += "Please input valid credentials";
+        }
+        if (errorMessage.length() > 1)
+            throw new InvalidInputException(errorMessage);
+
+        RestoApp r = RestoAppApplication.getRestoApp();
+        try {
+            Waiter waiter = Waiter.getWithId(aId);
+            if (waiter == null) {
+                throw new InvalidInputException("This ID does not exist");
+            }
+            String waiterPass = waiter.getPassword();
+            if (waiterPass.equals(aPassword)) {
+                r.setCurrentWaiter(waiter);
+                RestoAppApplication.save();
+                return true;
+            } else
+                {throw new InvalidInputException("Incorrect Password");
+
+                }
+
+        } catch (RuntimeException e){
+            throw new InvalidInputException(e.getMessage());
+        }
+
+    }
+	
+	public void createWaiter(String aName, int aId, String aPassword)  throws InvalidInputException {
+	
+	        String errorMessage = "";
+	
+	        if(aName == null || aName.equals("")){
+	            errorMessage = "Please enter in your name";
+	        }
+	        if(aId<=0){
+	            errorMessage = "Please enter in a valid ID number";
+	        }
+	        if(aPassword == null || aPassword.equals("")){
+	            errorMessage = "Please enter a password";
+	        }
+	        if(errorMessage.length()>1){
+	            throw new InvalidInputException(errorMessage);
+	        }
+	        RestoApp r = RestoAppApplication.getRestoApp();
+	
+	        try{
+	        Waiter w = new Waiter(aId, aName, aPassword, r);
+	        RestoAppApplication.save();
+	    } catch (RuntimeException e){
+	            throw new InvalidInputException(e.getMessage());
+	        }
+	    }
 
 	public static void addMenuItem(String name, ItemCategory category, double price) throws InvalidInputException {
 		String error="";
