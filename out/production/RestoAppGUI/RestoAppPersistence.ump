@@ -9,6 +9,7 @@ class RestoApp {
   	Table.reinitializeUniqueNumber(this.getTables());
   	Order.reinitializeAutouniqueNumber(this.getOrders());
     MenuItem.reinitializeUniqueName(this.getMenu().getMenuItems());
+    if(waiters==null){waiters = new ArrayList<Waiter>();};
     Waiter.reinitializeUniqueId(this.getWaiters());
   }
   

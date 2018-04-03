@@ -1,11 +1,11 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.26.1-f40f105-3613 modeling language!*/
+/*This code was generated using the UMPLE 1.27.0.3728.d139ed893 modeling language!*/
 
 package ca.mcgill.ecse223.resto.model;
 import java.io.Serializable;
 import java.util.*;
 
-// line 17 "../../../../../RestoAppPersistence.ump"
+// line 18 "../../../../../RestoAppPersistence.ump"
 // line 75 "../../../../../RestoApp v3.ump"
 public class Menu implements Serializable
 {
@@ -81,7 +81,7 @@ public class Menu implements Serializable
   {
     return 0;
   }
-
+  /* Code from template association_AddManyToOne */
   public MenuItem addMenuItem(String aName, double aPrice)
   {
     return new MenuItem(aName, aPrice, this);
@@ -170,7 +170,7 @@ public class Menu implements Serializable
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
-  // line 20 ../../../../../RestoAppPersistence.ump
+  // line 21 "../../../../../RestoAppPersistence.ump"
   private static final long serialVersionUID = -7403802774454467836L ;
 
   

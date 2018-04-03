@@ -1,5 +1,5 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.26.1-f40f105-3613 modeling language!*/
+/*This code was generated using the UMPLE 1.27.0.3728.d139ed893 modeling language!*/
 
 package ca.mcgill.ecse223.resto.model;
 import java.io.Serializable;
@@ -7,7 +7,7 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.*;
 
-// line 72 "../../../../../RestoAppPersistence.ump"
+// line 74 "../../../../../RestoAppPersistence.ump"
 // line 25 "../../../../../RestoApp v3.ump"
 public class Reservation implements Serializable
 {
@@ -351,10 +351,13 @@ public class Reservation implements Serializable
     }
     RestoApp placeholderRestoApp = restoApp;
     this.restoApp = null;
-    placeholderRestoApp.removeReservation(this);
+    if(placeholderRestoApp != null)
+    {
+      placeholderRestoApp.removeReservation(this);
+    }
   }
 
-  // line 77 "../../../../../RestoAppPersistence.ump"
+  // line 79 "../../../../../RestoAppPersistence.ump"
    public static  void reinitializeAutouniqueReservationNumber(List<Reservation> reservations){
     for (Reservation reservation : reservations) {
       if (reservation.getReservationNumber() > nextReservationNumber) {
@@ -391,7 +394,7 @@ public class Reservation implements Serializable
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
-  // line 75 ../../../../../RestoAppPersistence.ump
+  // line 77 "../../../../../RestoAppPersistence.ump"
   private static final long serialVersionUID = 2315072607928790501L ;
 
   

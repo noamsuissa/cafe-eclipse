@@ -1,5 +1,5 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.26.1-f40f105-3613 modeling language!*/
+/*This code was generated using the UMPLE 1.27.0.3728.d139ed893 modeling language!*/
 
 package ca.mcgill.ecse223.resto.model;
 import java.io.Serializable;
@@ -7,7 +7,7 @@ import java.util.*;
 import java.sql.Date;
 import java.sql.Time;
 
-// line 23 "../../../../../RestoAppPersistence.ump"
+// line 24 "../../../../../RestoAppPersistence.ump"
 // line 19 "../../../../../RestoApp v3.ump"
 public class Waiter implements Serializable
 {
@@ -170,7 +170,7 @@ public class Waiter implements Serializable
   {
     return 0;
   }
-
+  /* Code from template association_AddManyToOne */
   public Order addOrder(Date aDate, Time aTime, RestoApp aRestoApp, Table... allTables)
   {
     return new Order(aDate, aTime, this, aRestoApp, allTables);
@@ -243,7 +243,10 @@ public class Waiter implements Serializable
     waitersById.remove(getId());
     RestoApp placeholderRestoApp = restoApp;
     this.restoApp = null;
-    placeholderRestoApp.removeWaiter(this);
+    if(placeholderRestoApp != null)
+    {
+      placeholderRestoApp.removeWaiter(this);
+    }
     for(int i=orders.size(); i > 0; i--)
     {
       Order aOrder = orders.get(i - 1);
@@ -251,9 +254,10 @@ public class Waiter implements Serializable
     }
   }
 
-  // line 28 "../../../../../RestoAppPersistence.ump"
+  // line 29 "../../../../../RestoAppPersistence.ump"
    public static  void reinitializeUniqueId(List<Waiter> waiters){
-    waitersById = new HashMap<Integer, Waiter>();
+    if(waiters==null){waiters = new ArrayList<Waiter>();};
+  		waitersById = new HashMap<Integer, Waiter>();
   		for(Waiter waiter : waiters){
   			waitersById.put(waiter.getId(), waiter);
   		}
@@ -272,7 +276,7 @@ public class Waiter implements Serializable
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
-  // line 26 ../../../../../RestoAppPersistence.ump
+  // line 27 "../../../../../RestoAppPersistence.ump"
   private static final long serialVersionUID = -1520532775726597836L ;
 
   

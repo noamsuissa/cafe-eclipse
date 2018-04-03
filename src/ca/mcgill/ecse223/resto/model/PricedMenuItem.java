@@ -1,11 +1,11 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.26.1-f40f105-3613 modeling language!*/
+/*This code was generated using the UMPLE 1.27.0.3728.d139ed893 modeling language!*/
 
 package ca.mcgill.ecse223.resto.model;
 import java.io.Serializable;
 import java.util.*;
 
-// line 67 "../../../../../RestoAppPersistence.ump"
+// line 69 "../../../../../RestoAppPersistence.ump"
 // line 90 "../../../../../RestoApp v3.ump"
 public class PricedMenuItem implements Serializable
 {
@@ -122,7 +122,7 @@ public class PricedMenuItem implements Serializable
   {
     return 0;
   }
-
+  /* Code from template association_AddManyToOne */
   public OrderItem addOrderItem(int aQuantity, Order aOrder, Seat... allSeats)
   {
     return new OrderItem(aQuantity, this, aOrder, allSeats);
@@ -224,7 +224,10 @@ public class PricedMenuItem implements Serializable
   {
     RestoApp placeholderRestoApp = restoApp;
     this.restoApp = null;
-    placeholderRestoApp.removePricedMenuItem(this);
+    if(placeholderRestoApp != null)
+    {
+      placeholderRestoApp.removePricedMenuItem(this);
+    }
     for(int i=orderItems.size(); i > 0; i--)
     {
       OrderItem aOrderItem = orderItems.get(i - 1);
@@ -232,7 +235,10 @@ public class PricedMenuItem implements Serializable
     }
     MenuItem placeholderMenuItem = menuItem;
     this.menuItem = null;
-    placeholderMenuItem.removePricedMenuItem(this);
+    if(placeholderMenuItem != null)
+    {
+      placeholderMenuItem.removePricedMenuItem(this);
+    }
   }
 
 
@@ -247,7 +253,7 @@ public class PricedMenuItem implements Serializable
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
-  // line 70 ../../../../../RestoAppPersistence.ump
+  // line 72 "../../../../../RestoAppPersistence.ump"
   private static final long serialVersionUID = -4855219931984388104L ;
 
   

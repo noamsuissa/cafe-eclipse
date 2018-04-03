@@ -1,5 +1,5 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.26.1-f40f105-3613 modeling language!*/
+/*This code was generated using the UMPLE 1.27.0.3728.d139ed893 modeling language!*/
 
 package ca.mcgill.ecse223.resto.model;
 import java.io.Serializable;
@@ -7,7 +7,7 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.*;
 
-// line 47 "../../../../../RestoAppPersistence.ump"
+// line 49 "../../../../../RestoAppPersistence.ump"
 // line 60 "../../../../../RestoApp v3.ump"
 public class Order implements Serializable
 {
@@ -341,7 +341,7 @@ public class Order implements Serializable
   {
     return 0;
   }
-
+  /* Code from template association_AddManyToOne */
   public OrderItem addOrderItem(int aQuantity, PricedMenuItem aPricedMenuItem, Seat... allSeats)
   {
     return new OrderItem(aQuantity, aPricedMenuItem, this, allSeats);
@@ -451,7 +451,7 @@ public class Order implements Serializable
   {
     return 0;
   }
-
+  /* Code from template association_AddManyToOne */
   public Bill addBill(RestoApp aRestoApp, Seat... allIssuedForSeats)
   {
     return new Bill(this, aRestoApp, allIssuedForSeats);
@@ -536,10 +536,16 @@ public class Order implements Serializable
     
     Waiter placeholderWaiter = waiter;
     this.waiter = null;
-    placeholderWaiter.removeOrder(this);
+    if(placeholderWaiter != null)
+    {
+      placeholderWaiter.removeOrder(this);
+    }
     RestoApp placeholderRestoApp = restoApp;
     this.restoApp = null;
-    placeholderRestoApp.removeOrder(this);
+    if(placeholderRestoApp != null)
+    {
+      placeholderRestoApp.removeOrder(this);
+    }
     for(int i=bills.size(); i > 0; i--)
     {
       Bill aBill = bills.get(i - 1);
@@ -547,7 +553,7 @@ public class Order implements Serializable
     }
   }
 
-  // line 52 "../../../../../RestoAppPersistence.ump"
+  // line 54 "../../../../../RestoAppPersistence.ump"
    public static  void reinitializeAutouniqueNumber(List<Order> orders){
     for (Order order : orders) {
       if (order.getNumber() > nextNumber) {
@@ -571,7 +577,7 @@ public class Order implements Serializable
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
-  // line 50 ../../../../../RestoAppPersistence.ump
+  // line 52 "../../../../../RestoAppPersistence.ump"
   private static final long serialVersionUID = -3900912597282882073L ;
 
   
