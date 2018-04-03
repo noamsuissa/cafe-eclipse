@@ -93,6 +93,7 @@ public class LogInScreenController {
     }
 
     public void createWaiterButton(ActionEvent event) throws InvalidInputException{
+    	
         try {
             int id = Integer.parseInt(createIdTF.getText());
             String name = createNameTF.getText();

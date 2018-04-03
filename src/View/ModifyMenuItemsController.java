@@ -105,6 +105,7 @@ public class ModifyMenuItemsController implements Initializable{
 		double price = Double.parseDouble(firstPrice.getText());
 		try {
 			c.addMenuItem(name, cat, price);
+			loadCurrentMenuItems();
 			updateBox(name + " menu item created. ", Color.BLUE);
 			System.out.println(name + " menu item created. ");
 		}catch(InvalidInputException e) {
@@ -135,8 +136,24 @@ public class ModifyMenuItemsController implements Initializable{
 	}
 
 	public void updateAnItemButton(ActionEvent event) throws InvalidInputException{
-		ItemCategory cat = categoryDropDown1.getSelectionModel().getSelectedItem();
+		selectedMenuItem = tableView.getSelectionModel().getSelectedItem();
+		ItemCategory cat = categoryDropDown2.getValue();
+		System.out.println(cat.toString());
 		categoryDropDown1.setPromptText(cat.name());
+		String name = newName.getText();
+		double price = Double.parseDouble(newPrice.getText());
+		try {
+			c.updateMenuItem(selectedMenuItem, name, cat, price);
+			//loadCurrentMenuItems();
+			tableView.refresh();
+			updateBox(name + " menu item updated to: " + name + ", " + cat.toString() + ", " + price, Color.BLUE);
+			System.out.println(name + " menu item updated to: " + name + ", " + cat.toString() + ", " + price);
+		}catch(InvalidInputException e) {
+			System.out.println(e.getMessage());
+			updateBox(e.getMessage(),Color.RED);
+		}catch(RuntimeException e) {
+			updateBox("Please input a value in the field." , Color.RED);
+		}
 	}
 
 	public void returnToMainMenu(ActionEvent event) throws IOException {
