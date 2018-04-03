@@ -12,7 +12,6 @@ import ca.mcgill.ecse223.resto.controller.RestoAppController;
 import ca.mcgill.ecse223.resto.model.Menu;
 import ca.mcgill.ecse223.resto.model.MenuItem;
 import ca.mcgill.ecse223.resto.model.RestoApp;
-import ca.mcgill.ecse223.resto.model.Seat;
 import ca.mcgill.ecse223.resto.model.Table;
 import ca.mcgill.ecse223.resto.model.MenuItem.ItemCategory;
 import javafx.event.ActionEvent;
@@ -25,14 +24,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
@@ -41,11 +35,7 @@ public class MenuItemsViewController implements Initializable{
 	@FXML private Label label1;
 	@FXML private Button returnMain;
 	@FXML private Pane P1;
-	@FXML private Pane errorPane;
 	@FXML private GridPane G1;
-	@FXML private TableView<Seat> tableView;
-	@FXML private TextField qtyText;
-	@FXML private Button addOrderButton;
 	RestoAppController c = new RestoAppController();
 	private Table selectedTable1;
 	
@@ -64,26 +54,6 @@ public class MenuItemsViewController implements Initializable{
         window.setScene(tableViewScene);
         window.show();
 
-    }
-    public void updateBox(String message, Color color) {
-		Text txt = new Text(message);
-		txt.setLayoutY(20);
-		txt.setFont(Font.font("Verdana", FontWeight.BOLD, 10));
-		txt.setFill(color);
-		errorPane.getChildren().clear();
-		errorPane.getChildren().add(txt);
-	}
-
-    
-    public void addOrderClicked(ActionEvent event)throws InvalidInputException{
-    		try {
-    			
-    		}catch(InvalidInputException e) {
-    			System.out.println(e.getMessage());
-    			updateBox(e.getMessage(),Color.RED);
-    		}catch(RuntimeException e) {
-    			updateBox("Please input a value in the field." , Color.RED);
-    		}
     }
     
     public void returnToPreviousPage(ActionEvent event)throws IOException {
@@ -113,7 +83,6 @@ public class MenuItemsViewController implements Initializable{
             btn.setOnAction(new EventHandler<ActionEvent>() {
                 @Override public void handle(ActionEvent e) {
                 	selectedTable1 = currentTable;
-                	// insert seats
                 }
             });
             P1.getChildren().add(btn);
