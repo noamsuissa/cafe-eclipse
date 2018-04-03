@@ -92,7 +92,6 @@ public class ModifyMenuItemsController implements Initializable{
 				for(MenuItem mI : menuItems) {
 					mI.getPMIPrice();
 					menuItemsForTable.add(mI);
-					System.out.println(mI);
 				}
 			} catch (InvalidInputException e) {
 				// TODO Auto-generated catch block
