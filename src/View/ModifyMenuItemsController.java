@@ -99,11 +99,11 @@ public class ModifyMenuItemsController implements Initializable{
 	}
 
 	public void addNewItemButton(ActionEvent event) throws InvalidInputException{
-		ItemCategory cat = categoryDropDown1.getSelectionModel().getSelectedItem();
-		categoryDropDown1.setPromptText(cat.name());
-		String name = firstName.getText();
-		double price = Double.parseDouble(firstPrice.getText());
 		try {
+			ItemCategory cat = categoryDropDown1.getSelectionModel().getSelectedItem();
+			categoryDropDown1.setPromptText(cat.name());
+			String name = firstName.getText();
+			double price = Double.parseDouble(firstPrice.getText());
 			c.addMenuItem(name, cat, price);
 			loadCurrentMenuItems();
 			updateBox(name + " menu item created. ", Color.BLUE);
@@ -117,8 +117,8 @@ public class ModifyMenuItemsController implements Initializable{
 	}
 
 	public void removeAnItemButton(ActionEvent event) throws InvalidInputException{
-		selectedMenuItem = tableView.getSelectionModel().getSelectedItem();
 		try {
+			selectedMenuItem = tableView.getSelectionModel().getSelectedItem();
 			c.removeMenuItem(selectedMenuItem);
 			loadCurrentMenuItems();
 			tableView.refresh(); //does not refresh, need to check more
@@ -136,17 +136,16 @@ public class ModifyMenuItemsController implements Initializable{
 	}
 
 	public void updateAnItemButton(ActionEvent event) throws InvalidInputException{
-		selectedMenuItem = tableView.getSelectionModel().getSelectedItem();
-		ItemCategory cat = categoryDropDown2.getValue();
-		System.out.println(cat.toString());
-		categoryDropDown1.setPromptText(cat.name());
-		String name = newName.getText();
-		double price = Double.parseDouble(newPrice.getText());
 		try {
+			selectedMenuItem = tableView.getSelectionModel().getSelectedItem();
+			ItemCategory cat = categoryDropDown2.getValue();
+			String name = newName.getText();
+			double price = Double.parseDouble(newPrice.getText());
 			c.updateMenuItem(selectedMenuItem, name, cat, price);
+			categoryDropDown2.setPromptText(cat.name());
 			//loadCurrentMenuItems();
 			tableView.refresh();
-			updateBox(name + " menu item updated to: " + name + ", " + cat.toString() + ", " + price, Color.BLUE);
+			updateBox(name + " menu item updated to: \n" + name + ", " + cat.toString() + ", " + price, Color.BLUE);
 			System.out.println(name + " menu item updated to: " + name + ", " + cat.toString() + ", " + price);
 		}catch(InvalidInputException e) {
 			System.out.println(e.getMessage());
