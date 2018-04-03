@@ -16,7 +16,80 @@ public class RestoAppController {
 	public RestoAppController() {
 	}
 	
-	public boolean isValidWaiter( int aId, String aPassword) throws InvalidInputException {
+	public static void issueBill(List<Seat> seats) throws InvalidInputException {
+		String error = "";
+		if (seats == null || seats.isEmpty()) { 
+			error = "List of seats cannot be null or empty";
+		}
+		if (error.length() > 1) throw new InvalidInputException(error);
+		
+		RestoApp r = RestoAppApplication.getRestoApp();
+		List<Table> currentTables = r.getCurrentTables();
+		Order lastOrder = null;
+		
+		for (Seat seat : seats) {
+			Table table = seat.getTable();
+			
+			if (!currentTables.contains(table)) 
+				throw new InvalidInputException("Table is not a currentTable");
+			
+			List<Seat> currentSeats = table.getCurrentSeats();
+			if (!currentSeats.contains(seat)) 
+				throw new InvalidInputException("Seat is not a currentSeat");
+			
+			if (lastOrder == null) {
+				if (table.numberOfOrders() > 0) {
+					lastOrder = table.getOrder(table.numberOfOrders()-1);
+				} else {
+					throw new InvalidInputException("Table has no orders");
+				}
+			} else {
+				Order comparedOrder = null;
+				if (table.numberOfOrders()>0) {
+					comparedOrder = table.getOrder(table.numberOfOrders() - 1);
+				} else {
+					throw new InvalidInputException("Table has no orders");
+				}
+				if (!comparedOrder.equals(lastOrder))
+					throw new InvalidInputException("All seats dont have the same orders");
+			}
+			
+		}
+		if (lastOrder == null) throw new InvalidInputException("None of the selected seats have an Order");
+		boolean billCreated = false;
+		Bill newBill = null;
+		
+		for (Seat seat : seats) {
+			Table table = seat.getTable();
+			
+			if (billCreated) {
+				table.addToBill(newBill, seat);
+			} else {
+				Bill lastBill = null;
+				if (lastOrder.numberOfBills()>0) {
+					lastBill = lastOrder.getBill(lastOrder.numberOfBills()-1);
+				}
+				table.billForSeat(lastOrder, seat);
+				
+				if(lastOrder.numberOfBills()>0 && !lastOrder.getBill(lastOrder.numberOfBills()-1).equals(lastBill)) {
+					billCreated = true;
+					newBill = lastOrder.getBill(lastOrder.numberOfBills()-1);
+				}
+				
+			}
+			
+		}
+		if (!billCreated) throw new InvalidInputException("Bill couldn't be created");
+
+		try {
+			RestoAppApplication.save();
+		}
+		catch (RuntimeException e) {
+			throw new InvalidInputException(e.getMessage());
+		}
+	
+	}
+	public static boolean isValidWaiter( int aId, String aPassword) throws InvalidInputException {
         String errorMessage = "";
         if (aId <= 0) {
             errorMessage += "Please input valid credentials";
@@ -46,10 +119,11 @@ public class RestoAppController {
         } catch (RuntimeException e){
             throw new InvalidInputException(e.getMessage());
         }
+        
 
     }
 	
-	public void createWaiter(String aName, int aId, String aPassword)  throws InvalidInputException {
+	public static void createWaiter(String aName, int aId, String aPassword)  throws InvalidInputException {
 	
 	        String errorMessage = "";
 	
