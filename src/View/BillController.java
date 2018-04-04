@@ -1,5 +1,7 @@
 package View;
 
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -46,7 +48,7 @@ public class BillController implements Initializable{
     @FXML private Pane displaySelectedTablePane;
     @FXML private Pane billTotalPane;
     @FXML private TableView<Seat> tableViewSeat;
-    @FXML private TableColumn<Seat, Integer > tableSeatName;
+    @FXML private TableColumn<Seat,Number> tableSeatName;
     private Table selectedTable1 = null;
     
     @Override
@@ -55,7 +57,7 @@ public class BillController implements Initializable{
     	loadCurrentTables();
     
 
-    	tableSeatName.setCellValueFactory(new PropertyValueFactory<Seat, Integer>("Seat Number"));
+    	tableSeatName.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.hashCode()));
     	
     }
     
