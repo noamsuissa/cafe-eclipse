@@ -45,7 +45,7 @@ public class ModifyMenuItemsController implements Initializable{
 
 	@FXML private TableView<MenuItem> tableView;
 	@FXML private TableColumn<MenuItem, String> tableName;
-	@FXML private TableColumn<MenuItem, Double> tablePrice; //change to string if uncommenting the bellow comment
+	@FXML private TableColumn<MenuItem, Number> tablePrice;
 	@FXML private TableColumn<MenuItem, ItemCategory> tableCategory;
 	@FXML private ComboBox<ItemCategory> categoryDropDown1;
 	@FXML private ComboBox<ItemCategory> categoryDropDown2;
@@ -66,15 +66,8 @@ public class ModifyMenuItemsController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		tableName.setCellValueFactory(new PropertyValueFactory<MenuItem, String>("Name"));
 		tableCategory.setCellValueFactory(new PropertyValueFactory<MenuItem, ItemCategory>("itemCategory"));
-		tablePrice.setCellValueFactory(new PropertyValueFactory<MenuItem, Double>("price"));
-		/*way to retrieve price directly from PMI
-		tablePrice.setCellValueFactory(new Callback<CellDataFeatures<MenuItem, String>, ObservableValue<String>>() {
-		    @Override
-			public ObservableValue<String> call( CellDataFeatures<MenuItem, String> c) {
-		      return new SimpleStringProperty(c.getValue().getValue().getCurrentPricedMenuItem().getPrice()+"");
-		     }
-		    });	
-		*/
+		//tablePrice.setCellValueFactory(new PropertyValueFactory<MenuItem, Double>("price"));
+		tablePrice.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getCurrentPricedMenuItem().getPrice()));
 		categoryDropDown1.getItems().setAll(ItemCategory.values());
 		categoryDropDown2.getItems().setAll(ItemCategory.values());
 

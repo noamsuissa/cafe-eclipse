@@ -82,9 +82,9 @@ public class Menu implements Serializable
     return 0;
   }
 
-  public MenuItem addMenuItem(String aName, double aPrice)
+  public MenuItem addMenuItem(String aName)
   {
-    return new MenuItem(aName, aPrice, this);
+    return new MenuItem(aName, this);
   }
 
   public boolean addMenuItem(MenuItem aMenuItem)
