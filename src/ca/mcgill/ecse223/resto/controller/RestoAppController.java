@@ -164,7 +164,7 @@ public class RestoAppController {
 		RestoApp r = RestoAppApplication.getRestoApp();
 		Menu menu = r.getMenu();
 		try {
-			MenuItem menuItem = new MenuItem(name, price, menu);
+			MenuItem menuItem = new MenuItem(name, menu);
 			menuItem.setItemCategory(category);
 			PricedMenuItem pmi = menuItem.addPricedMenuItem(price, r);
 			menuItem.setCurrentPricedMenuItem(pmi);
