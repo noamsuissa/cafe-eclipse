@@ -66,7 +66,6 @@ public class ModifyMenuItemsController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		tableName.setCellValueFactory(new PropertyValueFactory<MenuItem, String>("Name"));
 		tableCategory.setCellValueFactory(new PropertyValueFactory<MenuItem, ItemCategory>("itemCategory"));
-		//tablePrice.setCellValueFactory(new PropertyValueFactory<MenuItem, Double>("price"));
 		tablePrice.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getCurrentPricedMenuItem().getPrice()));
 		categoryDropDown1.getItems().setAll(ItemCategory.values());
 		categoryDropDown2.getItems().setAll(ItemCategory.values());
@@ -83,7 +82,6 @@ public class ModifyMenuItemsController implements Initializable{
 			try {
 				menuItems = RestoAppController.getMenuItems(itemCategory);
 				for(MenuItem mI : menuItems) {
-					mI.getPMIPrice();
 					menuItemsForTable.add(mI);
 				}
 			} catch (InvalidInputException e) {
