@@ -20,6 +20,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -50,6 +53,9 @@ public class BillController implements Initializable{
     @FXML private TableColumn<Seat,Number> tableSeatName;
     @FXML private TableColumn<Seat,Number> allSeatsTableViewId;
     @FXML private Button clearSeatsButton;
+    @FXML private Pane updateBox;
+    
+    private List<Seat> selectedSeats;
     
     private Table selectedTable1 = null;
     
@@ -95,6 +101,7 @@ public class BillController implements Initializable{
                 @Override public void handle(ActionEvent e) {
                 	selectedTable1 = currentTable;
                 	loadSeatsinTableView(selectedTable1);
+                	updateBox("Table " + selectedTable1.getNumber() + " selected. It has " + selectedTable1.getCurrentSeats().size()+" seats.", Color.BLACK);
                 }
             });
             P1.getChildren().add(btn);
@@ -113,6 +120,25 @@ public class BillController implements Initializable{
     }
     
     
+    public void addToListPressed(ActionEvent event) {
+    	Seat selectedSeat = tableViewSeat.getSelectionModel().getSelectedItem();
+    	if (selectedSeat == null) {
+    		selectedSeats.add(selectedSeat);
+    	} else {
+    		updateBox("No seat selected", Color.RED);
+    	}
+    
+    }
+    
+    
+    public void updateBox(String message, Color color) {
+        Text txt = new Text(message);
+        txt.setLayoutY(20);
+        txt.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
+        txt.setFill(color);
+        updateBox.getChildren().clear();
+        updateBox.getChildren().add(txt);
+      }
 
 
 }
