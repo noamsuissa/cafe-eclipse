@@ -28,6 +28,7 @@ import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -54,8 +55,11 @@ public class BillController implements Initializable{
     @FXML private TableColumn<Seat,Number> allSeatsTableViewId;
     @FXML private Button clearSeatsButton;
     @FXML private Pane updateBox;
+    @FXML private TableColumn<Seat, Number> allSeatsTableId;
+    RestoAppController c = new RestoAppController();
     
-    private List<Seat> selectedSeats;
+    private List<Seat> selectedSeats = new ArrayList<Seat>();
+    ObservableList<Seat> selectedSeatsViewList = FXCollections.observableArrayList();
     
     private Table selectedTable1 = null;
     
@@ -66,16 +70,18 @@ public class BillController implements Initializable{
     
     	
     	tableSeatName.setCellValueFactory(new PropertyValueFactory<Seat, Number>("Id"));
+    	allSeatsTableViewId.setCellValueFactory(new PropertyValueFactory<Seat, Number>("Id"));
+    	allSeatsTableId.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getTable().getNumber()));
     	
     }
     
     private void loadSeatsinTableView(Table table) {
-    			ObservableList<Seat> listOfSeats = FXCollections.observableArrayList();
+    	ObservableList<Seat> listOfSeats = FXCollections.observableArrayList();
     	if (table != null) {
 			for(Seat seat : table.getCurrentSeats()) {
 			
 				listOfSeats.add(seat);
-				System.out.println(seat.toString());
+				//System.out.println(seat.toString());
 				
 			}
 			}
@@ -121,15 +127,41 @@ public class BillController implements Initializable{
     
     
     public void addToListPressed(ActionEvent event) {
-    	Seat selectedSeat = tableViewSeat.getSelectionModel().getSelectedItem();
-    	if (selectedSeat == null) {
+    	try {
+    		Seat selectedSeat =tableViewSeat.getSelectionModel().getSelectedItem();
+    		
+    		if (selectedSeat == null) {
+    			updateBox("No seat selected.", Color.RED);
+    			return;
+    		}
     		selectedSeats.add(selectedSeat);
-    	} else {
-    		updateBox("No seat selected", Color.RED);
+    		selectedSeatsViewList.add(selectedSeat);
+    		allSeatsTableView.setItems(selectedSeatsViewList);
+    		
+    		
+    	} catch (RuntimeException e) {
+    		updateBox("No seat selected.", Color.RED);
     	}
     
     }
     
+    public void createBillPressed(ActionEvent event) {
+    	try {
+			c.issueBill(selectedSeats);
+			updateBox("Bill created for seats", Color.GREEN);
+			clearSeatsPressed(null);
+		} catch (InvalidInputException e) {
+			updateBox(e.getMessage(), Color.RED);
+			
+		}
+    }
+    
+    public void clearSeatsPressed(ActionEvent event) {
+    	selectedSeats.clear();
+    	selectedSeatsViewList.clear();
+    	allSeatsTableView.setItems(selectedSeatsViewList);
+    	System.out.println("cleared seats");
+    }
     
     public void updateBox(String message, Color color) {
         Text txt = new Text(message);

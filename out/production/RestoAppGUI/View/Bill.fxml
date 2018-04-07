@@ -36,9 +36,9 @@
                   <Font size="22.0" />
                </font>
             </Text>
-            <TableView fx:id="tableViewSeat" layoutX="24.0" layoutY="194.0" prefHeight="219.0" prefWidth="176.0">
+            <TableView fx:id="tableViewSeat" layoutX="24.0" layoutY="194.0" prefHeight="219.0" prefWidth="144.0">
               <columns>
-                <TableColumn fx:id="tableSeatName" prefWidth="175.0" text="Seat Number" />
+                <TableColumn fx:id="tableSeatName" prefWidth="141.59998168945313" text="Seat Number" />
               </columns>
             </TableView>
             <Text layoutX="26.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select a table in the floor plan to view it's seats. " />
@@ -54,14 +54,15 @@
                   <Text layoutX="34.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bill Total: " />
                </children>
             </Pane>
-            <Button fx:id="createBillButton" layoutX="133.0" layoutY="709.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="155.0" style="-fx-background-color: black;" text="Create Bill" textFill="WHITE" />
-            <TableView fx:id="allSeatsTableView" layoutX="212.0" layoutY="194.0" prefHeight="219.0" prefWidth="176.0">
+            <Button fx:id="createBillButton" layoutX="133.0" layoutY="709.0" mnemonicParsing="false" onAction="#createBillPressed" prefHeight="65.0" prefWidth="155.0" style="-fx-background-color: black;" text="Create Bill" textFill="WHITE" />
+            <Button fx:id="clearSeatsButton" layoutX="222.0" layoutY="418.0" mnemonicParsing="false" onAction="#clearSeatsPressed" prefHeight="29.0" prefWidth="134.0" style="-fx-background-color: black;" text="Clear Seats" textFill="WHITE" />
+            <Button layoutX="28.0" layoutY="418.0" mnemonicParsing="false" onAction="#addToListPressed" prefHeight="29.0" prefWidth="134.0" style="-fx-background-color: black;" text="Add to list" textFill="WHITE" />
+            <TableView fx:id="allSeatsTableView" layoutX="179.0" layoutY="194.0" prefHeight="219.0" prefWidth="221.0">
               <columns>
-                <TableColumn fx:id="allSeatsTableViewId" prefWidth="183.199951171875" text="Currently Selected Seats" />
+                <TableColumn fx:id="allSeatsTableViewId" prefWidth="128.7999267578125" text="Selected Seats" />
+                <TableColumn fx:id="allSeatsTableId" prefWidth="91.2000732421875" text="Table ID" />
               </columns>
             </TableView>
-            <Button fx:id="clearSeatsButton" layoutX="233.0" layoutY="418.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="134.0" style="-fx-background-color: black;" text="Clear Seats" textFill="WHITE" />
-            <Button layoutX="45.0" layoutY="418.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="134.0" style="-fx-background-color: black;" text="Add to list" textFill="WHITE" />
          </children></AnchorPane>
   </items>
 </SplitPane>
