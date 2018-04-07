@@ -55,6 +55,7 @@ class Table {
 }
 
 class Seat {
+	autounique Id;
 }
 
 class Order {

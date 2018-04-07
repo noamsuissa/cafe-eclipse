@@ -11,8 +11,17 @@ public class Seat implements Serializable
 {
 
   //------------------------
+  // STATIC VARIABLES
+  //------------------------
+
+  private static int nextId = 1;
+
+  //------------------------
   // MEMBER VARIABLES
   //------------------------
+
+  //Autounique Attributes
+  private int Id;
 
   //Seat Associations
   private Table table;
@@ -25,6 +34,7 @@ public class Seat implements Serializable
 
   public Seat(Table aTable)
   {
+    Id = nextId++;
     boolean didAddTable = setTable(aTable);
     if (!didAddTable)
     {
@@ -37,6 +47,11 @@ public class Seat implements Serializable
   //------------------------
   // INTERFACE
   //------------------------
+
+  public int getId()
+  {
+    return Id;
+  }
 
   public Table getTable()
   {
@@ -332,7 +347,14 @@ public class Seat implements Serializable
       }
     }
   }
-  
+
+
+  public String toString()
+  {
+    return super.toString() + "["+
+            "Id" + ":" + getId()+ "]" + System.getProperties().getProperty("line.separator") +
+            "  " + "table = "+(getTable()!=null?Integer.toHexString(System.identityHashCode(getTable())):"null");
+  }  
   //------------------------
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------

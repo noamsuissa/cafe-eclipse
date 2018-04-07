@@ -56,8 +56,8 @@ public class BillController implements Initializable{
     	
     	loadCurrentTables();
     
-
-    	tableSeatName.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.hashCode()));
+    	
+    	tableSeatName.setCellValueFactory(new PropertyValueFactory<Seat, Number>("Id"));
     	
     }
     
