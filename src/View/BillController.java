@@ -44,11 +44,13 @@ public class BillController implements Initializable{
 	@FXML private Pane P1;
     @FXML private Button returnToMain;
     @FXML private Button createBillButton;
-    @FXML private Pane displaySeatsPane;
-    @FXML private Pane displaySelectedTablePane;
     @FXML private Pane billTotalPane;
     @FXML private TableView<Seat> tableViewSeat;
+    @FXML private TableView<Seat> allSeatsTableView;
     @FXML private TableColumn<Seat,Number> tableSeatName;
+    @FXML private TableColumn<Seat,Number> allSeatsTableViewId;
+    @FXML private Button clearSeatsButton;
+    
     private Table selectedTable1 = null;
     
     @Override
