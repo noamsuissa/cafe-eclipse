@@ -11,6 +11,7 @@ class RestoApp {
     MenuItem.reinitializeUniqueName(this.getMenu().getMenuItems());
     if(waiters==null){waiters = new ArrayList<Waiter>();};
     Waiter.reinitializeUniqueId(this.getWaiters());
+    Seat.reinitializeAutoUniqueId(this.getTables());
   }
   
 }
@@ -93,6 +94,17 @@ class Bill {
 class Seat {
   depend java.io.Serializable;
   isA Serializable;
+  public static void reinitializeAutoUniqueId(List<Table> tables){
+  	for(Table table : tables){
+  		List<Seat> seats = table.getSeats();
+  		for(Seat seat : seats){
+  			if(seat.getId() > nextId){
+  				nextId = seat.getId();
+  			}
+  		}
+  		nextId++;
+  	}
+  }
   private static final long serialVersionUID = 386717977557499839L;
 }
 
