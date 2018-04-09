@@ -15,7 +15,71 @@ import ca.mcgill.ecse223.resto.model.MenuItem.ItemCategory;
 public class RestoAppController {
 	public RestoAppController() {
 	}
-	
+	public static void cancelOrderItem(OrderItem orderItem) throws InvalidInputException {
+
+		if (orderItem == null) {
+
+			throw new InvalidInputException("Error. Orderitem is null");
+		}
+
+		List<Seat> seats = orderItem.getSeats(); 
+		
+		Order order = orderItem.getOrder();
+		
+		ArrayList<Table> tables = new ArrayList<Table>();
+		
+		for(Seat seat : seats){
+			Table table = seat.getTable();
+
+			Order lastOrder = null;
+			if(table.numberOfOrders() > 0) {
+				lastOrder = table.getOrder(table.numberOfOrders()-1);
+			}else {
+				throw new InvalidInputException("Error");	
+			}
+			if(lastOrder.equals(order) && !tables.contains(table)){
+				tables.add(table);
+			}
+		}
+
+		for(Table table : tables){ //tables or table list?
+			table.cancelOrderItem(orderItem);
+		}
+		
+		try {
+			RestoAppApplication.save();
+		}
+		catch (RuntimeException e) {
+			throw new InvalidInputException(e.getMessage());
+		}
+		
+	}
+	public static void cancelOrder(Table table) throws InvalidInputException {
+
+		if (table == null) {
+
+			throw new InvalidInputException("Error. Table is null");
+		}
+		RestoApp r = RestoAppApplication.getRestoApp();
+		
+		List<Table> currentTables = r.getCurrentTables();	
+		
+		boolean current = currentTables.contains(table);
+		
+		if(!current) {
+			throw new InvalidInputException("Error, current is false. ");
+		}
+		
+		table.cancelOrder();
+		
+		try {
+			RestoAppApplication.save();
+		}
+		catch (RuntimeException e) {
+			throw new InvalidInputException(e.getMessage());
+		}
+		
+	}
 	public static void issueBill(List<Seat> seats) throws InvalidInputException {
 		String error = "";
 		if (seats == null || seats.isEmpty()) { 
@@ -426,8 +490,14 @@ public class RestoAppController {
 		}
 
 		List<Table> tables = order.getTables();
+		List<Table> tablesForOrder = new ArrayList<>();
+		
+		for(Table table: tables)
+		{
+			tablesForOrder.add(table);
+		}
 
-		for (Table table : tables) { 
+		for (Table table : tablesForOrder) { 
 			if(table.numberOfOrders()>0 && table.getOrder(table.numberOfOrders()-1).equals(order)) {
 
 				table.endOrder(order);
@@ -448,7 +518,6 @@ public class RestoAppController {
 		}
 
 	}
-
 	private static boolean allTablesAvailableOrDifferentCurrentOrder(List<Table> tables, Order order) {
 
 		for(Table table: tables)
