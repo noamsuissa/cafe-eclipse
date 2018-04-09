@@ -16,6 +16,7 @@ import ca.mcgill.ecse223.resto.model.RestoApp;
 import ca.mcgill.ecse223.resto.model.Seat;
 import ca.mcgill.ecse223.resto.model.Table;
 import ca.mcgill.ecse223.resto.model.MenuItem.ItemCategory;
+import ca.mcgill.ecse223.resto.model.Table.Status;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -158,7 +159,12 @@ public class MenuItemsViewController implements Initializable{
 			btn.setLayoutY(currentTable.getY());
 			btn.setMinWidth(currentTable.getWidth());
 			btn.setMinHeight(currentTable.getLength());
-			btn.setStyle("-fx-background-color: black; ");
+			if (currentTable.getStatus().equals(Status.Available)) {
+				btn.setStyle("-fx-background-color: black; ");
+			
+			} else {
+				btn.setStyle("-fx-background-color: red; ");
+			}
 			btn.setTextFill(Color.WHITE);
 			btn.setOnAction(new EventHandler<ActionEvent>() {
 				@Override public void handle(ActionEvent e) {
