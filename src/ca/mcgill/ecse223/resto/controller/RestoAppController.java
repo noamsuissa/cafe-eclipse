@@ -90,15 +90,16 @@ public class RestoAppController {
 	
 	}
 	
-	public static void orderMenuItem (MenuItem aMenuItem, int quantity,Seat... allSeats) throws InvalidInputException {
+	public static void orderMenuItem (MenuItem aMenuItem, int quantity,List <Seat> seats) throws InvalidInputException {
 		RestoApp r = RestoAppApplication.getRestoApp();
+		//Order comparedOrder;// if declare compare order in if else, cannot check of compared order equals last order
 		String error = "";
 		if(aMenuItem == null) {
 			error += "Menu item cannot be null. ";
 		}
 		if(quantity<=0) {
 			error += "quantity cannot be zero or negative. ";
-		}if(allSeats.length == 0) {
+		}if(seats == null) {
 			error += "You must select seats. ";
 		}if (error.length() > 0) {
 			throw new InvalidInputException(error.trim());
@@ -108,19 +109,25 @@ public class RestoAppController {
 
 			throw new InvalidInputException("order item is not current ");
 		} 
+		
 		List<Table> currentTables = r.getCurrentTables();
+		
 		Order lastOrder=null;
-		Order comparedOrder=null;// if declare compare order in if else, cannot check of compared order equals last order
-		for(Seat seat: allSeats) {
+		
+		for(Seat seat: seats) {
 			Table table= seat.getTable();
 			if (!currentTables.contains(table)) {
 				throw new InvalidInputException("table is not current");
 			}
+			
 			List<Seat> curSeats= table.getCurrentSeats();
+			
 			if (!curSeats.contains(seat)) {
 				throw new InvalidInputException("seat is not current");
 			}
-
+			
+			Order comparedOrder;// where does this go
+			
 			if(lastOrder==null) {
 				if(table.numberOfOrders()>0) {
 					lastOrder= table.getOrder(table.numberOfOrders()-1);
@@ -130,18 +137,20 @@ public class RestoAppController {
 				}
 
 			}
+		
 			else {
+				comparedOrder= null;
 				if (table.numberOfOrders()>0) {
 					comparedOrder= table.getOrder(table.numberOfOrders()-1);
 				}
 				else {
 					throw new InvalidInputException("table has no order");
 				}
-			}
-			if(!comparedOrder.equals(lastOrder)) {
+			
+				if(!comparedOrder.equals(lastOrder)) {
 				throw new InvalidInputException("error with last order");
+				}
 			}
-
 			if(lastOrder==null) {
 				throw new InvalidInputException("Order was not found");
 			}
@@ -149,25 +158,29 @@ public class RestoAppController {
 		PricedMenuItem pmi= aMenuItem.getCurrentPricedMenuItem();
 		OrderItem newItem= null;
 		boolean itemCreated= false;
-		OrderItem lastItem=null; // last item must be created outside the if else statements
-		for(Seat seat: allSeats) {
+		
+		OrderItem lastItem; // last item must be created outside the if else statements
+		
+		for(Seat seat: seats) {
 			Table table= seat.getTable();
 
 			if(itemCreated==true) {
 				table.addToOrderItem(newItem,seat);
 			}
 			else {
-
+				lastItem=null;
 				if(lastOrder.numberOfOrderItems()>0) {
 					lastItem=lastOrder.getOrderItem(lastOrder.numberOfOrderItems()-1);
 				}
 				table.orderItem(quantity,lastOrder,seat, pmi);
-			}
-			if(lastOrder.numberOfOrderItems()>0 && !lastOrder.getOrderItem(lastOrder.numberOfOrderItems()-1).equals(lastItem)) {
+			
+				if(lastOrder.numberOfOrderItems()>0 && !lastOrder.getOrderItem(lastOrder.numberOfOrderItems()-1).equals(lastItem)) {
 				itemCreated=true;
 				newItem=lastOrder.getOrderItem(lastOrder.numberOfOrderItems()-1);
+				}
 			}
 		}
+		
 		if(itemCreated== false) {
 			throw new InvalidInputException("Item was not created");
 		}
