@@ -192,7 +192,7 @@ public class RestoAppController {
 		}	
 	}
 	
-	
+
 	public static boolean isValidWaiter( int aId, String aPassword) throws InvalidInputException {
         String errorMessage = "";
         if (aId <= 0) {
