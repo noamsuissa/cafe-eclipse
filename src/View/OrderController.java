@@ -2,6 +2,7 @@ package View;
 
 import ca.mcgill.ecse223.resto.application.RestoAppApplication;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -53,33 +54,33 @@ ObservableList<OrderItem> selectedTableViewList = FXCollections.observableArrayL
     RestoAppController c = new RestoAppController();
     
     private List<OrderItem> selectedItem = new ArrayList<OrderItem>();
-ObservableList<OrderItem> selectedItemViewList = FXCollections.observableArrayList();
+    ObservableList<OrderItem> selectedItemViewList = FXCollections.observableArrayList();
     
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-    orderName.setCellValueFactory(new PropertyValueFactory<OrderItem, String>("Name"));
-//orderQuantity.setCellValueFactory(cellData -> new SimpleDoubleProperty(MenuItemsViewController.getQuantity()));
+    orderName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPricedMenuItem().getMenuItem().getName()));
+    orderQuantity.setCellValueFactory(new PropertyValueFactory<OrderItem, Number>("quantity"));
     loadCurrentTables();
     }
 
   
     
     private void loadOrdersInTableView(Table table) {
-ObservableList<OrderItem> listOfOrderItems = FXCollections.observableArrayList();
-if (table != null) {
-List<OrderItem> orderItems;
-try {
-orderItems = c.getOrderItems(table);
-for(OrderItem order: orderItems) {
-listOfOrderItems.add(order);
-updateBox("list"+ listOfOrderItems, Color.BLACK);
-} 
-} catch (InvalidInputException e) {
-updateBox(e.getMessage(), Color.RED);
-}
-    }
-tableView.setItems(listOfOrderItems);
+		ObservableList<OrderItem> listOfOrderItems = FXCollections.observableArrayList();
+		if (table != null) {
+		List<OrderItem> orderItems;
+		try {
+		orderItems = c.getOrderItems(table);
+		for(OrderItem order: orderItems) {
+		listOfOrderItems.add(order);
+		updateBox("list"+ listOfOrderItems, Color.BLACK);
+		} 
+		} catch (InvalidInputException e) {
+		updateBox(e.getMessage(), Color.RED);
+		}
+		    }
+		tableView.setItems(listOfOrderItems);
     }
     
     
@@ -100,7 +101,7 @@ tableView.setItems(listOfOrderItems);
             btn.setOnAction(new EventHandler<ActionEvent>() {
                 @Override public void handle(ActionEvent e) {
                 selectedTable1 = currentTable;
-            loadOrdersInTableView(selectedTable1);
+                loadOrdersInTableView(selectedTable1);
                 }
             });
             P1.getChildren().add(btn);
@@ -108,11 +109,11 @@ tableView.setItems(listOfOrderItems);
     }
     
     public void clearItemsPressed(ActionEvent event) {
-selectedItem.clear();
-selectedItemViewList.clear();
-//orderName.setItems(selectedItemViewList);
-updateBox("Cleared items", Color.BLACK);
-}
+    	selectedItem.clear();
+    	selectedItemViewList.clear();
+    	//orderName.setItems(selectedItemViewList);
+    	updateBox("Cleared items", Color.BLACK);
+    }
     
     
     
@@ -127,11 +128,11 @@ updateBox("Cleared items", Color.BLACK);
     }
     
     public void updateBox(String message, Color color) {
-Text txt = new Text(message);
-txt.setLayoutY(20);
-txt.setFont(Font.font("Verdana", FontWeight.BOLD, 10));
-txt.setFill(color);
-updateBox.getChildren().clear();
-updateBox.getChildren().add(txt);
-}
+		Text txt = new Text(message);
+		txt.setLayoutY(20);
+		txt.setFont(Font.font("Verdana", FontWeight.BOLD, 10));
+		txt.setFill(color);
+		updateBox.getChildren().clear();
+		updateBox.getChildren().add(txt);
+	}
 }
