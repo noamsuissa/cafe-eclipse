@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" style="-fx-border-style: solid; -fx-border-width: 8;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainMenuController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" style="-fx-border-style: solid; -fx-border-width: 8;" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainMenuController">
     <children>
         <Button layoutX="447.0" layoutY="384.0" mnemonicParsing="false" onAction="#goToFloorPlanTableLocationButtonPushed" prefHeight="105.0" prefWidth="284.0" style="-fx-background-color: BLACK;" text="Floor Plan/ Table Location" textFill="WHITE">
             <font>
@@ -44,7 +44,7 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Button layoutX="263.0" layoutY="650.0" mnemonicParsing="false" prefHeight="105.0" prefWidth="284.0" style="-fx-background-color: BLack;" text="Orders" textFill="WHITE">
+      <Button layoutX="263.0" layoutY="650.0" mnemonicParsing="false" onAction="#goToOrderPage" prefHeight="105.0" prefWidth="284.0" style="-fx-background-color: BLack;" text="Orders" textFill="WHITE">
          <font>
             <Font size="22.0" />
          </font>
