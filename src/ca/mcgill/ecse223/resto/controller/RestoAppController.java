@@ -834,4 +834,55 @@ public class RestoAppController {
 
 
 	}
+	public static List<OrderItem> getOrderItems(Table table) throws InvalidInputException{
+		String error = "";
+		if (table == null) {
+			error = "Must enter a table to view order. ";
+		}
+		if (error.length() > 0) {
+			throw new InvalidInputException(error.trim());
+		}
+		RestoApp r = RestoAppApplication.getRestoApp();
+		List<Table> currentTables = r.getCurrentTables();
+		boolean current = currentTables.contains(table);
+
+		if(!current){
+			throw new InvalidInputException("Cannot view order for table because it is not one of the current tables.");
+		}
+		//Check over
+		String status = table.getStatusFullName();
+		String Available = "Available";
+
+		if(status.equals(Available)){
+			throw new InvalidInputException("Table is not in use, cannot view order");
+		}
+
+		Order lastOrder = null;
+		if(table.numberOfOrders()>0){
+			lastOrder = table.getOrder(table.numberOfOrders()-1);
+		}else{
+			throw new InvalidInputException("Table has no order.");
+
+		}
+
+		List<Seat> currentSeats = table.getCurrentSeats();
+		ArrayList<OrderItem> result = new ArrayList<OrderItem>();
+
+		try {
+			for(Seat seat : currentSeats) {
+				List<OrderItem> orderItems = seat.getOrderItems();
+				for(OrderItem orderItem : orderItems) {
+					Order order = orderItem.getOrder();
+					if(lastOrder.equals(order) && !result.contains(orderItem)) {
+						result.add(orderItem);
+					}
+				}
+			}
+
+			return result;
+		}
+		catch (RuntimeException e) {
+			throw new InvalidInputException(e.getMessage());
+		}
+		}
 }

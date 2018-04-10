@@ -52,7 +52,7 @@ public class MenuItemsViewController implements Initializable{
 	@FXML private Pane updateBox;
 	@FXML private GridPane G1;
 	@FXML private TableView<Seat> tableView;
-	@FXML private static TextField qtyText;
+	@FXML private  TextField qtyText;
 	@FXML private Button addOrderButton;
 	RestoAppController c = new RestoAppController();
 	private Table selectedTable1=null;
@@ -85,9 +85,9 @@ public class MenuItemsViewController implements Initializable{
 
 	}
 	
-	public static int getQuanity () {
-		return Integer.parseInt(qtyText.getText());
-	}
+	//public static int getQuanity () {
+	//	return Integer.parseInt(qtyText.getText());
+	//}
 	public void updateBox(String message, Color color) {
 		Text txt = new Text(message);
 		txt.setLayoutY(20);
