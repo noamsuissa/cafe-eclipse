@@ -252,9 +252,22 @@ public class ReservationController {
 			loadCurrentTables();
 			
 		} catch (InvalidInputException e) {
+			//System.out.println("Test");
 			updateBox(e.getMessage(), Color.RED);
 		} catch (RuntimeException e) {
-			updateBox(e.getMessage(), Color.RED);
+			//System.out.println("test2");
+			for (Table table: selectedTables) {
+				List<Order> orders = table.getOrders();
+				for (Order order: orders) {
+					c.endOrder(order);
+				}
+			}
+			
+			updateBox("Table status toggled.", Color.BLACK);
+			
+			P1.getChildren().clear();
+			loadCurrentTables();
+			
 		}
 		
 	}
