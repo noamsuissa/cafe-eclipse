@@ -85,9 +85,6 @@ public class MenuItemsViewController implements Initializable{
 
 	}
 	
-	//public static int getQuanity () {
-	//	return Integer.parseInt(qtyText.getText());
-	//}
 	public void updateBox(String message, Color color) {
 		Text txt = new Text(message);
 		txt.setLayoutY(20);

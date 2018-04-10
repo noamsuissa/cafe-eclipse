@@ -109,7 +109,7 @@ public class ModifyMenuItemsController implements Initializable{
 			String name = firstName.getText();
 			double price = Double.parseDouble(firstPrice.getText());
 			c.addMenuItem(name, cat, price);
-			loadCurrentMenuItems();
+			tableView.setItems(loadCurrentMenuItems());
 			updateBox(name + " menu item created. ", Color.BLUE);
 			System.out.println(name + " menu item created. ");
 		}catch(InvalidInputException e) {
@@ -125,9 +125,7 @@ public class ModifyMenuItemsController implements Initializable{
 			selectedMenuItem = tableView.getSelectionModel().getSelectedItem();
 			c.removeMenuItem(selectedMenuItem);
 			loadCurrentMenuItems();
-			tableView.refresh(); //does not refresh, need to check more
-			//tableView.getColumns().get(0).setVisible(false);
-			//tableView.getColumns().get(0).setVisible(true);
+			tableView.setItems(loadCurrentMenuItems());
 			updateBox(selectedMenuItem.getName() + " has been removed. ", Color.BLUE);
 			System.out.println(selectedMenuItem.getName() + " has been removed. ");
 
@@ -143,12 +141,11 @@ public class ModifyMenuItemsController implements Initializable{
 		try {
 			selectedMenuItem = tableView.getSelectionModel().getSelectedItem();
 			ItemCategory cat = categoryDropDown2.getValue();
+			categoryDropDown2.setPromptText(cat.name());
 			String name = newName.getText();
 			double price = Double.parseDouble(newPrice.getText());
 			c.updateMenuItem(selectedMenuItem, name, cat, price);
-			categoryDropDown2.setPromptText(cat.name());
-			//loadCurrentMenuItems();
-			tableView.refresh();
+			tableView.setItems(loadCurrentMenuItems());
 			updateBox(name + " menu item updated to: \n" + name + ", " + cat.toString() + ", " + price, Color.BLUE);
 			System.out.println(name + " menu item updated to: " + name + ", " + cat.toString() + ", " + price);
 		}catch(InvalidInputException e) {
