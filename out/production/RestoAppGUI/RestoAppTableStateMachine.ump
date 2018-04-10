@@ -3,7 +3,7 @@ class Table {
       Available {
          startOrder() / {
        
-            new Order(new java.sql.Date(Calendar.getInstance().getTime().getTime()), new java.sql.Time(Calendar.getInstance().getTime().getTime()),this.restoApp.getCurrentWaiter(), this.getRestoApp(), this);
+            new Order(new java.sql.Date(Calendar.getInstance().getTime().getTime()), new java.sql.Time(Calendar.getInstance().getTime().getTime()),this.getRestoApp().getCurrentWaiter(), this.getRestoApp(), this);
          } -> NothingOrdered;
          addToOrder(Order o) / {
             o.addTable(this);
@@ -253,11 +253,6 @@ class Table {
 		}
 		return true;
 	}
-
-  // line 37 "../../../../../RestoApp v3.ump"
-   public boolean doesOverlap(int x2, int y2, int width2, int length2){
-    return x2 < this.x + this.width && x2 + width2 > this.x && y2 < this.y + this.length && y2 + length2 > this.y;
-  }
 
  }
   

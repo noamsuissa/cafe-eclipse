@@ -102,7 +102,7 @@ public class MenuItemsViewController implements Initializable{
 			int qty  =Integer.parseInt(qtyText.getText());
 			//Seat [] seatArr = new Seat[selectedSeats.size()];
 			c.orderMenuItem(selectedMenuItem, qty, selectedSeats); //it means u should do RestoAppController.orderMenuItem(...) but its fine just like this
-			updateBox("Order item " + selectedMenuItem + " added to order", Color.BLACK);
+			updateBox("Order item " + selectedMenuItem.getName() + " added to order", Color.BLACK);
 		} catch (InvalidInputException e) {
 			updateBox(e.getMessage(), Color.RED);
 

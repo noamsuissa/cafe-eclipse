@@ -1,5 +1,5 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.27.0.3728.d139ed893 modeling language!*/
+/*This code was generated using the UMPLE 1.26.1-f40f105-3613 modeling language!*/
 
 package ca.mcgill.ecse223.resto.model;
 import java.io.Serializable;
@@ -172,7 +172,7 @@ public class Table implements Serializable
     {
       case Available:
         // line 4 "../../../../../RestoAppTableStateMachine.ump"
-        new Order(new java.sql.Date(Calendar.getInstance().getTime().getTime()), new java.sql.Time(Calendar.getInstance().getTime().getTime()),this.restoApp.getCurrentWaiter(), this.getRestoApp(), this);
+        new Order(new java.sql.Date(Calendar.getInstance().getTime().getTime()), new java.sql.Time(Calendar.getInstance().getTime().getTime()),this.getRestoApp().getCurrentWaiter(), this.getRestoApp(), this);
         setStatus(Status.NothingOrdered);
         wasEventProcessed = true;
         break;
@@ -966,10 +966,7 @@ public class Table implements Serializable
     currentSeats.clear();
     RestoApp placeholderRestoApp = restoApp;
     this.restoApp = null;
-    if(placeholderRestoApp != null)
-    {
-      placeholderRestoApp.removeTable(this);
-    }
+    placeholderRestoApp.removeTable(this);
     ArrayList<Reservation> copyOfReservations = new ArrayList<Reservation>(reservations);
     reservations.clear();
     for(Reservation aReservation : copyOfReservations)
@@ -1095,11 +1092,7 @@ public class Table implements Serializable
 		return true;
   }
 
-
-  /**
-   * line 37 "../../../../../RestoApp v3.ump"
-   */
-  // line 259 "../../../../../RestoAppTableStateMachine.ump"
+  // line 53 "../../../../../RestoApp v3.ump"
    public boolean doesOverlap(int x2, int y2, int width2, int length2){
     return x2 < this.x + this.width && x2 + width2 > this.x && y2 < this.y + this.length && y2 + length2 > this.y;
   }
@@ -1119,7 +1112,7 @@ public class Table implements Serializable
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
-  // line 114 "../../../../../RestoAppPersistence.ump"
+  // line 114 ../../../../../RestoAppPersistence.ump
   private static final long serialVersionUID = 8896099581655989380L ;
 
   
