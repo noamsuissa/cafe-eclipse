@@ -145,6 +145,7 @@ public class ModifyMenuItemsController implements Initializable{
 			String name = newName.getText();
 			double price = Double.parseDouble(newPrice.getText());
 			c.updateMenuItem(selectedMenuItem, name, cat, price);
+			tableView.getItems().clear();
 			tableView.setItems(loadCurrentMenuItems());
 			updateBox(name + " menu item updated to: \n" + name + ", " + cat.toString() + ", " + price, Color.BLUE);
 			System.out.println(name + " menu item updated to: " + name + ", " + cat.toString() + ", " + price);
