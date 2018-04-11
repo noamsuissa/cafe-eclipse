@@ -63,6 +63,8 @@ public class BillController implements Initializable{
 	@FXML private TableColumn<OrderItem, String> orderName;
 	@FXML private TableColumn<OrderItem, Number> orderQuantity;
 	@FXML private TableColumn<OrderItem, Number> tablePrice;
+	@FXML private TableColumn<OrderItem, Number> sharedBy;
+	
 	
 	
 	RestoAppController c = new RestoAppController();
@@ -79,6 +81,7 @@ public class BillController implements Initializable{
 		orderName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPricedMenuItem().getMenuItem().getName()));
 	    orderQuantity.setCellValueFactory(new PropertyValueFactory<OrderItem, Number>("quantity"));
 	    tablePrice.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getPricedMenuItem().getPrice()));
+	    sharedBy.setCellValueFactory(cellData -> new SimpleDoubleProperty((Integer)(cellData.getValue().numberOfSeats())));
 
 		tableSeatName.setCellValueFactory(new PropertyValueFactory<Seat, Number>("Id"));
 		allSeatsTableViewId.setCellValueFactory(new PropertyValueFactory<Seat, Number>("Id"));

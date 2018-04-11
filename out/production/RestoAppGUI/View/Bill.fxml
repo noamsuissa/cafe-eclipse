@@ -42,11 +42,12 @@
               </columns>
             </TableView>
             <Text layoutX="26.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select a table in the floor plan to view it's seats. " />
-            <TableView fx:id="tableView" layoutX="27.0" layoutY="462.0" prefHeight="208.0" prefWidth="367.0">
+            <TableView fx:id="tableView" layoutX="6.0" layoutY="461.0" prefHeight="208.0" prefWidth="400.0">
               <columns>
-                <TableColumn fx:id="orderName" prefWidth="193.0" text="Ordered Item" />
-                <TableColumn fx:id="orderQuantity" prefWidth="69.0" text="Quantity" />
-                  <TableColumn fx:id="tablePrice" prefWidth="104.0" text="Price (per item)" />
+                <TableColumn fx:id="orderName" prefWidth="157.0" text="Ordered Item" />
+                <TableColumn fx:id="orderQuantity" prefWidth="60.0" text="Quantity" />
+                  <TableColumn fx:id="tablePrice" prefWidth="111.0" text="Price (per item)" />
+                  <TableColumn fx:id="sharedBy" prefWidth="75.0" text="Shared By" />
               </columns>
             </TableView>
             <Pane fx:id="billTotalPane" layoutX="301.0" layoutY="669.0" prefHeight="31.0" prefWidth="92.0" />
