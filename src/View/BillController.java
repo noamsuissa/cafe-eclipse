@@ -2,6 +2,7 @@ package View;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -37,6 +38,7 @@ import java.util.ResourceBundle;
 import ca.mcgill.ecse223.resto.application.RestoAppApplication;
 import ca.mcgill.ecse223.resto.controller.InvalidInputException;
 import ca.mcgill.ecse223.resto.controller.RestoAppController;
+import ca.mcgill.ecse223.resto.model.Bill;
 import ca.mcgill.ecse223.resto.model.MenuItem;
 import ca.mcgill.ecse223.resto.model.OrderItem;
 import ca.mcgill.ecse223.resto.model.RestoApp;
@@ -57,6 +59,12 @@ public class BillController implements Initializable{
 	@FXML private Button clearSeatsButton;
 	@FXML private Pane updateBox;
 	@FXML private TableColumn<Seat, Number> allSeatsTableId;
+	@FXML private TableView<OrderItem> tableView;
+	@FXML private TableColumn<OrderItem, String> orderName;
+	@FXML private TableColumn<OrderItem, Number> orderQuantity;
+	@FXML private TableColumn<OrderItem, Number> tablePrice;
+	
+	
 	RestoAppController c = new RestoAppController();
 
 	private List<Seat> selectedSeats = new ArrayList<Seat>();
@@ -68,7 +76,9 @@ public class BillController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 
 		loadCurrentTables();
-
+		orderName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPricedMenuItem().getMenuItem().getName()));
+	    orderQuantity.setCellValueFactory(new PropertyValueFactory<OrderItem, Number>("quantity"));
+	    tablePrice.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getPricedMenuItem().getPrice()));
 
 		tableSeatName.setCellValueFactory(new PropertyValueFactory<Seat, Number>("Id"));
 		allSeatsTableViewId.setCellValueFactory(new PropertyValueFactory<Seat, Number>("Id"));
@@ -154,12 +164,64 @@ public class BillController implements Initializable{
 	public void createBillPressed(ActionEvent event) {
 		try {
 			c.issueBill(selectedSeats);
+			Seat seat1 = selectedSeats.get(0);
+			loadOrdersInTableView(seat1);
+			calculateBillTotal(seat1);
+			
 			updateBox("Bill created for seats", Color.GREEN);
 			clearSeatsPressed(null);
+			
+			
 		} catch (InvalidInputException e) {
 			updateBox(e.getMessage(), Color.RED);
 
+		}	
+		
+	}
+	 private void loadOrdersInTableView(Seat seat) {
+			ObservableList<OrderItem> listOfOrderItems = FXCollections.observableArrayList();
+			List<OrderItem> orderItems;
+			orderItems = seat.getOrderItems();
+			for(OrderItem order: orderItems) {
+			listOfOrderItems.add(order);
+			updateBox("list"+ listOfOrderItems, Color.BLACK);
+			}
+			  
+			tableView.setItems(listOfOrderItems);
+	    }
+	 public static double round(double value, int places) {
+		    if (places < 0) throw new IllegalArgumentException();
+
+		    long factor = (long) Math.pow(10, places);
+		    value = value * factor;
+		    long tmp = Math.round(value);
+		    return (double) tmp / factor;
 		}
+	
+	public void calculateBillTotal(Seat seat) {
+		double billTotal = 0;
+		List<OrderItem> orderItems;
+		orderItems = seat.getOrderItems();
+		for(OrderItem order: orderItems) {
+			if(order.getQuantity() == 1) {
+				int sharedByInt = order.numberOfSeats();
+				System.out.println(sharedByInt);
+				billTotal = billTotal + ((order.getPricedMenuItem().getPrice())/sharedByInt);
+			} else if(order.getQuantity()>1) {
+				int sharedByInt = order.numberOfSeats();
+				System.out.println(sharedByInt);
+				billTotal += (((order.getQuantity())*(order.getPricedMenuItem().getPrice()))/sharedByInt);
+		}}
+		
+		billTotal = round(billTotal, 2);
+		String str = String.valueOf(billTotal)+" $";
+		Text txt = new Text(str);
+		txt.setLayoutY(20);
+		txt.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
+		txt.setFill(Color.BLACK);
+    		billTotalPane.getChildren().clear();
+    		billTotalPane.getChildren().add(txt);
+		
 	}
 
 	public void clearSeatsPressed(ActionEvent event) {

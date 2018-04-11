@@ -106,6 +106,7 @@ public class MenuItemsViewController implements Initializable{
 		}
 	}
 	
+	
 	public void addtoListButton(ActionEvent event) {
 		try {
 			Seat selectedSeat =tableViewSeat.getSelectionModel().getSelectedItem();
