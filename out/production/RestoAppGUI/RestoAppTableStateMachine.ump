@@ -120,7 +120,7 @@ class Table {
             
          } -> Ordered;
          
-         addToBill(Bill b, Seat s) / {
+addToBill(Bill b, Seat s) / {
             // add provided seat to provided bill unless seat has already been added, in which case nothing needs
             // to be done; if the provided seat is already assigned to another bill for the current order, then the
             // seat is first removed from the other bill and if no seats are left for the bill, the bill is deleted
@@ -142,28 +142,29 @@ class Table {
 	            		
 	            		for (Bill bill : bills) {
 	            		
-	            			List<Seat> issuedSeats = bill.getIssuedForSeats();
+	            			List<Seat> seatsForBill = bill.getIssuedForSeats();
 	            			
-	            			if (issuedSeats.contains(s)) {
-	            			
-	            				bill.removeIssuedForSeat(s);
+	            			if (seatsForBill.contains(s)) {
 	            				
-			            		if (bill.getIssuedForSeats().size() == 0) {
+			            		if (b.getIssuedForSeats().size() == 1) {
 			            		
-			            			o.removeBill(bill);
+			            			bill.delete();
+			            		
+			            		} else {
+			            			            			
+	            					bill.removeIssuedForSeat(s);
 			            		
 			            		}
 	            			
 	            			}
 	            		
 	            		}
+	            		
 	            }
 	            
 	            b.addIssuedForSeat(s);
 	            
-	     	}       
-            
-         } -> Ordered;
+	     	}         } -> Ordered;
          
          endOrder(Order o) [allSeatsBilled()] / {
          } -> Available;
