@@ -65,7 +65,7 @@ public class BillController implements Initializable{
 	@FXML private TableColumn<OrderItem, Number> tablePrice;
 	@FXML private TableColumn<OrderItem, Number> sharedBy;
 	
-	//hi
+	
 	
 	RestoAppController c = new RestoAppController();
 
