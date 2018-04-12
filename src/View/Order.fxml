@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -22,8 +20,8 @@
             <Font size="18.0" />
           </font>
         </Text>
-        <Pane fx:id="P1" layoutX="8.0" layoutY="74.0" prefHeight="650.0" prefWidth="400.0" style="-fx-border-color: black; -fx-border-width: 3;" />
-            <Pane fx:id="updateBox" layoutX="35.0" layoutY="727.0" prefHeight="42.0" prefWidth="341.0" />
+        <Pane fx:id="P1" layoutX="8.0" layoutY="74.0" prefHeight="647.0" prefWidth="400.0" style="-fx-border-color: black; -fx-border-width: 3;" />
+            <Pane fx:id="updateBox" layoutX="35.0" layoutY="729.0" prefHeight="40.0" prefWidth="341.0" />
       </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
       <children>
@@ -39,48 +37,37 @@
           </font>
         </Text>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="612.0" layoutX="20.0" layoutY="159.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="374.0" />
-        <Text layoutX="42.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select a table on the Floor Plan to the left to view/edit it's current order" wrappingWidth="287.203857421875">
+        <Text layoutX="42.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select a table on the Floor Plan to the left to view it's current order" wrappingWidth="287.203857421875">
           <font>
             <Font size="17.0" />
           </font>
         </Text>
-        <Text layoutX="40.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete all order items for this table:" wrappingWidth="198.392333984375">
+        <Text layoutX="39.0" layoutY="472.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete all order items for this table:" wrappingWidth="198.392333984375">
           <font>
             <Font size="17.0" />
           </font>
         </Text>
-        <Button layoutX="231.0" layoutY="261.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="113.0" style="-fx-background-color: black;" text="Delete" textFill="WHITE">
+        <Button layoutX="249.0" layoutY="460.0" mnemonicParsing="false" onAction="#deleteAllTableItemsAction" prefHeight="38.0" prefWidth="113.0" style="-fx-background-color: black;" text="Delete" textFill="WHITE">
           <font>
             <Font size="17.0" />
           </font>
         </Button>
-        <Text layoutX="42.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select an order to view/edit:">
-          <font>
-            <Font size="17.0" />
-          </font>
-        </Text>
-        <MenuButton layoutX="40.0" layoutY="372.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="230.0" text="Order">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Action 1" />
-            <MenuItem mnemonicParsing="false" text="Action 2" />
-          </items>
-        </MenuButton>
-        <TableView fx:id="tableView" layoutX="43.0" layoutY="420.0" prefHeight="250.0" prefWidth="320.0">
+        <TableView fx:id="tableView" layoutX="39.0" layoutY="230.0" prefHeight="219.0" prefWidth="320.0">
           <columns>
             <TableColumn fx:id="orderName" prefWidth="254.0" text="Order Item" />
                   <TableColumn fx:id="orderQuantity" minWidth="2.0" prefWidth="65.0" text="Quantity" />
           </columns>
         </TableView>
-            <Button layoutX="43.0" layoutY="693.0" mnemonicParsing="false" onAction="#clearItemsPressed" prefHeight="38.0" prefWidth="158.0" style="-fx-background-color: black;" text="Delete Selected Items" textFill="WHITE">
+            <Button layoutX="43.0" layoutY="710.0" mnemonicParsing="false" onAction="#deleteAllOrderItemsAction" prefHeight="38.0" prefWidth="158.0" style="-fx-background-color: black;" text="Delete All Order Items" textFill="WHITE">
                <font>
                   <Font size="12.0" />
                </font>
             </Button>
-            <Button layoutX="217.0" layoutY="693.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="146.0" style="-fx-background-color: black;" text="Delete All Order Items" textFill="WHITE">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Button>
+            <TableView fx:id="tableViewSeat" layoutX="39.0" layoutY="511.0" prefHeight="182.0" prefWidth="144.0">
+               <columns>
+                  <TableColumn fx:id="tableSeatName" prefWidth="141.59998168945313" text="Seat Number" />
+               </columns>
+            </TableView>
       </children></AnchorPane>
   </items>
 </SplitPane>
