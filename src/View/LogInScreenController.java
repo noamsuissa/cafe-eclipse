@@ -70,6 +70,9 @@ public class LogInScreenController {
             String password = createPasswordTF.getText();
             c.createWaiter(name, id, password);
             updateBox("Waiter Account Created Successfully", Color.BLACK);
+            createIdTF.clear();
+            createNameTF.clear();
+            createPasswordTF.clear();
         }
         catch(InvalidInputException e) {
                 updateBox(e.getMessage(), Color.RED);

@@ -54,7 +54,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <TableView fx:id="tableViewSeat" layoutX="14.0" layoutY="571.0" prefHeight="116.0" prefWidth="106.0">
+            <TableView fx:id="tableViewSeat" layoutX="14.0" layoutY="571.0" prefHeight="116.0" prefWidth="133.0">
               <columns>
                 <TableColumn fx:id="tableSeatName" prefWidth="142.0" text="Seat Number" />
               </columns>
