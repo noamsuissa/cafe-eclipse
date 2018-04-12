@@ -241,10 +241,11 @@ public class ReservationController {
 	public void toggleTableAvailability() throws InvalidInputException, InterruptedException {
 		try {
 			for (Table table: selectedTables) {
-				c.cancelOrder(table);
-				table.setStatus(Status.Available);
+				List<Order> orders = table.getOrders();
+				for (Order order: orders) {
+					c.endOrder(order);
 				}
-			
+			}
 			updateBox("Table status toggled.", Color.BLACK);
 			
 			P1.getChildren().clear();
