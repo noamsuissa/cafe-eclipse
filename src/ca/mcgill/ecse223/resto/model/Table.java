@@ -171,8 +171,8 @@ public class Table implements Serializable
     switch (aStatus)
     {
       case Available:
-        // line 4 "../../../../../RestoAppTableStateMachine.ump"
-        new Order(new java.sql.Date(Calendar.getInstance().getTime().getTime()), new java.sql.Time(Calendar.getInstance().getTime().getTime()),this.getRestoApp().getCurrentWaiter(), this.getRestoApp(), this);
+        // line 7 "../../../../../RestoAppTableStateMachine.ump"
+        new Order(new java.sql.Date(Calendar.getInstance().getTime().getTime()), new java.sql.Time(Calendar.getInstance().getTime().getTime()),this.restoApp.getCurrentWaiter(), this.getRestoApp(), this);
         setStatus(Status.NothingOrdered);
         wasEventProcessed = true;
         break;
@@ -191,7 +191,7 @@ public class Table implements Serializable
     switch (aStatus)
     {
       case Available:
-        // line 8 "../../../../../RestoAppTableStateMachine.ump"
+        // line 15 "../../../../../RestoAppTableStateMachine.ump"
         o.addTable(this);
         setStatus(Status.NothingOrdered);
         wasEventProcessed = true;
@@ -213,9 +213,11 @@ public class Table implements Serializable
       case NothingOrdered:
         if (quantityNotNegative(quantity))
         {
-        // line 14 "../../../../../RestoAppTableStateMachine.ump"
+        // line 27 "../../../../../RestoAppTableStateMachine.ump"
           // create a new order item with the provided quantity, order, seat, and priced menu item
+
             //null checks
+
             OrderItem item = new OrderItem(quantity, i, o, s);
           setStatus(Status.Ordered);
           wasEventProcessed = true;
@@ -225,9 +227,11 @@ public class Table implements Serializable
       case Ordered:
         if (quantityNotNegative(quantity))
         {
-        // line 38 "../../../../../RestoAppTableStateMachine.ump"
+        // line 75 "../../../../../RestoAppTableStateMachine.ump"
           // create a new order item with the provided quantity, order, seat, and priced menu item
+
             //null checks
+
             OrderItem item = new OrderItem(quantity, i, o, s);
           setStatus(Status.Ordered);
           wasEventProcessed = true;
@@ -249,17 +253,21 @@ public class Table implements Serializable
     switch (aStatus)
     {
       case NothingOrdered:
-        // line 21 "../../../../../RestoAppTableStateMachine.ump"
+        // line 41 "../../../../../RestoAppTableStateMachine.ump"
         // add provided seat to provided order item unless seat has already been added, in which case nothing needs to be done
+
             //null checks
+
             i.addSeat(s);
         setStatus(Status.Ordered);
         wasEventProcessed = true;
         break;
       case Ordered:
-        // line 45 "../../../../../RestoAppTableStateMachine.ump"
+        // line 89 "../../../../../RestoAppTableStateMachine.ump"
         // add provided seat to provided order item unless seat has already been added, in which case nothing needs to be done
+
             //null checks
+
             i.addSeat(s);
         setStatus(Status.Ordered);
         wasEventProcessed = true;
@@ -279,11 +287,15 @@ public class Table implements Serializable
     switch (aStatus)
     {
       case NothingOrdered:
-        // line 28 "../../../../../RestoAppTableStateMachine.ump"
+        // line 55 "../../../../../RestoAppTableStateMachine.ump"
         if (!o.removeTable(this)) {
+
                if (o.numberOfTables() == 1) {
+
                   o.delete();
+
                }
+
             }
         setStatus(Status.Available);
         wasEventProcessed = true;
@@ -291,7 +303,7 @@ public class Table implements Serializable
       case Ordered:
         if (allSeatsBilled())
         {
-        // line 168 "../../../../../RestoAppTableStateMachine.ump"
+        // line 333 "../../../../../RestoAppTableStateMachine.ump"
           
           setStatus(Status.Available);
           wasEventProcessed = true;
@@ -315,24 +327,24 @@ public class Table implements Serializable
       case Ordered:
         if (iIsLastItem(i))
         {
-        // line 52 "../../../../../RestoAppTableStateMachine.ump"
+        // line 103 "../../../../../RestoAppTableStateMachine.ump"
           // delete order item
+
             //null checks
-            Order order = i.getOrder();
-            
-            order.removeOrderItem(i);
+
+            i.delete();
           setStatus(Status.NothingOrdered);
           wasEventProcessed = true;
           break;
         }
         if (!(iIsLastItem(i)))
         {
-        // line 61 "../../../../../RestoAppTableStateMachine.ump"
+        // line 117 "../../../../../RestoAppTableStateMachine.ump"
           // delete order item
+
             //null checks
-            Order order = i.getOrder();
-            
-            order.removeOrderItem(i);
+
+            i.delete();
           setStatus(Status.Ordered);
           wasEventProcessed = true;
           break;
@@ -353,21 +365,41 @@ public class Table implements Serializable
     switch (aStatus)
     {
       case Ordered:
-        // line 70 "../../../../../RestoAppTableStateMachine.ump"
-        // delete all order items of the table
+        // line 131 "../../../../../RestoAppTableStateMachine.ump"
+        //here
+
+         	//changed
+
+         	
+
+            // delete all order items of the table
+
             List<Order> orders = this.getOrders();
+
 	   	    int size = orders.size();
-	   		if (size == 0) {
-		  		 return false;
-	   		}
+
+	   	
+
 	   		Order currentOrder = orders.get(size - 1);
+
 	   		
+
 	   			List <OrderItem>  items = currentOrder.getOrderItems();
+
 	   		
-	   		for (OrderItem i: items) {
+
+	   		//for (OrderItem i: items) {
+
+	   		while(items.size()>0){
+
 	   			
-	   			currentOrder.removeOrderItem(i);
+
+	   			//currentOrder.removeOrderItem(i);
+
+	   			items.get(0).delete();
+
 	   		
+
 	   		}
         setStatus(Status.NothingOrdered);
         wasEventProcessed = true;
@@ -387,36 +419,65 @@ public class Table implements Serializable
     switch (aStatus)
     {
       case Ordered:
-        // line 89 "../../../../../RestoAppTableStateMachine.ump"
+        // line 175 "../../../../../RestoAppTableStateMachine.ump"
         // create a new bill with the provided order and seat; if the provided seat is already assigned to
+
             // another bill for the current order, then the seat is first removed from the other bill and if no seats
+
             // are left for the bill, the bill is deleted
+
             RestoApp r = this.getRestoApp();
+
             
+
            if (o.hasBills()){
+
             		
+
             		List<Bill> bills = o.getBills();
+
             		
+
             		for (Bill b : bills) {
+
             		
+
             			List<Seat> seats = b.getIssuedForSeats();
+
             			
+
             			if (seats.contains(s)) {
+
             			
+
             				b.removeIssuedForSeat(s);
+
             				
+
 		            		if (b.getIssuedForSeats().size() == 0) {
+
 		            		
+
 		            			o.removeBill(b);
+
 		            		
+
 		            		}
+
             			
+
             			}
+
             		
+
             		}
+
             		
+
             }
+
             
+
           Bill bill = new Bill(o, r, s);
         setStatus(Status.Ordered);
         wasEventProcessed = true;
@@ -436,47 +497,87 @@ public class Table implements Serializable
     switch (aStatus)
     {
       case Ordered:
-        // line 123 "../../../../../RestoAppTableStateMachine.ump"
+        // line 243 "../../../../../RestoAppTableStateMachine.ump"
         // add provided seat to provided bill unless seat has already been added, in which case nothing needs
+
             // to be done; if the provided seat is already assigned to another bill for the current order, then the
+
             // seat is first removed from the other bill and if no seats are left for the bill, the bill is deleted
+
             List<Seat> seats = b.getIssuedForSeats();
+
             
+
             if (!seats.contains(s)) {
+
             
+
 	            Table table = s.getTable();
+
 	            
+
 	            List<Order> orders = table.getOrders();
+
 	            
+
 	            int size = orders.size();
+
 	            
+
 	            Order o = orders.get(size - 1);
+
 	            
+
 	            if (o.hasBills()) {
+
 	            		
+
 	            		List<Bill> bills = o.getBills();
+
 	            		
+
 	            		for (Bill bill : bills) {
+
 	            		
+
 	            			List<Seat> issuedSeats = bill.getIssuedForSeats();
+
 	            			
+
 	            			if (issuedSeats.contains(s)) {
+
 	            			
+
 	            				bill.removeIssuedForSeat(s);
+
 	            				
+
 			            		if (bill.getIssuedForSeats().size() == 0) {
+
 			            		
+
 			            			o.removeBill(bill);
+
 			            		
+
 			            		}
+
 	            			
+
 	            			}
+
 	            		
+
 	            		}
+
 	            }
+
 	            
+
 	            b.addIssuedForSeat(s);
+
 	            
+
 	     	}
         setStatus(Status.Ordered);
         wasEventProcessed = true;
@@ -1008,11 +1109,14 @@ public class Table implements Serializable
    * end status
    * check that the provided quantity is an integer greater than 0
    */
-  // line 179 "../../../../../RestoAppTableStateMachine.ump"
+  // line 355 "../../../../../RestoAppTableStateMachine.ump"
    private boolean quantityNotNegative(int quantity){
     if (quantity > 0 ){
+
       return true;
+
       }
+
       return false;
   }
 
@@ -1020,79 +1124,145 @@ public class Table implements Serializable
   /**
    * check that the provided order item is the last item of the current order of the table
    */
-  // line 187 "../../../../../RestoAppTableStateMachine.ump"
+  // line 371 "../../../../../RestoAppTableStateMachine.ump"
    private boolean iIsLastItem(OrderItem i){
     // TODO
+
       
+
       Order order = i.getOrder();
+
       List <OrderItem> orderItems= order.getOrderItems();
+
       int size= orderItems.size();
+
       if(size==1 && orderItems.get(0)==i){
+
       return true;
+
       }
+
       
+
    return false;
   }
 
-  // line 201 "../../../../../RestoAppTableStateMachine.ump"
+  // line 399 "../../../../../RestoAppTableStateMachine.ump"
    private boolean allSeatsBilled(){
     List<Seat> curSeats = getCurrentSeats(); // get current seats in the whole restaurant
+
 		List<Seat> activeSeats = new ArrayList<Seat>(); // this will be used later to store all active seats at table
+
 		// have to move current seats into list that is modifiable
+
 		List<Seat> tempSeats = new ArrayList< Seat>();
+
 		for( Seat seat: curSeats){
+
 		tempSeats.add(seat);
+
 		}
+
 		
+
 	
+
 		//this section is used to get the last order in the current orders for the table
+
 		List<Order> orders = getOrders();
+
 		int listSize = orders.size();
+
 		Order lastOrder;
+
 		if (listSize == 0) {
+
 			return false;
+
 		} else {
+
 			listSize = listSize - 1;
+
 			lastOrder = orders.get(listSize);
+
 		}
+
 		
+
 		List<Bill> curBills = lastOrder.getBills();// get bills for this order in this table. These are the bills that the seats must have
+
 		List<OrderItem> curOrderItems = lastOrder.getOrderItems();// get order items for this order at this table
 
+
+
 		// get all seats that have order item
+
 		for (OrderItem item : curOrderItems) {
 
+
+
 			List<Seat> tempList = item.getSeats();
+
 			for (Seat seat : tempList) {
+
 				activeSeats.add(seat);
+
 			}
+
 		}
+
 		// remove seats from all current seats that do not have an order item
 
+
+
 		for (Seat seat : tempSeats) {
+
 			if (!activeSeats.contains(seat)) {
+
 				tempSeats.remove(seat);
+
 			}
+
 		}
+
 		// all seats in cur seats are current and have order items 
+
 		// check logic
+
 		int i = 0;
+
 		for (Seat seat : tempSeats) {
+
 			List<Bill> billsOfSeat = seat.getBills();
+
 			for (Bill bill : curBills) {
+
 				if (billsOfSeat.contains(bill)) {
+
 					i += 1;
+
 				}
+
 			}
+
 			if (i == 0) {
+
 				return false;
+
 			}
+
 			i = 0;
+
 		}
+
 		return true;
   }
 
-  // line 53 "../../../../../RestoApp v3.ump"
+
+  /**
+   * line 37 "../../../../../RestoApp v3.ump"
+   */
+  // line 515 "../../../../../RestoAppTableStateMachine.ump"
    public boolean doesOverlap(int x2, int y2, int width2, int length2){
     return x2 < this.x + this.width && x2 + width2 > this.x && y2 < this.y + this.length && y2 + length2 > this.y;
   }
