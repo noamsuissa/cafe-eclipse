@@ -101,8 +101,7 @@ public class MenuItemsViewController implements Initializable{
 			c.orderMenuItem(selectedMenuItem, qty, selectedSeats); //it means u should do RestoAppController.orderMenuItem(...) but its fine just like this
 			updateBox("Order item " + selectedMenuItem.getName() + " added to order", Color.BLACK);
 			clearSeatsPressed(null);
-			//selectedSeats.clear();
-			//allSeatsTableView.setItems(selectedSeatsViewList);
+			qtyText.clear();
 		} catch (InvalidInputException e) {
 			updateBox(e.getMessage(), Color.RED);
 
@@ -112,7 +111,7 @@ public class MenuItemsViewController implements Initializable{
 		selectedSeats.clear();
 		selectedSeatsViewList.clear();
 		allSeatsTableView.setItems(selectedSeatsViewList);
-		//System.out.println("cleared seats");
+		
 	}
 	
 	public void addtoListButton(ActionEvent event) {

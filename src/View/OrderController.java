@@ -67,22 +67,22 @@ ObservableList<OrderItem> selectedTableViewList = FXCollections.observableArrayL
   
     
     private void loadOrdersInTableView(Table table) {
-		ObservableList<OrderItem> listOfOrderItems = FXCollections.observableArrayList();
-		if (table != null) {
-		List<OrderItem> orderItems;
-		try {
-		orderItems = c.getOrderItems(table);
-		for(OrderItem order: orderItems) {
-		listOfOrderItems.add(order);
-		updateBox("list"+ listOfOrderItems, Color.BLACK);
-		} 
-		} catch (InvalidInputException e) {
-		updateBox(e.getMessage(), Color.RED);
-		}
-		    }
-		tableView.setItems(listOfOrderItems);
-    }
-    
+    	ObservableList<OrderItem> listOfOrderItems = FXCollections.observableArrayList();
+    	if (table != null) {
+    	List<OrderItem> orderItems;
+    	try {
+    	orderItems = c.getOrderItems(table);
+    	for(OrderItem order: orderItems) {
+    	listOfOrderItems.add(order);
+    	} 
+    	updateBox("Table " + selectedTable1.getNumber() + " selected. Current number of seats: " + selectedTable1.getCurrentSeats().size(), Color.BLACK);
+    	} 
+    	catch (InvalidInputException e) {
+    	updateBox(e.getMessage(), Color.RED);
+    	}
+    	}
+    	tableView.setItems(listOfOrderItems);
+    	}
     
     
     //Load all the tables into the floor plan
