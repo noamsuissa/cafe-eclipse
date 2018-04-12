@@ -30,10 +30,10 @@ import javafx.util.Callback;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
-
-
+import java.util.Set;
 
 import ca.mcgill.ecse223.resto.application.RestoAppApplication;
 import ca.mcgill.ecse223.resto.controller.InvalidInputException;
@@ -168,8 +168,14 @@ public class BillController implements Initializable{
 		try {
 			c.issueBill(selectedSeats);
 			Seat seat1 = selectedSeats.get(0);
-			loadOrdersInTableView(seat1);
-			calculateBillTotal(seat1);
+			Set<OrderItem> orderItems = new HashSet<OrderItem>();
+			for (Seat seat : selectedSeats) {
+				for (OrderItem oi: seat.getOrderItems()) {
+				orderItems.add(oi);}
+			}
+			
+			loadOrdersInTableView(orderItems);
+			calculateBillTotal(orderItems);
 			
 			updateBox("Bill created for seats", Color.GREEN);
 			clearSeatsPressed(null);
@@ -181,10 +187,8 @@ public class BillController implements Initializable{
 		}	
 		
 	}
-	 private void loadOrdersInTableView(Seat seat) {
+	 private void loadOrdersInTableView(Set<OrderItem> orderItems) {
 			ObservableList<OrderItem> listOfOrderItems = FXCollections.observableArrayList();
-			List<OrderItem> orderItems;
-			orderItems = seat.getOrderItems();
 			for(OrderItem order: orderItems) {
 			listOfOrderItems.add(order);
 			updateBox("list"+ listOfOrderItems, Color.BLACK);
@@ -201,10 +205,8 @@ public class BillController implements Initializable{
 		    return (double) tmp / factor;
 		}
 	
-	public void calculateBillTotal(Seat seat) {
+	public void calculateBillTotal(Set<OrderItem> orderItems) {
 		double billTotal = 0;
-		List<OrderItem> orderItems;
-		orderItems = seat.getOrderItems();
 		for(OrderItem order: orderItems) {
 			if(order.getQuantity() == 1) {
 				int sharedByInt = order.numberOfSeats();
