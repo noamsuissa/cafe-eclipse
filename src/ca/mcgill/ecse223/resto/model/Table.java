@@ -589,7 +589,7 @@ public class Table implements Serializable
     return wasEventProcessed;
   }
 
-  private void setStatus(Status aStatus)
+  public void setStatus(Status aStatus)
   {
     status = aStatus;
   }
